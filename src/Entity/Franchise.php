@@ -29,43 +29,43 @@ class Franchise
     private ?string $adresse = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $code_postal = null;
+    private ?string $codePostal = null;
 
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $short_descritpion = null;
+    private ?string $shortDescription = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $full_description = null;
+    private ?string $fullDescription = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $active = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $vente_whey = null;
+    private ?int $venteWhey = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $vente_serviette = null;
+    private ?int $venteServiette = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $vente_boisson = null;
+    private ?int $venteBoisson = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $sauna = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $jour_paiement = null;
+    private ?int $jourPaiement = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $fermeture_tardive = null;
+    private ?int $fermetureTardive = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $envoi_newsletter = null;
+    private ?int $envoiNewsletter = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $ring_boxe = null;
+    private ?int $ringBoxe = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $crossfit = null;
@@ -136,12 +136,12 @@ class Franchise
 
     public function getCodePostal(): ?string
     {
-        return $this->code_postal;
+        return $this->codePostal;
     }
 
-    public function setCodePostal(string $code_postal): self
+    public function setCodePostal(string $codePostal): self
     {
-        $this->code_postal = $code_postal;
+        $this->codePostal = $codePostal;
 
         return $this;
     }
@@ -158,26 +158,26 @@ class Franchise
         return $this;
     }
 
-    public function getShortDescritpion(): ?string
+    public function getShortDescription(): ?string
     {
-        return $this->short_descritpion;
+        return $this->shortDescription;
     }
 
-    public function setShortDescritpion(?string $short_descritpion): self
+    public function setShortDescription(?string $shortDescription): self
     {
-        $this->short_descritpion = $short_descritpion;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
     public function getFullDescription(): ?string
     {
-        return $this->full_description;
+        return $this->fullDescription;
     }
 
-    public function setFullDescription(?string $full_description): self
+    public function setFullDescription(?string $fullDescription): self
     {
-        $this->full_description = $full_description;
+        $this->fullDescription = $fullDescription;
 
         return $this;
     }
@@ -196,36 +196,36 @@ class Franchise
 
     public function getVenteWhey(): ?int
     {
-        return $this->vente_whey;
+        return $this->venteWhey;
     }
 
-    public function setVenteWhey(int $vente_whey): self
+    public function setVenteWhey(int $venteWhey): self
     {
-        $this->vente_whey = $vente_whey;
+        $this->venteWhey = $venteWhey;
 
         return $this;
     }
 
     public function getVenteServiette(): ?int
     {
-        return $this->vente_serviette;
+        return $this->venteServiette;
     }
 
-    public function setVenteServiette(int $vente_serviette): self
+    public function setVenteServiette(int $venteServiette): self
     {
-        $this->vente_serviette = $vente_serviette;
+        $this->venteServiette = $venteServiette;
 
         return $this;
     }
 
     public function getVenteBoisson(): ?int
     {
-        return $this->vente_boisson;
+        return $this->venteBoisson;
     }
 
-    public function setVenteBoisson(int $vente_boisson): self
+    public function setVenteBoisson(int $venteBoisson): self
     {
-        $this->vente_boisson = $vente_boisson;
+        $this->venteBoisson = $venteBoisson;
 
         return $this;
     }
@@ -244,48 +244,48 @@ class Franchise
 
     public function getJourPaiement(): ?int
     {
-        return $this->jour_paiement;
+        return $this->jourPaiement;
     }
 
-    public function setJourPaiement(int $jour_paiement): self
+    public function setJourPaiement(int $jourPaiement): self
     {
-        $this->jour_paiement = $jour_paiement;
+        $this->jourPaiement = $jourPaiement;
 
         return $this;
     }
 
     public function getFermetureTardive(): ?int
     {
-        return $this->fermeture_tardive;
+        return $this->fermetureTardive;
     }
 
-    public function setFermetureTardive(int $fermeture_tardive): self
+    public function setFermetureTardive(int $fermetureTardive): self
     {
-        $this->fermeture_tardive = $fermeture_tardive;
+        $this->fermetureTardive = $fermetureTardive;
 
         return $this;
     }
 
     public function getEnvoiNewsletter(): ?int
     {
-        return $this->envoi_newsletter;
+        return $this->envoiNewsletter;
     }
 
-    public function setEnvoiNewsletter(int $envoi_newsletter): self
+    public function setEnvoiNewsletter(int $envoiNewsletter): self
     {
-        $this->envoi_newsletter = $envoi_newsletter;
+        $this->envoiNewsletter = $envoiNewsletter;
 
         return $this;
     }
 
     public function getRingBoxe(): ?int
     {
-        return $this->ring_boxe;
+        return $this->ringBoxe;
     }
 
-    public function setRingBoxe(int $ring_boxe): self
+    public function setRingBoxe(int $ringBoxe): self
     {
-        $this->ring_boxe = $ring_boxe;
+        $this->ringBoxe = $ringBoxe;
 
         return $this;
     }
