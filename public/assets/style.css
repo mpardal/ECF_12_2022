@@ -1,0 +1,327 @@
+body {
+    margin: 0;
+}
+
+/* Gestion de la NavBar */
+a {
+    text-decoration: none;
+    color: black;
+    padding-top: 5%;
+}
+
+nav {
+    padding: 2rem;
+    background: #dfdfdf;
+}
+
+.link {
+    display: flex;
+    justify-content: space-around;
+}
+
+.partnerNav,
+.buttonNav {
+    display: none;
+}
+
+/* Titre des pages (présent dans : home/index et connect/index)*/
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* paragraphe (présent dans : home/index)*/
+p {
+    text-align: justify;
+    margin: 1rem;
+}
+
+.imgNav {
+    width: 20%;
+    height: 20%;
+}
+
+img {
+    width: 50%;
+    height: 50%;
+}
+
+.champs,
+.buttonAction,
+.partnerDiv,
+#list {
+    margin: 1rem;
+}
+
+.champs,
+.champList {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+
+.champList {
+    margin-left: 1rem;
+    width: 50%;
+}
+
+input,
+#list {
+    height: 2rem;
+}
+
+button,
+input,
+img {
+    border-radius: 6px;
+}
+
+.partnerDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.partnerInfo {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.etat {
+    display: flex;
+    margin-left: 10%;
+}
+
+/* Permet le mouvement de l'interrupteur ACTIF // NON ACTIF */
+/* DEBUT */
+.int input[type='checkbox'],
+.interr input[type='checkbox'] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.int span,
+.interr span {
+    display: block;
+    background: red;
+    border-radius: 50px;
+    width: 2rem;
+    height: 1rem;
+    transition: background .2s ease-in-out;
+}
+
+.int span::after,
+.interr span::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.int input[type='checkbox']:checked + span,
+.interr input[type='checkbox']:checked + span {
+    background: green;
+}
+
+.int input[type='checkbox']:checked + span::after,
+.interr input[type='checkbox']:checked + span::after {
+    transform: translateX(1rem);
+}
+
+/* FIN de l'interrupteur */
+
+section {
+    border: thin solid lightgrey;
+    margin: 0.1rem;
+    border-radius: 2%;
+}
+
+.partnerLink {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.label {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.branchSearchPartner {
+    display: flex;
+    flex-direction: row;
+}
+
+.branchSearchPartner div {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.branchSearchPartner div:nth-child(1) div:nth-child(2) {
+    margin-left: 10%;
+}
+
+.branchSearchPartner div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+.branchSearchPartner div:nth-child(2) button {
+    margin: 1rem 1rem 1rem 50%;
+    width: 20%;
+}
+
+
+/* liaison avec le fichier partner/new */
+
+
+.autorisation_new div div,
+.autorisation div div {
+    display: flex;
+    flex-direction: row;
+}
+
+.autorisation_new div div p:nth-child(1),
+.autorisation div div p:nth-child(2) {
+    margin-top: 1.9rem;
+}
+
+.autorisation_new div div p:nth-child(1) {
+    width: 100%;
+}
+
+.autorisation div div p:nth-child(1) {
+    width: 100%;
+}
+
+.champsNew {
+    display: flex;
+    flex-direction: column;
+}
+
+.champsNew div {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.champsNew div label {
+    width: 20%;
+    padding-top: 0.5rem;
+}
+
+.champsNew div input {
+    width: 70%;
+}
+
+@media screen and (min-width: 600px) {
+    .autorisation,
+    .autorisation_new {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    body {
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    button {
+        height: 3rem;
+        width: 10rem;
+        font-size: 1rem;
+    }
+
+    input {
+        height: 3rem;
+    }
+
+    .champs,
+    .champList {
+        font-size: 1rem;
+    }
+
+    .etat {
+        margin-bottom: 2rem;
+    }
+
+    .int span,
+    .interr span {
+        width: 4rem;
+        height: 2rem;
+    }
+
+    .int span::after,
+    .interr span::after {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .int input[type='checkbox']:checked + span::after,
+    .interr input[type='checkbox']:checked + span::after {
+        transform: translateX(2rem);
+    }
+
+    .actif {
+        padding-top: 1rem;
+        margin-left: 2rem;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    body {
+        font-size: 2rem;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    button {
+        height: 4rem;
+        width: 15rem;
+        font-size: 1rem;
+    }
+
+    input {
+        height: 4rem;
+    }
+
+    .champs,
+    .champList {
+        font-size: 1.5rem;
+    }
+
+    .int span,
+    .interr span {
+        width: 6rem;
+        height: 3rem;
+    }
+
+    .int span::after,
+    .interr span::after {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .int input[type='checkbox']:checked + span::after,
+    .interr input[type='checkbox']:checked + span::after {
+        transform: translateX(3rem);
+    }
+
+    .actif {
+        padding-top: 1.5rem;
+        margin-left: 2rem;
+    }
+}

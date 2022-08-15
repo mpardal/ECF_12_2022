@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un nouveau partenaire{% endblock %}
+
+{% block body %}
+    <section class="champsNew">
+        <div>
+            <label for="client_name" class="label">client_name</label>
+            <input type="text" id="client_name" placeholder="Nantes" class="new">
+        </div>
+        <div>
+            <label for="install_id" class="label">install_id</label>
+            <input type="text" id="install_id" placeholder="44">
+        </div>
+        <div>
+            <label for="active" class="label">active</label>
+            <input type="text" id="active" placeholder="44">
+        </div>
+        <div>
+            <label for="branch_id" class="label">branch_id</label>
+            <input type="text" id="branch_id" placeholder="44">
+        </div>
+    </section>
+    <section class="autorisation_new">
+        <div>
+            <div>
+                <p>members_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>members_write</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>members_add</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>members_payment_schedules_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>members_products-read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p>payment_schedules_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>payment_schedules_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>members_statistiques_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>payment_day_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+            <div>
+                <p>members_subscription_read</p>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="partnerLink">
+        <button class="partnerButton"><a href="/partner">Annuler</a></button>
+        <button class="partnerButton"><a href="#">Valider</a></button>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de connexion{% endblock %}
+
+{% block body %}
+    <h1>Connectez-vous</h1>
+    <div class="champs">
+        <label for="username">Username (e-mail)</label>
+        <input type="text" id="username" placeholder="agence@marque.com">
+    </div>
+    <div class="champs">
+        <label for="mdp">Mot de passe</label>
+        <input type="text" id="mdp" placeholder="******">
+    </div>
+    <button type="submit" class="buttonAction">Se connecter</button>
+{% endblock %}

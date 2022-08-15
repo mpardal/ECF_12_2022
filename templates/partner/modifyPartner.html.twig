@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du partenaire{% endblock %}
+
+{% block body %}
+    <button type="button" id="list"><a href="/partner">Liste partenaires</a></button>
+    <section>
+        <div class="partnerDiv">
+            <img src="{{ asset('/images/logo.jpg') }}" alt="photo de la salle">
+            <div class="partnerInfo">
+                <p>client_id</p>
+                <p>client_name</p>
+                <p>full description</p>
+            </div>
+            <div class="partnerInfo">
+                <p>url</p>
+                <p>dpo</p>
+                <p>technical_contact</p>
+                <p>commercial_contact</p>
+            </div>
+        </div>
+        {{ include('partner/_interrupteur.html.twig') }}
+    </section>
+    <section class="branchSearchPartner">
+        <div>
+            <div class="champList">
+                <label for="zone_id-branch_id">zone_id-branch_id</label>
+                <input type="text" id="zone_id-branch_id">
+            </div>
+            <div>
+                {{ include('partner/_interrupteur.html.twig') }}
+            </div>
+        </div>
+        <div class="buttonPartner">
+            <button type="button">TOUTES</button>
+            <button type="button">AJOUTER</button>
+        </div>
+    </section>
+    <section>
+        <div class="partnerDiv">
+            <img src="{{ asset('/images/logo.jpg') }}" alt="photo de la salle">
+            <div class="partnerInfo">
+                <p>client_id</p>
+                <p>install_id</p>
+                <p>branch_id</p>
+            </div>
+        </div>
+        {{ include('partner/_interrupteur.html.twig') }}
+    </section>
+    <section class="autorisation">
+        <div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_read</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_write</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_add</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_payment_schedules_read</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_products-read</p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>payment_schedules_read</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>payment_schedules_read</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_statistiques_read</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>payment_day_read</p>
+            </div>
+            <div>
+                <p>{{ include('partner/_interrupteur_new_edit.html.twig') }}</p>
+                <p>members_subscription_read</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="partnerDiv">
+            <img src="{{ asset('/images/logo.jpg') }}" alt="photo de la salle">
+            <div class="partnerInfo">
+                <p>client_id</p>
+                <p>install_id</p>
+                <p>branch_id</p>
+            </div>
+        </div>
+        {{ include('partner/_interrupteur.html.twig') }}
+    </section>
+
+    <div class="partnerLink">
+        <button class="partnerButton"><a href="/partner">Annuler</a></button>
+        <button class="partnerButton"><a href="#">Valider</a></button>
+    </div>
+{% endblock %}
