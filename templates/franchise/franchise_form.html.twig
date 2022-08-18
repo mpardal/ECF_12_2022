@@ -1,0 +1,108 @@
+{{ form_start(franchiseRegistrationForm) }}
+<article class="border articleInfo">
+    <div>
+        {{ form_label(franchiseRegistrationForm.name) }}
+        {{ form_widget(franchiseRegistrationForm.name, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.email) }}
+        {{ form_widget(franchiseRegistrationForm.email, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.password) }}
+        {{ form_widget(franchiseRegistrationForm.password, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        <p>Actif ?</p>
+        <p>
+            {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.active} only %}
+        </p>
+    </div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.address) }}
+        {{ form_widget(franchiseRegistrationForm.address, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.postalCode) }}
+        {{ form_widget(franchiseRegistrationForm.postalCode, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.city) }}
+        {{ form_widget(franchiseRegistrationForm.city, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div></div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.shortDescription) }}
+        {{ form_widget(franchiseRegistrationForm.shortDescription, {'attr': {'class': 'formDescription'}}) }}
+    </div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.fullDescription) }}
+        {{ form_widget(franchiseRegistrationForm.fullDescription, {'attr': {'class': 'formDescription'}}) }}
+    </div>
+</article>
+<section class="sectionOption">
+    <h2>Options de la franchise</h2>
+    <article class="border articleOption">
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.wheySale) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.wheySale} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.towelSale) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.towelSale} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.drinkSale) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.drinkSale} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.sauna) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.sauna} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.paymentDay) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.paymentDay} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.lateClosing) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.lateClosing} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.sendNewsletter) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.sendNewsletter} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.ringBoxe) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.ringBoxe} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.crossfit) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.crossfit} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.biking) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.biking} only %}
+            </p>
+        </div>
+    </article>
+</section>
+{{ form_rest(franchiseRegistrationForm) }}

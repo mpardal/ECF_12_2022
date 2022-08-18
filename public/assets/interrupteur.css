@@ -1,0 +1,102 @@
+.etat {
+    display: flex;
+    margin-left: 10%;
+}
+
+/* Permet le mouvement de l'interrupteur ACTIF // NON ACTIF */
+/* DEBUT */
+.int input[type='checkbox'],
+.interr input[type='checkbox'] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.int span,
+.interr span {
+    display: block;
+    background: red;
+    border-radius: 50px;
+    width: 2rem;
+    height: 1rem;
+    transition: background .2s ease-in-out;
+}
+
+.int span::after,
+.interr span::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.int input[type='checkbox']:checked + span,
+.interr input[type='checkbox']:checked + span {
+    background: green;
+}
+
+.int input[type='checkbox']:checked + span::after,
+.interr input[type='checkbox']:checked + span::after {
+    transform: translateX(1rem);
+}
+
+/* FIN de l'interrupteur */
+
+.actif{
+    margin: 1rem;
+}
+/*
+@media screen and (min-width: 900px) {
+    .etat {
+        margin-bottom: 2rem;
+    }
+
+    .int span,
+    .interr span {
+        width: 4rem;
+        height: 2rem;
+    }
+
+    .int span::after,
+    .interr span::after {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .int input[type='checkbox']:checked + span::after,
+    .interr input[type='checkbox']:checked + span::after {
+        transform: translateX(2rem);
+    }
+
+    .actif {
+        padding-top: 1rem;
+        margin-left: 2rem;
+    }
+}
+/*
+@media screen and (min-width: 1600px) {
+    .int span,
+    .interr span {
+        width: 6rem;
+        height: 3rem;
+    }
+
+    .int span::after,
+    .interr span::after {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .int input[type='checkbox']:checked + span::after,
+    .interr input[type='checkbox']:checked + span::after {
+        transform: translateX(3rem);
+    }
+
+    .actif {
+        padding-top: 1.5rem;
+        margin-left: 2rem;
+    }
+}*/

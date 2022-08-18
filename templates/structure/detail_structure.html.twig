@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la structure{% endblock %}
+
+{% block body %}
+    <button type="button" id="list"><a href="{{ path('app_list_franchise') }}">Liste partenaires</a></button>
+    <section>
+        <div class="partnerDiv">
+            <img src="#" alt="photo de la salle">
+            <div class="partnerInfo">
+                <p>{{ structure.name }}</p>
+                <p>{{ structure.address }}</p>
+                <p>{{ structure.postalCode }}</p>
+                <p>{{ structure.city }}</p>
+            </div>
+            <div class="partnerInfo">
+                <p>{{ structure.email }}</p>
+                <p></p>
+                <p>{{ structure.shortDescription }}</p>
+                <p>{{ structure.fullDescription }}</p>
+            </div>
+        </div>
+        {{ structure.active }}
+    </section>
+    <section class="branchSearchPartner">
+        <div>
+            <div class="champList">
+                <label for="zone_id-branch_id">zone_id-branch_id</label>
+                <input type="text" id="zone_id-branch_id">
+            </div>
+            <div>
+                {{ include('interrupteur/_interrupteur.html.twig') }}
+            </div>
+        </div>
+        <div class="buttonPartner">
+            <button type="button">TOUTES</button>
+            <button type="button">AJOUTER</button>
+        </div>
+    </section>
+    <section>
+        <div class="partnerDiv">
+            <img src="#" alt="photo de la salle">
+            <div class="partnerInfo">
+                <p>{{ structure.name }}</p>
+                <p>{{  structure.city }}</p>
+                <p>{{ structure.shortDescription }}</p>
+            </div>
+        </div>
+        {{ structure.active }}
+    </section>
+    <section class="sectionOption">
+        <h2>Options de la structure</h2>
+        <article class="articleOption">
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.wheySale) }}</p>
+                <p>
+                    {{ structure.wheySale }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.towelSale) }}</p>
+                <p>
+                    {{ structure.towelSale }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.drinkSale) }}</p>
+                <p>
+                    {{ structure.drinkSale }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sauna) }}</p>
+                <p>
+                    {{ structure.sauna }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.paymentDay) }}</p>
+                <p>
+                    {{ structure.paymentDay }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.lateClosing) }}</p>
+                <p>
+                    {{ structure.lateClosing }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sendNewsletter) }}</p>
+                <p>
+                    {{ structure.sendNewsletter }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.ringBoxe) }}</p>
+                <p>
+                    {{ structure.ringBoxe }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.crossfit) }}</p>
+                <p>
+                    {{ structure.crossfit }}
+                </p>
+            </div>
+            <div>
+                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.biking) }}</p>
+                <p>
+                    {{ structure.biking }}
+                </p>
+            </div>
+        </article>
+    </section>
+{% endblock %}

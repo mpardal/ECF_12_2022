@@ -9,12 +9,46 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+       # main:
+        franchise_secured_area:
             lazy: true
             provider: users_in_memory
+            #provider: app_franchise_provider
+            custom_authenticator:
+                App\Security\FranchiseAuthenticator
+            form_login:
+                login_path: /connect
+                check_path: app_login
+                default_target_path: /connect
+            logout:
+                path: app_logout
+                # redirection après la déconnexion
+                target: api_home
+            entry_point: 'form_login'
+        structure_secured_area:
+            lazy: true
+            provider: users_in_memory
+            #provider: app_structure_provider
+            custom_authenticator:
+                App\Security\StructureAuthenticator
+            form_login:
+                login_path: /connect
+                check_path: app_login
+                default_target_path: /connect
+            logout:
+                path: app_logout
+                # redirection après la déconnexion
+                target: api_home
+            entry_point: 'form_login'
+
+            #logout:
+             #   path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
@@ -22,8 +56,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des partenaires{% endblock %}
+
+{% block body %}
+    <div class="border searchPartner">
+        <div class="searchDiv">
+            <div class="search">
+                <label for="client_name">Franchise</label>
+                <input type="text" id="client_name">
+            </div>
+            <div class="search">
+                <label for="client_id">Structure</label>
+                <input type="number" id="client_id">
+            </div>
+        </div>
+        <div>
+            <button type="button">ACTIF</button>
+            <button type="button">NON ACTIF</button>
+        </div>
+    </div>
+    <h2>Liste des structures</h2>
+    <section class="listPartner">
+        {%  for structure in structures %}
+            <article class="border">
+                <div class="listPartnerDiv">
+                    <img src="#" alt="photo de la salle">
+                    <div>
+                        <p>{{ structure.name }}</p>
+                        <p>{{ structure.address }}</p>
+                        <p>{{ structure.shortDescription }}</p>
+                        <p>{{ structure.fullDescription }}</p>
+                    </div>
+                </div>
+                <div class="listActif">
+                    {{ structure.active }}
+                    <button type="button"><a href="{{ path('app_admin_edit_structure', {id : structure.id}) }}">Modifier une structure</a></button>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+
+    <div class="partnerButton">
+        <button><a href="{{ path('app_admin_create_structure') }}">Créer une nouvelle structure</a></button>
+    </div>
+
+{% endblock %}
+

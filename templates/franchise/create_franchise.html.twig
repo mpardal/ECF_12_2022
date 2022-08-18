@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un nouveau partenaire{% endblock %}
+
+{% block body %}
+    <h2>Informations d'une structure</h2>
+{% include "franchise/franchise_form.html.twig" %}
+<div>
+    <button type="button"><a href="{{ path('app_list_franchise') }}">Annuler</a></button>
+    <button>Valider</button>
+</div>
+    {{ form_end(franchiseRegistrationForm) }}
+{% endblock %}

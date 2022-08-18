@@ -7,9 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
-class Franchise
+#[UniqueEntity(fields: ['email'], message: 'Vous avez déjà un compte avec cette adresse email')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,10 +31,10 @@ class Franchise
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $adresse = null;
+    private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $codePostal = null;
+    private ?string $postalCode = null;
 
     #[ORM\Column(length: 255)]
     private ?string $city = null;
@@ -40,38 +45,41 @@ class Franchise
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $fullDescription = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $active = null;
+    #[ORM\Column]
+    private ?bool $active = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $venteWhey = null;
+    #[ORM\Column]
+    private ?bool $wheySale = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $venteServiette = null;
+    #[ORM\Column]
+    private ?bool $towelSale = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $venteBoisson = null;
+    #[ORM\Column]
+    private ?bool $drinkSale = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $sauna = null;
+    #[ORM\Column]
+    private ?bool $sauna = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $jourPaiement = null;
+    #[ORM\Column]
+    private ?bool $paymentDay = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $fermetureTardive = null;
+    #[ORM\Column]
+    private ?bool $lateClosing = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $envoiNewsletter = null;
+    #[ORM\Column]
+    private ?bool $sendNewsletter = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $ringBoxe = null;
+    #[ORM\Column]
+    private ?bool $ringBoxe = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $crossfit = null;
+    #[ORM\Column]
+    private ?bool $crossfit = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $biking = null;
+    #[ORM\Column]
+    private ?bool $biking = null;
+
+    #[ORM\Column]
+    private ?array $roles = [];
 
     #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class, orphanRemoval: true)]
     private Collection $structures;
@@ -110,6 +118,7 @@ class Franchise
         return $this;
     }
 
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -122,26 +131,26 @@ class Franchise
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adresse;
+        return $this->address;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAddress(string $address): self
     {
-        $this->adresse = $adresse;
+        $this->address = $address;
 
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    public function getPostalCode(): ?string
     {
-        return $this->codePostal;
+        return $this->postalCode;
     }
 
-    public function setCodePostal(string $codePostal): self
+    public function setPostalCode(string $postalCode): self
     {
-        $this->codePostal = $codePostal;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
@@ -182,132 +191,132 @@ class Franchise
         return $this;
     }
 
-    public function getActive(): ?int
+    public function getActive(): ?bool
     {
         return $this->active;
     }
 
-    public function setActive(int $active): self
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
         return $this;
     }
 
-    public function getVenteWhey(): ?int
+    public function getWheySale(): ?bool
     {
-        return $this->venteWhey;
+        return $this->wheySale;
     }
 
-    public function setVenteWhey(int $venteWhey): self
+    public function setWheySale(bool $wheySale): self
     {
-        $this->venteWhey = $venteWhey;
+        $this->wheySale = $wheySale;
 
         return $this;
     }
 
-    public function getVenteServiette(): ?int
+    public function getTowelSale(): ?bool
     {
-        return $this->venteServiette;
+        return $this->towelSale;
     }
 
-    public function setVenteServiette(int $venteServiette): self
+    public function setTowelSale(bool $towelSale): self
     {
-        $this->venteServiette = $venteServiette;
+        $this->towelSale = $towelSale;
 
         return $this;
     }
 
-    public function getVenteBoisson(): ?int
+    public function getDrinkSale(): ?bool
     {
-        return $this->venteBoisson;
+        return $this->drinkSale;
     }
 
-    public function setVenteBoisson(int $venteBoisson): self
+    public function setDrinkSale(bool $drinkSale): self
     {
-        $this->venteBoisson = $venteBoisson;
+        $this->drinkSale = $drinkSale;
 
         return $this;
     }
 
-    public function getSauna(): ?int
+    public function getSauna(): ?bool
     {
         return $this->sauna;
     }
 
-    public function setSauna(int $sauna): self
+    public function setSauna(bool $sauna): self
     {
         $this->sauna = $sauna;
 
         return $this;
     }
 
-    public function getJourPaiement(): ?int
+    public function getPaymentDay(): ?bool
     {
-        return $this->jourPaiement;
+        return $this->paymentDay;
     }
 
-    public function setJourPaiement(int $jourPaiement): self
+    public function setPaymentDay(bool $paymentDay): self
     {
-        $this->jourPaiement = $jourPaiement;
+        $this->paymentDay = $paymentDay;
 
         return $this;
     }
 
-    public function getFermetureTardive(): ?int
+    public function getLateClosing(): ?bool
     {
-        return $this->fermetureTardive;
+        return $this->lateClosing;
     }
 
-    public function setFermetureTardive(int $fermetureTardive): self
+    public function setLateClosing(bool $lateClosing): self
     {
-        $this->fermetureTardive = $fermetureTardive;
+        $this->lateClosing = $lateClosing;
 
         return $this;
     }
 
-    public function getEnvoiNewsletter(): ?int
+    public function getSendNewsletter(): ?bool
     {
-        return $this->envoiNewsletter;
+        return $this->sendNewsletter;
     }
 
-    public function setEnvoiNewsletter(int $envoiNewsletter): self
+    public function setSendNewsletter(bool $sendNewsletter): self
     {
-        $this->envoiNewsletter = $envoiNewsletter;
+        $this->sendNewsletter = $sendNewsletter;
 
         return $this;
     }
 
-    public function getRingBoxe(): ?int
+    public function getRingBoxe(): ?bool
     {
         return $this->ringBoxe;
     }
 
-    public function setRingBoxe(int $ringBoxe): self
+    public function setRingBoxe(bool $ringBoxe): self
     {
         $this->ringBoxe = $ringBoxe;
 
         return $this;
     }
 
-    public function getCrossfit(): ?int
+    public function getCrossfit(): ?bool
     {
         return $this->crossfit;
     }
 
-    public function setCrossfit(int $crossfit): self
+    public function setCrossfit(bool $crossfit): self
     {
         $this->crossfit = $crossfit;
 
         return $this;
     }
 
-    public function getBiking(): ?int
+    public function getBiking(): ?bool
     {
         return $this->biking;
     }
 
-    public function setBiking(int $biking): self
+    public function setBiking(bool $biking): self
     {
         $this->biking = $biking;
 
@@ -342,5 +351,30 @@ class Franchise
         }
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

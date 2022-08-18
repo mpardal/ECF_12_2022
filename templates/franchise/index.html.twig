@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La liste des partenaires{% endblock %}
+
+{% block body %}
+    <div class="border searchPartner">
+        <div class="searchDiv">
+            <div class="search">
+                <label for="client_name">client_name</label>
+                <input type="text" id="client_name">
+            </div>
+            <div class="search">
+                <label for="client_id">client_id</label>
+                <input type="number" id="client_id">
+            </div>
+        </div>
+        <div>
+            <button type="button">ACTIF</button>
+            <button type="button">NON ACTIF</button>
+        </div>
+    </div>
+    <h2>Liste des franchises</h2>
+    <section class="listPartner">
+        {%  for franchise in franchises %}
+        <article class="border">
+            <div class="listPartnerDiv">
+                <img src="#" alt="photo de la salle">
+                <div>
+                    <p>{{ franchise.name }}</p>
+                    <p>{{ franchise.address }}</p>
+                    <p>{{ franchise.shortDescription }}</p>
+                    <p>{{ franchise.fullDescription }}</p>
+                </div>
+            </div>
+            <div class="listActif">
+                {{ franchise.active }}
+                <button type="button"><a href="{{ path('app_admin_edit_franchise', {id : franchise.id}) }}">Modifier une franchise</a></button>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+
+<div class="partnerButton">
+    <button><a href="{{ path('app_admin_create_franchise') }}">Créer un nouveau partenaire</a></button>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,113 @@
+
+{{ form_start(structureRegistrationForm) }}
+<article class="articleInfo">
+    <div>
+        {{ form_label(structureRegistrationForm.name) }}
+        {{ form_widget(structureRegistrationForm.name, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.franchiseId) }}
+        {{ form_widget(structureRegistrationForm.franchiseId, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.email) }}
+        {{ form_widget(structureRegistrationForm.email, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.password) }}
+        {{ form_widget(structureRegistrationForm.password, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div class="partnerActiveForm">
+        <p class="labelActiveForm">Actif ?</p>
+        <p>
+            {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.active} only %}
+        </p>
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.address) }}
+        {{ form_widget(structureRegistrationForm.address, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.postalCode) }}
+        {{ form_widget(structureRegistrationForm.postalCode, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.city) }}
+        {{ form_widget(structureRegistrationForm.city, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div></div>
+    <div>
+        {{ form_label(structureRegistrationForm.shortDescription) }}
+        {{ form_widget(structureRegistrationForm.shortDescription, {'attr': {'class': 'formDescription'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.fullDescription) }}
+        {{ form_widget(structureRegistrationForm.fullDescription, {'attr': {'class': 'formDescription'}}) }}
+    </div>
+</article>
+<section class="sectionOption">
+    <h2>Options de la structure</h2>
+    <article class="articleOption">
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.wheySale) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.wheySale} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.towelSale) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.towelSale} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.drinkSale) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.drinkSale} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sauna) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sauna} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.paymentDay) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.paymentDay} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.lateClosing) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.lateClosing} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sendNewsletter) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sendNewsletter} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.ringBoxe) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.ringBoxe} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.crossfit) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.crossfit} only %}
+            </p>
+        </div>
+        <div>
+            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.biking) }}</p>
+            <p>
+                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.biking} only %}
+            </p>
+        </div>
+    </article>
+</section>
+{{ form_rest(structureRegistrationForm) }}

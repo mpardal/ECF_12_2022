@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une structure{% endblock %}
+
+{% block body %}
+    <h2>Informations de la structure</h2>
+    {% include "structure/structure_form.html.twig" %}
+    <div>
+        <button type="button"><a href="{{ path('app_list_structure') }}">Annuler</a></button>
+        <button>Valider</button>
+    </div>
+    {{ form_end(structureRegistrationForm) }}
+{% endblock %}
