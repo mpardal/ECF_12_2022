@@ -8,9 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Vous avez déjà un compte avec cette adresse email')]
+#[Vich\Uploadable]
 class Structure implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -78,9 +81,23 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?array $roles = [];
 
+    #[Vich\UploadableField(mapping: 'sport_gym', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $updatedAt = null;
+
     #[ORM\ManyToOne(inversedBy: 'structures')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Franchise $franchiseId = null;
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -351,4 +368,63 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->email;
     }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Structure
+     */
+    public function setImageFile(?File $imageFile): Structure
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string|null $imageName
+     * @return Structure
+     */
+    public function setImageName(?string $imageName): Structure
+    {
+        $this->imageName = $imageName;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeImmutable|\DateTimeInterface|null
+     */
+    public function getUpdatedAt(): \DateTimeImmutable|\DateTimeInterface|null
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeImmutable|\DateTimeInterface|null $updatedAt
+     * @return Structure
+     */
+    public function setUpdatedAt(\DateTimeImmutable|\DateTimeInterface|null $updatedAt): Structure
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
 }

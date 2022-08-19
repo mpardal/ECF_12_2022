@@ -1,11 +1,6 @@
-@import 'nav.css';
-@import 'page.css';
-@import 'form.css';
-@import 'connect.css';
-
 body {
     margin: 0;
-    font-family: "Roboto Light", serif;
+    font-family: Baghdad, sans-serif;
 }
 
 .border {
@@ -23,14 +18,565 @@ body {
     }
 }
 
-@media screen and (min-width: 1600px){
-    section{
+@media screen and (min-width: 1600px) {
+    section {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (min-width: 2200px){
-    section{
+@media screen and (min-width: 2200px) {
+    section {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* CSS Menu*/
+
+/* Gestion de la NavBar */
+nav {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    height: 30px;
+    padding: 0.5rem 1rem 1.5rem 1rem;
+    background: linear-gradient(to left, #898888, #d5d5d1);
+    color: #a03737;
+}
+
+.logo {
+    width: 45px;
+    margin-top: 0;
+}
+
+/* Permet de regrouper les li au même endroit */
+#menu-input ~ .menu li {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Permet d'activer une liste lors du checked de l'input*/
+#menu-input:checked ~ .menu li {
+    border: 1px solid #333;
+    height: 2.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Permet le positionnement du menu */
+.menu {
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    right: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Permet de faire la gestion des li dans le menu burger */
+.menu > li {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5rem;
+    width: 100%;
+    color: white;
+    background-color: #b1afaf;
+    overflow: hidden;
+}
+
+
+/* Désactive le input checkbox */
+#menu-input {
+    display: none;
+}
+
+.menu-button-container {
+    display: flex;
+    width: 100px;
+    cursor: pointer;
+    align-items: center;
+}
+
+/* Menu burger */
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+    display: block;
+    background-color: #e5e5e5;
+    position: absolute;
+    height: 4px;
+    width: 35px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+}
+
+/* Permet de faire le design du menu burger trait avant (before) trait après (after)*/
+.menu-button::before {
+    content: '';
+    margin-top: -10px;
+}
+
+.menu-button::after {
+    content: '';
+    margin-top: 10px;
+}
+
+/* Fin du design des traits du menu burger */
+
+/* Permet de créer la croix lors de l'appuie sur le menu burger*/
+#menu-input:checked + .menu-button-container .menu-button::before {
+    margin-top: 0;
+    transform: rotate(405deg);
+}
+
+/* design du trait central horizontal après appuie */
+#menu-input:checked + .menu-button-container .menu-button {
+    background: rgba(0, 0, 0, 0);
+}
+
+#menu-input:checked + .menu-button-container .menu-button::after {
+    margin-top: 0;
+    transform: rotate(-405deg);
+}
+
+/* Fin du design de la croix */
+
+a {
+    text-decoration: none;
+    color: #a03737;
+}
+
+@media screen and (min-width: 900px) {
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        display: none;
+    }
+
+    .menu > li {
+        overflow: visible;
+    }
+
+    .menu {
+        display: flex;
+        position: relative;
+        margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    nav {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    .logo {
+        width: 45px;
+        margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    nav {
+        font-size: 25px;
+        height: 50px;
+    }
+
+    .logo {
+        width: 65px;
+        margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 2300px) {
+    nav {
+        font-size: 30px;
+        height: 60px;
+    }
+
+    .logo {
+        width: 75px;
+        margin-top: 0;
+    }
+}
+
+/* CSS Page */
+
+@import 'interrupteur.css';
+
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+h2,
+h3 {
+    text-align: center;
+}
+
+.partnerActiveForm {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+}
+
+.labelActiveForm {
+    margin-right: 1rem;
+    padding-top: 1rem;
+}
+
+/* Page partner/index */
+.search {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    margin: 1rem;
+}
+
+.search input {
+    border-radius: 4px;
+}
+
+.searchPartner div:nth-child(2) button {
+    margin: 1rem;
+    border-radius: 5px;
+}
+
+.listPartnerDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.listPartnerDiv div {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.listPartnerDiv img {
+    width: 250px;
+    margin: 3rem;
+}
+
+.partnerButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.partnerButton button {
+    border-radius: 5px;
+}
+
+.partnerButton button a {
+    color: black;
+}
+
+.listActif {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+@media screen and (min-width: 700px) {
+    .search {
+        font-size: 1rem;
+    }
+
+    .search input,
+    .searchPartner div:nth-child(2) button {
+        height: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    .listPartnerDiv img {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: auto;
+    }
+
+    .listPartnerDiv img {
+        width: 250px;
+    }
+
+    .searchDiv {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+        grid-auto-rows: auto;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    h1 {
+        font-size: 4rem;
+    }
+
+    .listPartner {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: auto;
+        font-size: 1rem;
+    }
+
+    .listPartnerDiv img {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+    .listPartner {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .listPartnerDiv img {
+        width: 250px;
+    }
+}
+
+@media screen and (min-width: 2400px) {
+    .listPartnerDiv img {
+        width: 300px;
+    }
+}
+
+/* CSS interrupteur */
+
+.etat {
+    display: flex;
+    margin-left: 10%;
+}
+
+/* Permet le mouvement de l'interrupteur ACTIF // NON ACTIF */
+/* DEBUT */
+.int input[type='checkbox'],
+.interr input[type='checkbox'] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.int span,
+.interr span {
+    display: block;
+    background: red;
+    border-radius: 50px;
+    width: 2rem;
+    height: 1rem;
+    transition: background .2s ease-in-out;
+}
+
+.int span::after,
+.interr span::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.int input[type='checkbox']:checked + span,
+.interr input[type='checkbox']:checked + span {
+    background: green;
+}
+
+.int input[type='checkbox']:checked + span::after,
+.interr input[type='checkbox']:checked + span::after {
+    transform: translateX(1rem);
+}
+
+/* FIN de l'interrupteur */
+
+.actif {
+    margin: 1rem;
+}
+
+/* CSS connect */
+
+.inputConnect {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+}
+
+.inputConnect div {
+    margin: 1rem;
+}
+
+.inputConnect div input {
+    width: 100%;
+    margin-top: 10px;
+}
+
+form button {
+    width: 100px;
+    margin: 50px auto auto;
+}
+
+@media screen and (min-width: 900px) {
+    .inputConnect div input {
+        height: 30px;
+    }
+
+    form button {
+        height: 40px;
+        width: 150px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .inputConnect div input {
+        width: 80%;
+        margin: auto;
+    }
+
+    .inputConnect div label {
+        margin-bottom: 1rem;
+    }
+
+    .inputConnect div {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+    }
+
+    form button {
+        height: 40px;
+        width: 200px;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .inputConnect div input {
+        height: 50px;
+    }
+
+    form button {
+        height: 60px;
+        width: 250px;
+        font-size: 1.5rem;
+    }
+}
+
+/* CSS Form */
+
+.articleInfo,
+.articleOption {
+    padding: 2rem;
+}
+
+.articleInfo div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.choiceActive {
+    display: flex;
+    flex-direction: row;
+}
+
+.articleOption {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: auto;
+}
+
+.sectionOption {
+    display: block;
+}
+
+.formDescription {
+    height: 100px;
+}
+
+.form,
+.formDescription {
+    border-radius: 5px;
+}
+
+.hiddenDiv {
+    display: none;
+}
+
+@media screen and (min-width: 900px) {
+    .articleOption {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .articleInfo {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: auto
+    }
+
+    .hiddenDiv {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .articleOption {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /*   .articleInfo div:nth-child(3){
+           margin-top: 3rem;
+       }*/
+    .form {
+        height: 50px;
+    }
+
+    .formDescription {
+        height: 150px;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+    .articleOption {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (min-width: 2200px) {
+    .articleInfo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hiddenDiv {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 2400px) {
+    .articleOption {
+        grid-template-columns: repeat(6, 1fr);
     }
 }

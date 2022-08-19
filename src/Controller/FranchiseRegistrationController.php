@@ -69,7 +69,7 @@ class FranchiseRegistrationController extends AbstractController
         $formFranchise->handleRequest($request);
         if ($formFranchise->isSubmitted() && $formFranchise->isValid()) {
             // encode the plain password
-                  $franchise->setPassword(
+                 $franchise->setPassword(
                       $userPasswordHasher->hashPassword(
                           $franchise,
                           $formFranchise->get('password')->getData()

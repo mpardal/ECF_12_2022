@@ -24,7 +24,7 @@
         {%  for structure in structures %}
             <article class="border">
                 <div class="listPartnerDiv">
-                    <img src="#" alt="photo de la salle">
+                    {{ include('structure/_image_structure.html.twig') }}
                     <div>
                         <p>{{ structure.name }}</p>
                         <p>{{ structure.address }}</p>

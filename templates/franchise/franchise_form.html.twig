@@ -9,28 +9,31 @@
         {{ form_widget(franchiseRegistrationForm.email, {'attr': {'class': 'form'}}) }}
     </div>
     <div>
+        {{ form_label(franchiseRegistrationForm.address) }}
+        {{ form_widget(franchiseRegistrationForm.address, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
         {{ form_label(franchiseRegistrationForm.password) }}
         {{ form_widget(franchiseRegistrationForm.password, {'attr': {'class': 'form'}}) }}
     </div>
     <div>
+        {{ form_label(franchiseRegistrationForm.postalCode) }}
+        {{ form_widget(franchiseRegistrationForm.postalCode, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div class="choiceActive">
         <p>Actif ?</p>
         <p>
             {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.active} only %}
         </p>
     </div>
     <div>
-        {{ form_label(franchiseRegistrationForm.address) }}
-        {{ form_widget(franchiseRegistrationForm.address, {'attr': {'class': 'form'}}) }}
-    </div>
-    <div>
-        {{ form_label(franchiseRegistrationForm.postalCode) }}
-        {{ form_widget(franchiseRegistrationForm.postalCode, {'attr': {'class': 'form'}}) }}
-    </div>
-    <div>
         {{ form_label(franchiseRegistrationForm.city) }}
         {{ form_widget(franchiseRegistrationForm.city, {'attr': {'class': 'form'}}) }}
     </div>
-    <div></div>
+    <div>
+        {{ form_label(franchiseRegistrationForm.imageFile) }}
+        {{ form_widget(franchiseRegistrationForm.imageFile, {'attr': {'class': 'form'}}) }}
+    </div>
     <div>
         {{ form_label(franchiseRegistrationForm.shortDescription) }}
         {{ form_widget(franchiseRegistrationForm.shortDescription, {'attr': {'class': 'formDescription'}}) }}

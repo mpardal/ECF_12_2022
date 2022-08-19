@@ -10,10 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Vous avez déjà un compte avec cette adresse email')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[Vich\Uploadable]
 class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -81,12 +83,22 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?array $roles = [];
 
+    #[Vich\UploadableField(mapping: 'sport_gym', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $updatedAt = null;
+
     #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class, orphanRemoval: true)]
     private Collection $structures;
 
     public function __construct()
     {
         $this->structures = new ArrayCollection();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -377,4 +389,63 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->email;
     }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Franchise
+     */
+    public function setImageFile(?File $imageFile): Franchise
+    {
+        $this->imageFile = $imageFile;
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string|null $imageName
+     * @return Franchise
+     */
+    public function setImageName(?string $imageName): Franchise
+    {
+        $this->imageName = $imageName;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     * @return Franchise
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): Franchise
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+
 }

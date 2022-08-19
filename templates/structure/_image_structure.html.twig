@@ -1,0 +1,7 @@
+{%  if structure.imageName %}
+    <img src="{{ vich_uploader_asset(structure, 'imageFile') }}" alt="image">
+
+{% else %}
+    <img src="{{ '/images/salle.jpeg' }}" alt="image">
+
+{% endif %}

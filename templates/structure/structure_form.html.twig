@@ -14,28 +14,27 @@
         {{ form_widget(structureRegistrationForm.email, {'attr': {'class': 'form'}}) }}
     </div>
     <div>
-        {{ form_label(structureRegistrationForm.password) }}
-        {{ form_widget(structureRegistrationForm.password, {'attr': {'class': 'form'}}) }}
-    </div>
-    <div class="partnerActiveForm">
-        <p class="labelActiveForm">Actif ?</p>
-        <p>
-            {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.active} only %}
-        </p>
-    </div>
-    <div>
         {{ form_label(structureRegistrationForm.address) }}
         {{ form_widget(structureRegistrationForm.address, {'attr': {'class': 'form'}}) }}
+    </div>
+    <div>
+        {{ form_label(structureRegistrationForm.password) }}
+        {{ form_widget(structureRegistrationForm.password, {'attr': {'class': 'form'}}) }}
     </div>
     <div>
         {{ form_label(structureRegistrationForm.postalCode) }}
         {{ form_widget(structureRegistrationForm.postalCode, {'attr': {'class': 'form'}}) }}
     </div>
+    <div class="choiceActive">
+        <p>Actif ?</p>
+        <p>
+            {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.active} only %}
+        </p>
+    </div>
     <div>
         {{ form_label(structureRegistrationForm.city) }}
         {{ form_widget(structureRegistrationForm.city, {'attr': {'class': 'form'}}) }}
     </div>
-    <div></div>
     <div>
         {{ form_label(structureRegistrationForm.shortDescription) }}
         {{ form_widget(structureRegistrationForm.shortDescription, {'attr': {'class': 'formDescription'}}) }}

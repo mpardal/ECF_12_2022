@@ -24,7 +24,7 @@
         {%  for franchise in franchises %}
         <article class="border">
             <div class="listPartnerDiv">
-                <img src="#" alt="photo de la salle">
+                {{ include('franchise/_image_franchise.html.twig') }}
                 <div>
                     <p>{{ franchise.name }}</p>
                     <p>{{ franchise.address }}</p>
