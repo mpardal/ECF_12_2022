@@ -15,6 +15,8 @@ use App\Search\FranchiseSearch;
 use App\Search\StructureSearch;
 use App\Security\AdminAuthenticator;
 use App\Security\UserStorage;
+use App\Service\FranchiseMails;
+use App\Service\StructureMails;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -72,8 +74,8 @@ class AdminController extends AbstractController
 
 
     #[Route('/create_franchise', name: 'app_admin_create_franchise')]
-    public function franchiseNew(FranchiseRepository $franchiseRepository, Request $request, UserStorage $userStorage,
-                                 UserPasswordHasherInterface $userPasswordHasher, MailerInterface $mailer): Response
+    public function franchiseNew(FranchiseRepository $franchiseRepository, Request $request,
+                                 UserPasswordHasherInterface $userPasswordHasher, FranchiseMails $franchiseMails): Response
     {
         // Vérifie si l'utilisateur à le role admin
         //$this->denyAccessUnlessGranted('ROLE_ADMIN');
@@ -91,26 +93,13 @@ class AdminController extends AbstractController
                     $formFranchise->get('password')->getData()
                 )
             );
-            //Génère le token et l'enregistre
-            //$franchise->setActivationToken(md5(uniqid()));
 
 
             $franchiseRepository->add($franchise, true);
             $this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
             // do anything else you need here, like send an email
-            $admin = $userStorage->getUser();
 
-            // Crée l'email
-            $email = (new TemplatedEmail())
-                ->from(new Address('admin@sport.fr'))
-                ->to($franchise->getEmail())
-                ->subject('Création de votre franchise' . $franchise->getName())
-                ->htmlTemplate('mail/create_franchise.mjml.twig')
-                ->context([
-                    'franchise' => $franchise
-                ]);
-
-            $mailer->send($email);
+            $franchiseMails->sendCreated($franchise);
 
             return $this->redirectToRoute('app_admin_list_franchise');
         }
@@ -124,8 +113,8 @@ class AdminController extends AbstractController
 
     // Création d'une structure
     #[Route('/create_structure', name: 'app_admin_create_structure')]
-    public function structureNew(StructureRepository         $structureRepository, Request $request, UserStorage $userStorage,
-                                 UserPasswordHasherInterface $userPasswordHasher, MailerInterface $mailer): Response
+    public function structureNew(StructureRepository $structureRepository, Request $request,
+                                 UserPasswordHasherInterface $userPasswordHasher, StructureMails $structureMails): Response
     {
         // Vérifie si l'utilisateur à le role admin
         //$this->denyAccessUnlessGranted('ROLE_ADMIN');
@@ -147,18 +136,8 @@ class AdminController extends AbstractController
             $structureRepository->add($structure, true);
             $this->addFlash('success', 'La la nouvelle structure est créé avec succès');
             // do anything else you need here, like send an email
-            //$admin = $userStorage->getUser();
 
-            $email = (new TemplatedEmail())
-                ->from(new Address('admin@sport.fr'))
-                ->to($structure->getEmail())
-                ->cc($structure->getFranchise()->getEmail())
-                ->subject('Création de votre structure de ' . $structure->getName())
-                ->htmlTemplate('mail/create_structure.mjml.twig')
-                ->context([
-                    'structure' => $structure
-                ]);
-            $mailer->send($email);
+            $structureMails->sendCreated($structure);
 
             return $this->redirectToRoute('app_admin_list_structure');
         }
@@ -174,8 +153,8 @@ class AdminController extends AbstractController
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     #[Route('/edit_franchise/{id}', name: 'app_admin_edit_franchise')]
-    public function editFranchise(Franchise              $franchise, Request $request, UserPasswordHasherInterface $userPasswordHasher,
-                                  EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function editFranchise(Franchise $franchise, Request $request, UserPasswordHasherInterface $userPasswordHasher,
+                                  EntityManagerInterface $entityManager, FranchiseMails $franchiseMails): Response
     {
         $formFranchise = $this->createForm(FranchiseRegistrationFormType::class, $franchise);
         $formFranchise->handleRequest($request);
@@ -193,16 +172,7 @@ class AdminController extends AbstractController
             //$this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
             // do anything else you need here, like send an email
 
-            $email = (new TemplatedEmail())
-                ->from(new Address('admin@sport.fr'))
-                ->to($franchise->getEmail())
-                ->subject('Modification de votre structure de ' . $franchise->getName())
-                ->htmlTemplate('mail/edit_franchise.mjml.twig')
-                ->context([
-                    'franchise' => $franchise,
-                ]);
-
-            $mailer->send($email);
+            $franchiseMails->sendEdited($franchise);
 
             return $this->redirectToRoute('app_admin_list_franchise');
 
@@ -222,8 +192,8 @@ class AdminController extends AbstractController
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     #[Route('/edit_structure/{id}', name: 'app_admin_edit_structure')]
-    public function editStructure(Structure              $structure, Admin $admin, Request $request,
-                                  EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function editStructure(Structure $structure, Request $request, EntityManagerInterface $entityManager,
+                                  StructureMails $structureMails): Response
     {
         $formStructure = $this->createForm(StructureRegistrationFormType::class, $structure);
         $formStructure->handleRequest($request);
@@ -235,16 +205,7 @@ class AdminController extends AbstractController
             $this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
             // do anything else you need here, like send an email
 
-            $email = (new TemplatedEmail())
-                ->from(new Address($admin->getEmail(), 'Administrateur'))
-                ->to($structure->getEmail())
-                ->cc($structure->getFranchise()->getEmail())
-                ->subject('Modification de votre structure de ' . $structure->getName())
-                ->htmlTemplate('mail/edit_structure.mjml.twig')
-                ->context([
-                    'structure' => $structure
-                ]);
-            $mailer->send($email);
+           $structureMails->sendEdited($structure);
 
             return $this->redirectToRoute('app_admin_list_structure');
 
@@ -266,8 +227,7 @@ class AdminController extends AbstractController
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $search);
         $formFranchiseSearch->handleRequest($request);
 
-
-        //$data = $repository->findAll();
+        //Gère la pagination
         $franchises = $this->paginator->paginate(
             $repository->findAllQueries($search),
             $request->query->getInt('page', 1),
@@ -282,7 +242,6 @@ class AdminController extends AbstractController
     #[Route('/list_structure', name: 'app_admin_list_structure')]
     public function listStructure(Request $request, FranchiseRepository $repository, FranchiseSearch $search): Response
     {
-        $data = $repository->findAll();
         $franchises = $this->paginator->paginate(
             $repository->findAllQueries($search),
             $request->query->getInt('page', 1),
