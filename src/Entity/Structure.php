@@ -95,7 +95,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Franchise $franchise = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $activation_token = null;
+    private ?string $activationToken = null;
 
     public function __construct()
     {
@@ -432,12 +432,12 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getActivationToken(): ?string
     {
-        return $this->activation_token;
+        return $this->activationToken;
     }
 
-    public function setActivationToken(?string $activation_token): self
+    public function setActivationToken(?string $activationToken): self
     {
-        $this->activation_token = $activation_token;
+        $this->activationToken = $activationToken;
 
         return $this;
     }

@@ -7,7 +7,7 @@
     {% include "franchise/franchise_form.html.twig" %}
     <div>
         <button type="button"><a href="{{ path('app_list_franchise') }}">Annuler</a></button>
-        <button>Valider</button>
+        <button><a href="{{ path('app_admin_list_franchise') }}">Valider</a></button>
     </div>
     {{ form_end(franchiseRegistrationForm) }}
 {% endblock %}

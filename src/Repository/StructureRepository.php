@@ -50,9 +50,11 @@ class StructureRepository extends ServiceEntityRepository
             ->setParameter('franchiseId', $franchise->getId());
     }
 
-    public function findAllQueries(StructureSearch $search): Query
+    public function findAllByFranchiseQueries(Franchise $franchise, StructureSearch $search): Query
     {
-        $query = $this->createQueryBuilder('s');
+        $query = $this->createQueryBuilder('s')
+            ->where('s.franchise = :franchise')
+            ->setParameter('franchise', $franchise->getId());;
 
         if ($search->getName()) {
             $query = $query

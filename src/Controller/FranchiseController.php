@@ -48,7 +48,7 @@ class FranchiseController extends AbstractController
     {
         //$data = $structureRepository->findByFranchise($franchise);
         $structures = $this->paginator->paginate(
-            $repository->findAllQueries($search),
+            $repository->findAllByFranchiseQueries($search),
             $request->query->getInt('page', 1),
             6
         );

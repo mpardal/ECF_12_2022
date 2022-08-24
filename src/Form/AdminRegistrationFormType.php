@@ -42,7 +42,7 @@ class AdminRegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Admin::class,
+            'data_class' => Admin::class
         ]);
     }
 }

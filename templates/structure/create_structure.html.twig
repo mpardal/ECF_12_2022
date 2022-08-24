@@ -3,11 +3,11 @@
 {% block title %}Création d'un nouveau partenaire{% endblock %}
 
 {% block body %}
-    <h2>Informations de la franchise</h2>
+    <h2>Informations de la structure</h2>
     {% include "structure/structure_form.html.twig" %}
     <div>
         <button type="button"><a href="{{ path('app_list_structure') }}">Annuler</a></button>
-        <button>Valider</button>
+        <button onsubmit="{{ path('app_forgot_password_request') }}"><a href="{{ path('app_admin_list_structure') }}">Valider</a></button>
     </div>
     {{ form_end(structureRegistrationForm) }}
 {% endblock %}
