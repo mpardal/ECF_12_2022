@@ -1,10 +1,8 @@
 {% block title %}Mail de souscription{% endblock %}
 
 {% block body %}
-<h1>Demande d'autorisation d'accès aux données</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolorum est ex, exercitationem fugiat ipsam iure molestias neque odio quam qui, ratione saepe sint tenetur ullam unde ut velit vero?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolorum est ex, exercitationem fugiat ipsam iure molestias neque odio quam qui, ratione saepe sint tenetur ullam unde ut velit vero?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolorum est ex, exercitationem fugiat ipsam iure molestias neque odio quam qui, ratione saepe sint tenetur ullam unde ut velit vero?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dolorum est ex, exercitationem fugiat ipsam iure molestias neque odio quam qui, ratione saepe sint tenetur ullam unde ut velit vero?</p>
-    <button type="submit">Accepter l'accès</button>
+<h1>Activation de votre compte</h1>
+    <p>Vous avez créé un compte sur notre site, veuillez cliquer sur le lien ci-dessous pour l'activer</p>
+
+    <button type="submit"><a href="{{ absolute_url(path('app_franchise_activation', {'token': token})) }}">Activer mon compte</a></button>
 {% endblock %}

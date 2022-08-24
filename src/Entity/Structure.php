@@ -92,7 +92,10 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'structures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Franchise $franchiseId = null;
+    private ?Franchise $franchise = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $activation_token = null;
 
     public function __construct()
     {
@@ -332,14 +335,14 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFranchiseId(): ?Franchise
+    public function getFranchise(): ?Franchise
     {
-        return $this->franchiseId;
+        return $this->franchise;
     }
 
-    public function setFranchiseId(?Franchise $franchiseId): self
+    public function setFranchise(?Franchise $franchise): self
     {
-        $this->franchiseId = $franchiseId;
+        $this->franchise = $franchise;
 
         return $this;
     }
@@ -424,6 +427,18 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeImmutable|\DateTimeInterface|null $updatedAt): Structure
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
         return $this;
     }
 

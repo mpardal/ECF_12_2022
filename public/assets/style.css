@@ -1,6 +1,8 @@
 body {
-    margin: 0;
+    margin: auto;
     font-family: Baghdad, sans-serif;
+    max-width: 1600px;
+    display: block;
 }
 
 .border {
@@ -9,29 +11,7 @@ body {
     border-radius: 5px;
 }
 
-@media screen and (min-width: 1200px) {
-    section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-        grid-auto-rows: auto;
-    }
-}
-
-@media screen and (min-width: 1600px) {
-    section {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media screen and (min-width: 2200px) {
-    section {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
 /* CSS Menu*/
-
 /* Gestion de la NavBar */
 nav {
     display: flex;
@@ -150,63 +130,8 @@ a {
     color: #a03737;
 }
 
-@media screen and (min-width: 900px) {
-    .menu-button,
-    .menu-button::before,
-    .menu-button::after {
-        display: none;
-    }
-
-    .menu > li {
-        overflow: visible;
-    }
-
-    .menu {
-        display: flex;
-        position: relative;
-        margin-top: 0;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    nav {
-        font-size: 20px;
-        height: 40px;
-    }
-
-    .logo {
-        width: 45px;
-        margin-top: 0;
-    }
-}
-
-@media screen and (min-width: 1800px) {
-    nav {
-        font-size: 25px;
-        height: 50px;
-    }
-
-    .logo {
-        width: 65px;
-        margin-top: 0;
-    }
-}
-
-@media screen and (min-width: 2300px) {
-    nav {
-        font-size: 30px;
-        height: 60px;
-    }
-
-    .logo {
-        width: 75px;
-        margin-top: 0;
-    }
-}
 
 /* CSS Page */
-
-@import 'interrupteur.css';
 
 h1 {
     text-align: center;
@@ -286,81 +211,6 @@ h3 {
     margin: 2rem;
 }
 
-@media screen and (min-width: 700px) {
-    .search {
-        font-size: 1rem;
-    }
-
-    .search input,
-    .searchPartner div:nth-child(2) button {
-        height: 1.5rem;
-    }
-}
-
-@media screen and (min-width: 900px) {
-    h1 {
-        font-size: 3rem;
-    }
-
-    .listPartnerDiv img {
-        width: 300px;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-        grid-auto-rows: auto;
-    }
-
-    .listPartnerDiv img {
-        width: 250px;
-    }
-
-    .searchDiv {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 5px;
-        grid-auto-rows: auto;
-    }
-}
-
-@media screen and (min-width: 1600px) {
-    h1 {
-        font-size: 4rem;
-    }
-
-    .listPartner {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-        grid-auto-rows: auto;
-        font-size: 1rem;
-    }
-
-    .listPartnerDiv img {
-        width: 300px;
-    }
-}
-
-@media screen and (min-width: 1900px) {
-    .listPartner {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .listPartnerDiv img {
-        width: 250px;
-    }
-}
-
-@media screen and (min-width: 2400px) {
-    .listPartnerDiv img {
-        width: 300px;
-    }
-}
-
 /* CSS interrupteur */
 
 .etat {
@@ -436,51 +286,6 @@ form button {
     margin: 50px auto auto;
 }
 
-@media screen and (min-width: 900px) {
-    .inputConnect div input {
-        height: 30px;
-    }
-
-    form button {
-        height: 40px;
-        width: 150px;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .inputConnect div input {
-        width: 80%;
-        margin: auto;
-    }
-
-    .inputConnect div label {
-        margin-bottom: 1rem;
-    }
-
-    .inputConnect div {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: auto;
-    }
-
-    form button {
-        height: 40px;
-        width: 200px;
-    }
-}
-
-@media screen and (min-width: 1600px) {
-    .inputConnect div input {
-        height: 50px;
-    }
-
-    form button {
-        height: 60px;
-        width: 250px;
-        font-size: 1.5rem;
-    }
-}
-
 /* CSS Form */
 
 .articleInfo,
@@ -523,13 +328,198 @@ form button {
     display: none;
 }
 
+/* Pagination */
+.container {
+    display: inline-block;
+}
+
+.containerPagination {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    border-width: 1px;
+    border-color: rgb(156 163 175);
+    border-radius: 2px;
+    width: auto;
+}
+
+.spanPagination,
+.first,
+.last {
+    background-color: white;
+    color: rgb(37 99 235);
+    padding: 8px 12px 8px 12px;
+    font-size: 18px;
+    line-height: 28px;
+    border-color: rgb(156 163 175);
+}
+
+.spanPagination,
+.first {
+    border-right: 1px;
+}
+
+.first,
+.last{
+    font-weight: bold;
+}
+
+.spanPage {
+    background-color: rgb(37 99 235);
+    color: white;
+    padding: 8px 12px 8px 12px;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: bold;
+}
+
+/* SearchBar */
+.radio-toolbar input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    background-color: #ddd;
+    padding: 10px 20px;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 2px solid #444;
+    border-radius: 4px;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color:#bfb;
+    border-color: #4c4;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+    border: 2px dashed #444;
+}
+
+.radio-toolbar label:hover {
+    background-color: #dfd;
+}
+
+@media screen and (min-width: 700px) {
+    /* media queries pages */
+    .search {
+        font-size: 1rem;
+    }
+
+    .search input,
+    .searchPartner div:nth-child(2) button {
+        height: 1.5rem;
+    }
+}
+
+/* media queries form*/
 @media screen and (min-width: 900px) {
+    /*Nav media queries */
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        display: none;
+    }
+
+    .menu > li {
+        overflow: visible;
+    }
+
+    .menu {
+        display: flex;
+        position: relative;
+        margin-top: 0;
+    }
+
+    /* media queries connect*/
+    .inputConnect div input {
+        height: 30px;
+    }
+
+    form button {
+        height: 40px;
+        width: 150px;
+    }
+
+    /* media queries pages */
+    h1 {
+        font-size: 3rem;
+    }
+
+    .listPartnerDiv img {
+        width: 300px;
+    }
+
+    /* media queries form*/
     .articleOption {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media screen and (min-width: 1200px) {
+    /* media queries de base*/
+    section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: auto;
+    }
+
+    /*Nav media queries */
+    nav {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    .logo {
+        width: 45px;
+        margin-top: 0;
+    }
+
+    /* media queries connect*/
+    .inputConnect div input {
+        width: 80%;
+        margin: auto;
+    }
+
+    .inputConnect div label {
+        margin-bottom: 1rem;
+    }
+
+    .inputConnect div {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+    }
+
+    form button {
+        height: 40px;
+        width: 200px;
+    }
+
+    /* media queries pages */
+    section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: auto;
+    }
+
+    .listPartnerDiv img {
+        width: 250px;
+    }
+
+    .searchDiv {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+        grid-auto-rows: auto;
+    }
+
+    /* media queries form*/
     .articleInfo {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -543,13 +533,45 @@ form button {
 }
 
 @media screen and (min-width: 1600px) {
+    /* media queries de base*/
+    section {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* media queries connect*/
+    .inputConnect div input {
+        height: 50px;
+    }
+
+    form button {
+        height: 60px;
+        width: 250px;
+        font-size: 1.5rem;
+    }
+
+    /* media queries pages */
+    h1 {
+        font-size: 4rem;
+    }
+
+    .listPartner {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: auto;
+        font-size: 1rem;
+    }
+
+    .listPartnerDiv img {
+        width: 300px;
+    }
+
+
+    /* media queries form*/
     .articleOption {
         grid-template-columns: repeat(4, 1fr);
     }
 
-    /*   .articleInfo div:nth-child(3){
-           margin-top: 3rem;
-       }*/
     .form {
         height: 50px;
     }
@@ -559,24 +581,3 @@ form button {
     }
 }
 
-@media screen and (min-width: 1900px) {
-    .articleOption {
-        grid-template-columns: repeat(5, 1fr);
-    }
-}
-
-@media screen and (min-width: 2200px) {
-    .articleInfo {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .hiddenDiv {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 2400px) {
-    .articleOption {
-        grid-template-columns: repeat(6, 1fr);
-    }
-}

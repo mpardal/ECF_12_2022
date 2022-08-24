@@ -43,6 +43,6 @@
     <div class="partnerButton">
         <button><a href="{{ path('app_admin_create_structure') }}">Créer une nouvelle structure</a></button>
     </div>
-
+    {{ knp_pagination_render(structures) }}
 {% endblock %}
 

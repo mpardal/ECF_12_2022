@@ -47,7 +47,7 @@ class FranchiseAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-         return new RedirectResponse($this->urlGenerator->generate('app_list_franchise'));
+         return new RedirectResponse($this->urlGenerator->generate('api_home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

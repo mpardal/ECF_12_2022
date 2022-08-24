@@ -2,44 +2,56 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\Franchise:
+            algorithm: auto
+        App\Entity\Structure:
+            algorithm: auto
+        App\Entity\Admin:
+            algorithm: auto
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+        app_franchise_provider:
+            entity:
+                class: App\Entity\Franchise
+                property: email
+        app_structure_provider:
+            entity:
+                class: App\Entity\Structure
+                property: email
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-       # main:
         franchise_secured_area:
-            lazy: true
-            provider: users_in_memory
-            #provider: app_franchise_provider
-            custom_authenticator:
-                App\Security\FranchiseAuthenticator
-            form_login:
-                login_path: /connect
-                check_path: app_login
-                default_target_path: /connect
+            provider: app_franchise_provider
+            pattern: ^/franchise
+            custom_authenticator: App\Security\FranchiseAuthenticator
             logout:
-                path: app_logout
+                path: app_logout_franchise
                 # redirection après la déconnexion
                 target: api_home
-            entry_point: 'form_login'
         structure_secured_area:
-            lazy: true
-            provider: users_in_memory
-            #provider: app_structure_provider
-            custom_authenticator:
-                App\Security\StructureAuthenticator
-            form_login:
-                login_path: /connect
-                check_path: app_login
-                default_target_path: /connect
+            provider: app_structure_provider
+            pattern: ^/structure
+            custom_authenticator: App\Security\StructureAuthenticator
             logout:
-                path: app_logout
+                path: app_logout_structure
                 # redirection après la déconnexion
                 target: api_home
-            entry_point: 'form_login'
+        admin_secured_area:
+            provider: app_admin_provider
+            custom_authenticator: App\Security\AdminAuthenticator
+            logout:
+                path: app_logout_admin
+                # redirection après la déconnexion
+                target: api_home
+                # where to redirect after logout
+                # target: app_any_route
 
             #logout:
              #   path: app_logout
@@ -56,8 +68,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
+    # - { path: /home, roles: ROLE_ADMIN }
+     #- { path: /, roles: ROLE_USER }
 
 when@test:
     security:

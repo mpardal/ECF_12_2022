@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Franchise;
 use App\Entity\Structure;
+use App\Search\StructureSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +43,33 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByFranchise(Franchise $franchise):QueryBuilder
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.franchiseId = :franchiseId')
+            ->setParameter('franchiseId', $franchise->getId());
+    }
+
+    public function findAllQueries(StructureSearch $search): Query
+    {
+        $query = $this->createQueryBuilder('s');
+
+        if ($search->getName()) {
+            $query = $query
+                ->andWhere('s.name = :nameStructure')
+                ->setParameter('nameStructure', $search->getName());
+        }
+
+        //andWhere permet de cumuler les WHERE
+        if ($search->getActive()) {
+            $query = $query
+                ->andWhere('s.active = :activeStructure')
+                ->setParameter('activeStructure', $search->getActive());
+        }
+
+        return $query->getQuery();
+    }
+
 //    /**
 //     * @return Structure[] Returns an array of Structure objects
 //     */
@@ -63,4 +94,5 @@ class StructureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

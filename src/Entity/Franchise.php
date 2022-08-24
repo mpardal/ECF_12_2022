@@ -92,8 +92,11 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: Structure::class, orphanRemoval: true)]
     private Collection $structures;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $activationToken = null;
 
     public function __construct()
     {
@@ -347,7 +350,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->structures->contains($structure)) {
             $this->structures->add($structure);
-            $structure->setFranchiseId($this);
+            $structure->setFranchise($this);
         }
 
         return $this;
@@ -357,8 +360,8 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->structures->removeElement($structure)) {
             // set the owning side to null (unless already changed)
-            if ($structure->getFranchiseId() === $this) {
-                $structure->setFranchiseId(null);
+            if ($structure->getFranchise() === $this) {
+                $structure->setFranchise(null);
             }
         }
 
@@ -444,6 +447,18 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): Franchise
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activationToken;
+    }
+
+    public function setActivationToken(?string $activationToken): self
+    {
+        $this->activationToken = $activationToken;
+
         return $this;
     }
 

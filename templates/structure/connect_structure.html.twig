@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page de connexion{% endblock %}
+{% block title %}Page de connexion structure{% endblock %}
 
 {% block body %}
 <form method="post">
     {% if app.user %}
         <div>
-            Vous êtes connectés en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            Vous êtes connectés en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout_structure') }}">Se déconnecter</a>
         </div>
     {% endif %}
     {% if error %}

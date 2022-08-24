@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création nouvel admin{% endblock %}
+
+{% block body %}
+    <h1>Nouvel admin</h1>
+    {{ form_start(AdminRegistrationForm) }}
+    <article class="articleInfo">
+        <div>
+            {{ form_label(AdminRegistrationForm.email) }}
+            {{ form_widget(AdminRegistrationForm.email, {'attr': {'class': 'form'}}) }}
+        </div>
+        <div>
+            {{ form_label(AdminRegistrationForm.plainPassword) }}
+            {{ form_widget(AdminRegistrationForm.plainPassword, {'attr': {'class': 'form'}}) }}
+        </div>
+    </article>
+    <button type="submit" class="btn">Connexion (administrateur)</button>
+    {{ form_end(AdminRegistrationForm) }}
+{% endblock %}

@@ -5,6 +5,16 @@
 {% block body %}
     <h1>Bienvenu sur l'API salle de sport</h1>
 
+
+    <a href="{{ path('app_admin_connect') }}">
+        <button>Accès Administrateur</button>
+    </a>
+    <a href="{{ path('app_franchise_connect') }}">
+        <button>Accès Franchise</button>
+    </a>
+    <a href="{{ path('app_structure_connect') }}">
+        <button>Accès Structure</button>
+    </a>
     <!--
     <div>
         <p>Vous pouvez vous connectez à votre compte en cliquant sur ce <a href="/connect">lien</a></p>

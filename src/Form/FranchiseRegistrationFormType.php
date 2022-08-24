@@ -60,7 +60,7 @@ class FranchiseRegistrationFormType extends AbstractType
             ->add('fullDescription', null, [
                 'label' => 'fullDescription'
             ])
-            ->add('active', CheckboxType::class, [
+            ->add('active', options: [
                 'label' => 'active'
             ])
             ->add('wheySale', null, [

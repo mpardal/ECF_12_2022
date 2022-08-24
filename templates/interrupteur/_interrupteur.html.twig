@@ -1,9 +1,18 @@
 <div class="etat">
     {# Bouton va et vient // Début #}
     <label class="int">
-        <input type="checkbox">
+        {% if active %}
+            <input type="checkbox" checked disabled>
+        {% else %}
+            <input type="checkbox" disabled>
+        {% endif %}
         <span></span>
     </label>
     {# FIN #}
+    {% if active %}
     <p class="actif">ACTIF</p>
+    {% else %}
+    <p class="actif">NON ACTIF</p>
+    {% endif %}
+
 </div>

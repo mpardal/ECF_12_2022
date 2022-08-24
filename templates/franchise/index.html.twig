@@ -4,20 +4,24 @@
 
 {% block body %}
     <div class="border searchPartner">
+        {{ form_start(franchiseSearchType) }}
         <div class="searchDiv">
             <div class="search">
-                <label for="client_name">client_name</label>
-                <input type="text" id="client_name">
+                {{ form_label(franchiseSearchType.name) }}
+                {{ form_widget(franchiseSearchType.name) }}
             </div>
             <div class="search">
-                <label for="client_id">client_id</label>
-                <input type="number" id="client_id">
+                {{ form_label(franchiseSearchType.city) }}
+                {{ form_widget(franchiseSearchType.city) }}
             </div>
         </div>
-        <div>
-            <button type="button">ACTIF</button>
-            <button type="button">NON ACTIF</button>
+            <div class="radio-toolbar">
+                {{ form_widget(franchiseSearchType.active) }}
+            </div>
+        <div class="buttonSearch">
+            <button>Rechercher</button>
         </div>
+        {{ form_end(franchiseSearchType) }}
     </div>
     <h2>Liste des franchises</h2>
     <section class="listPartner">
@@ -33,16 +37,20 @@
                 </div>
             </div>
             <div class="listActif">
-                {{ franchise.active }}
-                <button type="button"><a href="{{ path('app_admin_edit_franchise', {id : franchise.id}) }}">Modifier une franchise</a></button>
+                {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <button type="button"><a href="{{ path('app_admin_edit_franchise', {id : franchise.id}) }}">Modifier la franchise</a></button>
+                {% endif %}
+                <button type="button"><a href="{{ path('app_detail_franchise', {id : franchise.id}) }}">Voir la franchise</a></button>
             </div>
         </article>
         {% endfor %}
     </section>
-
+{% if is_granted('ROLE_ADMIN') %}
 <div class="partnerButton">
     <button><a href="{{ path('app_admin_create_franchise') }}">Créer un nouveau partenaire</a></button>
 </div>
-
+    {% endif %}
+    {{ knp_pagination_render(franchises) }}
 {% endblock %}
 

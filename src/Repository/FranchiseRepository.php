@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Franchise;
+use App\Search\FranchiseSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +41,44 @@ class FranchiseRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllQueries(FranchiseSearch $search): Query
+    {
+        $query = $this->createQueryBuilder('f');
+
+        if ($search->getName()) {
+            $query = $query
+                ->andWhere('f.name LIKE :nameFranchise')
+                ->setParameter('nameFranchise', '%'.$search->getName().'%');
+        }
+
+        //andWhere permet de cumuler les WHERE
+        if ($search->isActive() !== null) {
+            $query = $query
+                ->andWhere('f.active = :activeFranchise')
+                ->setParameter('activeFranchise', $search->isActive());
+        }
+
+
+        if ($search->getCity()) {
+            $query = $query
+                ->andWhere('f.city LIKE :cityFranchise')
+                ->setParameter('cityFranchise', '%'.$search->getCity().'%');
+        }
+        return $query->getQuery();
+    }
+
+  /*  public function findQuery(Franchise $franchise):Query
+    {
+        $query = $this->findQueries();
+
+        if ($franchise->getName()){
+            $query = $query
+                ->andWhere('f.name')
+
+        }
+    }*/
+
 
 //    /**
 //     * @return Franchise[] Returns an array of Franchise objects

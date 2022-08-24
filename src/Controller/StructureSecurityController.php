@@ -25,7 +25,7 @@ class StructureSecurityController extends AbstractController
         return $this->render('structure/connect_structure.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/disconnect', name: 'app_logout_structure')]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
