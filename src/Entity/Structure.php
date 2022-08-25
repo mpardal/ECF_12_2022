@@ -100,6 +100,9 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, unique: true, nullable: true)]
     private ?string $passwordToken = null;
 
+    #[ORM\Column]
+    private bool $franchiseValidated = false;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
@@ -457,4 +460,15 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function isFranchiseValidated(): bool
+    {
+        return $this->franchiseValidated;
+    }
+
+    public function setFranchiseValidated(bool $franchiseValidated): self
+    {
+        $this->franchiseValidated = $franchiseValidated;
+
+        return $this;
+    }
 }

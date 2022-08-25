@@ -9,6 +9,7 @@ use App\Form\AdminRegistrationFormType;
 use App\Form\FranchiseRegistrationFormType;
 use App\Form\FranchiseSearchType;
 use App\Form\StructureRegistrationFormType;
+use App\Form\StructureSearchType;
 use App\Repository\AdminRepository;
 use App\Repository\FranchiseRepository;
 use App\Repository\StructureRepository;
@@ -18,6 +19,7 @@ use App\Security\AdminAuthenticator;
 use App\Security\UserStorage;
 use App\Service\FranchiseMails;
 use App\Service\StructureMails;
+use App\Service\StructureOptionsRegister;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -111,8 +113,7 @@ class AdminController extends AbstractController
 
     // Création d'une structure
     #[Route('/create_structure', name: 'app_admin_create_structure')]
-    public function structureNew(StructureRepository         $structureRepository, Request $request,
-                                 UserPasswordHasherInterface $userPasswordHasher, StructureMails $structureMails): Response
+    public function structureNew(StructureRepository $structureRepository, Request $request, FranchiseMails $franchiseMails, StructureOptionsRegister $structureOptionsRegister): Response
     {
         //créer une nouvelle entité structure
         $structure = new Structure();
@@ -123,14 +124,17 @@ class AdminController extends AbstractController
         //Vérification de la bonne complétude et de la validité du formulaire
         if ($formStructure->isSubmitted() && $formStructure->isValid()) {
             // initialisation mot de passe encodé
-            $structure->setPasswordToken(Uuid::v4());
             // fonction pour flush et persist (dans Repository)
+
+            // enregistre les options par défaut de la franchise sur la structure
+            $structureOptionsRegister->register($structure->getFranchise(), $structure);
+
             $structureRepository->add($structure, true);
             // Annonce pour validation de création
             $this->addFlash('success', 'La nouvelle structure est créée avec succès');
 
             // Création et envoi du mail du mail
-            $structureMails->sendCreated($structure);
+            $franchiseMails->sendStructureCreated($structure->getFranchise(), $structure);
 
             //redirection après validation du formulaire
             return $this->redirectToRoute('app_admin_list_franchise');
@@ -143,8 +147,8 @@ class AdminController extends AbstractController
     //Modification d'une franchise
 
     #[Route('/edit_franchise/{id}', name: 'app_admin_edit_franchise')]
-    public function editFranchise(Franchise              $franchise, Request $request, UserPasswordHasherInterface $userPasswordHasher,
-                                  EntityManagerInterface $entityManager, FranchiseMails $franchiseMails): Response
+    public function editFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager,
+                                  FranchiseMails $franchiseMails): Response
     {
         //Donne lieu à un nouveau formulaire
         $formFranchise = $this->createForm(FranchiseRegistrationFormType::class, $franchise);
@@ -169,7 +173,6 @@ class AdminController extends AbstractController
             'franchiseRegistrationForm' => $formFranchise->createView()
         ]);
     }
-
 
 
     //Modification d'une structure
@@ -208,7 +211,7 @@ class AdminController extends AbstractController
     #[Route('/list_franchise', name: 'app_admin_list_franchise')]
     public function listFranchise(Request $request, FranchiseRepository $repository): Response
     {
-        //créer une nouvelle entité structure
+        // Nouvelle entité FranchiseSearch
         $search = new FranchiseSearch();
         //Donne lieu à un nouveau formulaire
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $search);
@@ -229,26 +232,14 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/list_structure', name: 'app_admin_list_structure')]
-    public function listStructure(Request $request, StructureRepository $repository): Response
-    {
-        $search = new StructureSearch();
-
-        dd('TODO: StructureRepository find search');
-
-        $structures = $this->paginator->paginate(
-            $repository->findAllByFranchiseQueries($search),
-            $request->query->getInt('page', 1),
-            6
-        );
-        return $this->render('structure/index.html.twig', [
-            'structures' => $structures
-        ]);
-    }
-
     #[Route('/details_franchise/{id}', name: 'app_admin_detail_franchise')]
     public function detail(Request $request, StructureRepository $structureRepository, Franchise $franchise, StructureSearch $search): Response
     {
+        // Entité StructureSearch
+        $search = new StructureSearch();
+        // Nouveau formulaire
+        $formStructureSearch = $this->createForm(StructureSearchType::class, $search);
+        $formStructureSearch->handleRequest($request);
 
         //pagination et affichage d'une franchise et de ces structures.
         $structures = $this->paginator->paginate(
@@ -261,7 +252,8 @@ class AdminController extends AbstractController
         );
         return $this->render('franchise/detail_franchise.html.twig', [
                 'structures' => $structures,
-                'franchise' => $franchise
+                'franchise' => $franchise,
+                'structureSearchType' => $formStructureSearch->createView()
             ]
         );
     }

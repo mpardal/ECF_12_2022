@@ -3,116 +3,153 @@
 {% block title %}Détail de la franchise{% endblock %}
 
 {% block body %}
-    <button type="button" id="list" class="detailButton"><a href="{{ path('app_list_franchise') }}">Liste partenaires</a></button>
-    <div class="detailFranchise">
-        <div class="detailFranchiseDiv">
-            {{ include('franchise/_image_franchise.html.twig') }}
+<div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_admin_list_franchise') }}">
+        <button type="button" id="list" class="detailButton">
+            Liste partenaires
+        </button>
+    </a>
+    {% elseif is_granted('ROLE_FRANCHISE') %}
+    <a href="{{ path('app_list_franchise') }}">
+        <button type="button" id="list" class="detailButton">
+            Liste partenaires
+        </button>
+    </a>
+    {% elseif is_granted('ROLE_STRUCTURE') %}
+    <a href="{{ path('app_list_franchise_by_structure') }}">
+        <button type="button" id="list" class="detailButton">
+            Liste partenaires
+        </button>
+    </a>
+    {% endif %}
+</div>
+<div class="detailFranchise">
+    <div class="detailFranchiseDiv">
+        {{ include('franchise/_image_franchise.html.twig') }}
+        <div>
             <div>
-                <div>
-                    <p>{{ franchise.name }}</p>
-                    <p>{{ franchise.address }}</p>
-                    <p>{{ franchise.postalCode }}</p>
-                    <p>{{ franchise.city }}</p>
-                </div>
-                <div>
-                    <p>{{ franchise.email }}</p>
-                    <p></p>
-                    <p>{{ franchise.shortDescription }}</p>
-                    <p>{{ franchise.fullDescription }}</p>
-                </div>
+                <p>{{ franchise.name }}</p>
+                <p>{{ franchise.address }}</p>
+                <p>{{ franchise.postalCode }}</p>
+                <p>{{ franchise.city }}</p>
+            </div>
+            <div>
+                <p>{{ franchise.email }}</p>
+                <p></p>
+                <p>{{ franchise.shortDescription }}</p>
+                <p>{{ franchise.fullDescription }}</p>
             </div>
         </div>
-        {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
     </div>
-    {#    <section class="branchSearchPartner"> #}
-    {#        <div> #}
-    {#            <div class="champList"> #}
-    {#                <label for="zone_id-branch_id">zone_id-branch_id</label> #}
-    {#                <input type="text" id="zone_id-branch_id"> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %} #}
-    {#            </div> #}
-    {#        </div> #}
-    {#        <div class="buttonPartner"> #}
-    {#            <button type="button">TOUTES</button> #}
-    {#            <button type="button">AJOUTER</button> #}
-    {#        </div> #}
-    {#    </section> #}
-    {#    <section> #}
-    {#        <div class="partnerDiv"> #}
-    {#            <img src="#" alt="photo de la salle"> #}
-    {#            <div class="partnerInfo"> #}
-    {#                <p>{{ franchise.name }}</p> #}
-    {#                <p>{{  franchise.city }}</p> #}
-    {#                <p>{{ franchise.shortDescription }}</p> #}
-    {#            </div> #}
-    {#        </div> #}
-    {#        {{ franchise.active }} #}
-    {#    </section> #}
-    {#    <section class="sectionOption"> #}
-    {#        <h2>Options de la franchise</h2> #}
-    {#        <article class="articleOption"> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.wheySale) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.wheySale }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.towelSale) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.towelSale }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.drinkSale) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.drinkSale }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.sauna) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.sauna }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.paymentDay) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.paymentDay }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.lateClosing) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.lateClosing }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.sendNewsletter) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.sendNewsletter }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.ringBoxe) }}</p> #}
-    {#                <p> #}
-    {#                   {{ franchise.ringBoxe }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.crossfit) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.crossfit }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#            <div> #}
-    {#                <p class="labelChoiceForm">{{ form_label(franchiseRegistrationForm.biking) }}</p> #}
-    {#                <p> #}
-    {#                    {{ franchise.biking }} #}
-    {#                </p> #}
-    {#            </div> #}
-    {#        </article> #}
-    {#    </section> #}
+    {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
+</div>
+<section>
+    {{ form_start(structureSearchType) }}
+    <div>
+        <div>
+            {{ form_label(structureSearchType.name) }}
+            {{ form_widget(structureSearchType.name) }}
+        </div>
+        <div>
+            {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
+        </div>
+    </div>
+    <div class="buttonPartner">
+        <button type="reset">
+            TOUTES
+        </button>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_admin_create_structure')}}">
+                    <button type="button">
+                        AJOUTER
+                    </button>
+                </a>
+        {% endif %}
+                <button type="submit">
+                    RECHERCHER
+                </button>
+            </div>
+            {{ form_end(structureSearchType) }}
+        </section>
+    {% for structure in structures %}
+        <section>
+            <div>
+                {{ include('structure/_image_structure.html.twig') }}
+                <div>
+                    <p>{{ structure.name }}</p>
+                    <p>{{ structure.address }}</p>
+                    <p>{{ structure.city }}</p>
+                    <p>{{ structure.shortDescription }}</p>
+                </div>
+            </div>
+            {% include 'interrupteur/_interrupteur.html.twig' with {active : structure.active} only %}
+        </section>
+        <section>
+            <h2>Options de la structure</h2>
+            <article>
+                <div>
+                    <p>Vente de protéines</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.wheySale} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Vente de serviettes</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.towelSale} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Vente de boissons</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.drinkSale} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Accès sauna</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.sauna} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Jour de paiement</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.paymentDay} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Fermeture tardive</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.lateClosing} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Option newsletter</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.sendNewsletter} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Accès secteur boxing</p>
+                    <p>
+                       {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.ringBoxe} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Accès secteur crossfit</p>
+                    <p>
+                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.crossfit} only %}
+                    </p>
+                </div>
+                <div>
+                    <p>Accès secteur biking</p>
+                    <p>
+                       {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.biking} only %}
+                    </p>
+                </div>
+            </article>
+        </section>
+    {% endfor %}
+    {{ knp_pagination_render(structures) }}
 {% endblock %}

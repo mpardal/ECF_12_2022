@@ -23,17 +23,9 @@ class StructurePasswordNewController extends AbstractController
     #[Route('/structure/new-password/{passwordToken}', name: 'app_structure_password_new', methods: ['GET', 'POST'])]
     public function newPassword(Structure $structure, Request $request): Response
     {
-
-        /*
-         * Permet de mettre à jour le mot de passe de la structure
-         * La structure indique son mot de passe sur le formulaire <- c'est ok
-         * Après le submit, on hash le mot de passe et on l'ajoute en base de données <- c'est ok
-         * Ensuite, on lui envoie un mail pour le notifier du changement <- c'est ok
-         * On avait dit on supprime la possibilité de refaire le mdp <- c'est ok
-         * Et on le redirige vers la page d'accueil ou de login <- c'est ok
-         * FIXME: à tester
-         * ^ : ça permet de mettre de la couleur pour voir le commentaire. Mais ça indique aussi quelque chose à faire
-         */
+        if (!$structure->isFranchiseValidated()) {
+            throw $this->createAccessDeniedException();
+        }
 
         // fait le formulaire de mot de passe
         $form = $this->createForm(StructurePasswordNewFormType::class, $structure);

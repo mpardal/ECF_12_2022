@@ -1,6 +1,6 @@
 {% if pageCount > 1 %}
-    <div class="container">
-        <div class="containerPagination">
+    <div>
+        <div>
             {% if first is defined and current != first %}
                 <span class="first">
                 <a href="{{ path(route, query|merge({(pageParameterName): first})) }}">&lt;&lt;</a>
