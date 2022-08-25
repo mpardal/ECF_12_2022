@@ -7,7 +7,6 @@ use App\Form\FranchisePasswordNewFormType;
 use App\Service\FranchiseMails;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -33,11 +32,12 @@ class FranchisePasswordNewController extends AbstractController
             $franchise->setPassword(
                 $this->userPasswordHasher->hashPassword(
                     $franchise,
-                    $$plainPassword
+                    $plainPassword
                 )
             );
             // Supprime le token de la structure
-            $franchise->setPassword(null);
+            $franchise->setPasswordToken(null);
+
             // envoie dans la base de données
             $this->entityManager->flush();
 

@@ -1,8 +1,0 @@
-{% block title %}Mail de souscription{% endblock %}
-
-{% block body %}
-<h1>Activation de votre compte</h1>
-    <p>Vous avez créé un compte sur notre site, veuillez cliquer sur le lien ci-dessous pour l'activer</p>
-
-    <button type="submit"><a href="{{ absolute_url(path('app_franchise_activation', {'token': token})) }}">Activer mon compte</a></button>
-{% endblock %}

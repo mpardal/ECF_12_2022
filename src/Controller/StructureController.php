@@ -23,14 +23,14 @@ class StructureController extends AbstractController
     #[Route('/', name: 'app_list_structure')]
     public function index(Request $request, FranchiseRepository $repository, FranchiseSearch $search): Response
     {
-        $data = $repository->findAll();
-        $franchises = $this->paginator->paginate(
+        $structures = $this->paginator->paginate(
             $repository->findAllQueries($search),
             $request->query->getInt('page', 1),
             6
         );
-        return $this->render('franchise/index.html.twig', [
-            'franchises' => $franchises
+
+        return $this->render('structure/index.html.twig', [
+            'structures' => $structures
         ]);
     }
 

@@ -68,8 +68,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-     #- { path: /, roles: ROLE_USER }
+      - { path: /admin/connect, roles: PUBLIC_ACCESS }
+      - { path: ^/admin, roles: ROLE_ADMIN }
+      - { path: /franchise/connect, roles: PUBLIC_ACCESS }
+      - { path: ^/franchise, roles: ROLE_FRANCHISE }
+      - { path: /structure/connect, roles: PUBLIC_ACCESS }
+      - { path: ^/structure, roles: ROLE_STRUCTURE }
 
 when@test:
     security:

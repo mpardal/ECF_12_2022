@@ -21,7 +21,6 @@ class FranchiseController extends AbstractController
     {
     }
 
-
     #[Route('/list', name: 'app_list_franchise')]
     public function index(Request $request, FranchiseRepository $repository): Response
     {
@@ -31,7 +30,6 @@ class FranchiseController extends AbstractController
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $searchFranchise);
         $formFranchiseSearch->handleRequest($request);
 
-        //$data = $repository->findAll();
         $franchises = $this->paginator->paginate(
             $repository->findAllQueries($searchFranchise),
             $request->query->getInt('page', 1),
@@ -46,7 +44,6 @@ class FranchiseController extends AbstractController
     #[Route('/details/{id}', name: 'app_detail_franchise')]
     public function detail(Request $request, StructureRepository $repository, StructureSearch $search): Response
     {
-        //$data = $structureRepository->findByFranchise($franchise);
         $structures = $this->paginator->paginate(
             $repository->findAllByFranchiseQueries($search),
             $request->query->getInt('page', 1),
@@ -56,31 +53,4 @@ class FranchiseController extends AbstractController
             'structures' => $structures
         ]);
     }
-
-
-/*
-    #[Route('/activate/{token', name: 'app_franchise_activation')]
-    public function activation_token($token, FranchiseRepository $repository, EntityManagerInterface $entityManager)
-    {
-
-        $franchise = $repository->findOneBy([
-            'activation_token' => $token
-        ]);
-
-        //If no franchise exist
-        if (!$franchise){
-            //Message send if the Franchise doesn't exist
-            throw $this->createNotFoundException("Cette franchise n'existe pas");
-        }
-
-        //Delete token
-        $franchise->setActivationToken(null);
-        $entityManager->persist($franchise);
-        $entityManager->flush();
-
-        //generate a message flash
-        $this->addFlash('message', 'utilisateur activé avec succès');
-
-        return $this->redirectToRoute('api_home');
-    }*/
 }

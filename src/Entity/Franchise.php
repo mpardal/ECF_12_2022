@@ -374,7 +374,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_FRANCHISE';
 
         return array_unique($roles);
     }

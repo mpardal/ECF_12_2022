@@ -2,19 +2,22 @@
     <div>
         <img src="{{ asset('/images/logo1.jpg') }}" alt="logo" class="logo">
     </div>
-    <input id="menu-input" type="checkbox" />
+    <input id="menu-input" type="checkbox"/>
     <label class='menu-button-container' for="menu-input">
         <div class='menu-button'></div>
     </label>
     <ul class="menu">
-
         <li><a href="{{ path('api_home') }}">Accueil</a></li>
-        {# {% if is_granted('ROLE_ADMIN') %} #}
-        <li><a href="{{ path('app_admin_create_franchise') }}">Créer une franchise</a></li>
-        <li><a href="{{ path('app_admin_create_structure') }}">Créer une structure</a></li>
-        <li><a href="{{ path('app_admin_list_franchise') }}">Liste des partenaires</a></li>
-{# {% elseif is_granted('ROLE_USER')%} #}
-        <li><a href="{{ path('app_list_franchise') }}">Liste des partenaires</a></li>
-{#        {% endif %}#}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('app_admin_create_franchise') }}">Créer une franchise</a></li>
+            <li><a href="{{ path('app_admin_create_structure') }}">Créer une structure</a></li>
+            <li><a href="{{ path('app_admin_list_franchise') }}">Liste des partenaires</a></li>
+            <li><a href="{{ path('app_logout_admin') }}">Se déconnecter</a></li>
+        {% elseif is_granted('ROLE_FRANCHISE') %}
+            <li><a href="{{ path('app_list_franchise') }}">Liste des partenaires</a></li>
+        {% elseif is_granted('ROLE_STRUCTURE') %}
+            <li><a href="{{ path('app_list_structure') }}">Liste des partenaires</a></li>
+        {% endif %}
     </ul>
 </nav>
