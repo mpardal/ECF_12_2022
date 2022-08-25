@@ -38,10 +38,10 @@
                 </div>
 
                 <div class="listActif">
-                    {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
+                    {% include 'interrupteur/_interrupteur.html.twig' with {active : structure.active} only %}
 {#                    {% if is_granted('ROLE_ADMIN') %}#}
                         <button type="button"><a href="{{ path('app_admin_edit_structure', {id : structure.id}) }}">Modifier la structure</a></button>
-                        <button type="button"><a href="{{ path('app_forgot_password_request', {id : structure.id}) }}">Voir la structure</a></button>
+                        <button type="button"><a href="#">Voir la structure</a></button>
 {#                    {% endif %}#}
 {#                    #}{# {% elseif is_granted('ROLE_USER')%} #}
 {#                    <button type="button"><a href="{{ path('app_detail_structure', {id : franchise.id}) }}">Voir la franchise</a></button>#}

@@ -40,4 +40,18 @@ class FranchiseMails
 
         $this->mailer->send($email);
     }
+
+    public function returnPassword(Franchise $franchise)
+    {
+        $email = (new TemplatedEmail())
+            ->from(new Address('no-reply@sport.fr'))
+            ->to($franchise->getEmail())
+            ->subject("Validation de l'enregistrement de votre mot de passe")
+            ->htmlTemplate('mail/password_validate.mjml.twig')
+            ->context([
+                'franchise' => $franchise,
+            ]);
+
+        $this->mailer->send($email);
+    }
 }

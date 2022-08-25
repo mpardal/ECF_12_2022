@@ -98,6 +98,9 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $activationToken = null;
 
+    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    private ?string $passwordToken = null;
+
     public function __construct()
     {
         $this->structures = new ArrayCollection();
@@ -458,6 +461,18 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActivationToken(?string $activationToken): self
     {
         $this->activationToken = $activationToken;
+
+        return $this;
+    }
+
+    public function getPasswordToken(): ?string
+    {
+        return $this->passwordToken;
+    }
+
+    public function setPasswordToken(?string $passwordToken): self
+    {
+        $this->passwordToken = $passwordToken;
 
         return $this;
     }

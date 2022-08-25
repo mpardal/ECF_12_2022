@@ -25,24 +25,6 @@ class StructureRegistrationFormType extends AbstractType
             ->add('email', null, [
                 'label' => 'emailStructure'
             ])
-            ->add('password', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'label' => 'passwordStructure',
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => "Entrez un mot de passe s'il vous plait",
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit être entre {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
             ->add('franchise', EntityType::class, [
                 'class' => Franchise::class,
                 'choice_label' => 'name',

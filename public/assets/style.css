@@ -373,6 +373,27 @@ form button {
     font-weight: bold;
 }
 
+/* Page détail */
+
+.detailButton {
+    padding: 3px;
+    font-size: 15px;
+    margin: 10px;
+}
+
+.detailFranchiseDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    margin: 5rem;
+}
+
+.detailFranchise img {
+    width: 200px;
+    height: 200px;
+}
+
 @media screen and (min-width: 700px) {
     /* media queries pages */
     .search {

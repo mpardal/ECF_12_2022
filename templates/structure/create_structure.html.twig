@@ -7,7 +7,7 @@
     {% include "structure/structure_form.html.twig" %}
     <div>
         <button type="button"><a href="{{ path('app_list_structure') }}">Annuler</a></button>
-        <button onsubmit="{{ path('app_forgot_password_request') }}"><a href="{{ path('app_admin_list_structure') }}">Valider</a></button>
+        <button>Valider</button>
     </div>
     {{ form_end(structureRegistrationForm) }}
 {% endblock %}

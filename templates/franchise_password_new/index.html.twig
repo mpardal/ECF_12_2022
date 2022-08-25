@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe enregistré{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Votre mot de passé est validé ✅</h1>
+        <p>
+            Votre mot de passe est validé, vous pouvez désormais vous connecter pour visualiser les différentes franchises et
+            structures de notre société.
+        </p>
+        <p>
+            <a href="{{ path('api_home') }}">Vous pouvez y accèder à l'aide de ce lien</a>
+        </p>
+        <p>
+            Ensuite vous devez choisir votre accès soit l'accès franchise, soit l'accès structure.
+        </p>
+    </div>
+{% endblock %}

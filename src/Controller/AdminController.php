@@ -9,6 +9,7 @@ use App\Form\AdminRegistrationFormType;
 use App\Form\FranchiseRegistrationFormType;
 use App\Form\FranchiseSearchType;
 use App\Form\StructureRegistrationFormType;
+use App\Repository\AdminRepository;
 use App\Repository\FranchiseRepository;
 use App\Repository\StructureRepository;
 use App\Search\FranchiseSearch;
@@ -28,6 +29,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Uid\Uuid;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -38,14 +40,20 @@ class AdminController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register_admin')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AdminAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator,
+                             AdminAuthenticator $authenticator, EntityManagerInterface $entityManager, AdminRepository $adminRepository): Response
     {
+        // Vérifie si l'utilisateur à le role admin
+        //$this->denyAccessUnlessGranted('ROLE_ADMIN');
+        //créer une nouvelle entité franchise
         $user = new Admin();
+        //Donne lieu à un nouveau formulaire
         $form = $this->createForm(AdminRegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        //Vérification de la bonne complétude et de la validité du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            //encodage du mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -53,9 +61,9 @@ class AdminController extends AbstractController
                 )
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            //fonction pour flush et persist (dans Repository)
+            $adminRepository->add($user, true);
+
 
             return $userAuthenticator->authenticateUser(
                 $user,
@@ -71,8 +79,6 @@ class AdminController extends AbstractController
 
 
     //Création de la franchise
-
-
     #[Route('/create_franchise', name: 'app_admin_create_franchise')]
     public function franchiseNew(FranchiseRepository $franchiseRepository, Request $request,
                                  UserPasswordHasherInterface $userPasswordHasher, FranchiseMails $franchiseMails): Response
@@ -85,26 +91,31 @@ class AdminController extends AbstractController
         $formFranchise = $this->createForm(FranchiseRegistrationFormType::class, $franchise);
         $formFranchise->handleRequest($request);
 
+        //Vérification de la bonne complétude et de la validité du formulaire
         if ($formFranchise->isSubmitted() && $formFranchise->isValid()) {
-            // encode the plain password
+         /*   //encodage du mot de passe
             $franchise->setPassword(
                 $userPasswordHasher->hashPassword(
                     $franchise,
                     $formFranchise->get('password')->getData()
                 )
-            );
+            );*/
 
-
+            //initialisation mot de passe encodé
+            $franchise->setPasswordToken(Uuid::v4());
+            //fonction pour flush et persist (dans Repository)
             $franchiseRepository->add($franchise, true);
+            //Annonce pour validation de création
             $this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
             // do anything else you need here, like send an email
 
+            //Création et envoi du mail du mail
             $franchiseMails->sendCreated($franchise);
 
+            //redirection après validation du formulaire
             return $this->redirectToRoute('app_admin_list_franchise');
         }
         return $this->render('franchise/create_franchise.html.twig', [
-            //'controller_name' => 'PartnerController',
             'franchise' => $franchise,
             'franchiseRegistrationForm' => $formFranchise->createView(),
         ]);
@@ -124,25 +135,31 @@ class AdminController extends AbstractController
         $formStructure = $this->createForm(StructureRegistrationFormType::class, $structure);
         $formStructure->handleRequest($request);
 
+        //Vérification de la bonne complétude et de la validité du formulaire
         if ($formStructure->isSubmitted() && $formStructure->isValid()) {
-            // encode the plain password
+         /*   // encode the plain password
             $structure->setPassword(
                 $userPasswordHasher->hashPassword(
                     $structure,
                     $formStructure->get('password')->getData()
                 )
-            );
+            );*/
 
+            //initialisation mot de passe encodé
+            $structure->setPasswordToken(Uuid::v4());
+            //fonction pour flush et persist (dans Repository)
             $structureRepository->add($structure, true);
-            $this->addFlash('success', 'La la nouvelle structure est créé avec succès');
+            //Annonce pour validation de création
+            $this->addFlash('success', 'La nouvelle structure est créée avec succès');
             // do anything else you need here, like send an email
 
+            //Création et envoi du mail du mail
             $structureMails->sendCreated($structure);
 
-            return $this->redirectToRoute('app_admin_list_structure');
+            //redirection après validation du formulaire
+            return $this->redirectToRoute('app_admin_list_franchise');
         }
         return $this->render('structure/create_structure.html.twig', [
-            'controller_name' => 'PartnerController',
             'structureRegistrationForm' => $formStructure->createView(),
         ]);
     }
@@ -156,29 +173,34 @@ class AdminController extends AbstractController
     public function editFranchise(Franchise $franchise, Request $request, UserPasswordHasherInterface $userPasswordHasher,
                                   EntityManagerInterface $entityManager, FranchiseMails $franchiseMails): Response
     {
+        //Donne lieu à un nouveau formulaire
         $formFranchise = $this->createForm(FranchiseRegistrationFormType::class, $franchise);
         $formFranchise->handleRequest($request);
+
+        //Vérification de la bonne complétude et de la validité du formulaire
         if ($formFranchise->isSubmitted() && $formFranchise->isValid()) {
-            // encode the plain password
+          /*  //encodage du mot de passe
             $franchise->setPassword(
                 $userPasswordHasher->hashPassword(
                     $franchise,
                     $formFranchise->get('password')->getData()
                 )
-            );
+            );*/
 
-
+            //Enregistre les données dans la BDD
             $entityManager->flush();
-            //$this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
+            //Annonce pour validation de modification
+            $this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
             // do anything else you need here, like send an email
 
+            //Création et envoi du mail du mail
             $franchiseMails->sendEdited($franchise);
 
+            //redirection après validation du formulaire
             return $this->redirectToRoute('app_admin_list_franchise');
 
         }
         return $this->render('franchise/edit_franchise.html.twig', [
-            //'controller_name' => 'PartnerController',
             'franchise' => $franchise,
             'franchiseRegistrationForm' => $formFranchise->createView()
         ]);
@@ -195,23 +217,27 @@ class AdminController extends AbstractController
     public function editStructure(Structure $structure, Request $request, EntityManagerInterface $entityManager,
                                   StructureMails $structureMails): Response
     {
+        //Donne lieu à un nouveau formulaire
         $formStructure = $this->createForm(StructureRegistrationFormType::class, $structure);
         $formStructure->handleRequest($request);
+
+        //Vérification de la bonne complétude et de la validité du formulaire
         if ($formStructure->isSubmitted() && $formStructure->isValid()) {
-            // encode the plain password
 
-
+            //Enregistre les données dans la BDD
             $entityManager->flush();
+            //Annonce pour validation de modification
             $this->addFlash('success', 'Le nouveau partenaire est créé avec succès');
             // do anything else you need here, like send an email
 
-           $structureMails->sendEdited($structure);
+            //Création et envoi du mail du mail
+            $structureMails->sendEdited($structure);
 
+            //redirection après validation du formulaire
             return $this->redirectToRoute('app_admin_list_structure');
 
         }
         return $this->render('structure/edit_structure.html.twig', [
-            'controller_name' => 'PartnerController',
             'structure' => $structure,
             'structureRegistrationForm' => $formStructure->createView(),
         ]);
@@ -227,10 +253,13 @@ class AdminController extends AbstractController
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $search);
         $formFranchiseSearch->handleRequest($request);
 
-        //Gère la pagination
+        //pagination et affichage d'une franchise et de ces structures.
         $franchises = $this->paginator->paginate(
+            //fonction permettant de créer une barre de recherche
             $repository->findAllQueries($search),
+            //initialisation de la pagination
             $request->query->getInt('page', 1),
+            //Nombre d'articles par page
             6
         );
         return $this->render('franchise/index.html.twig', [
@@ -242,13 +271,13 @@ class AdminController extends AbstractController
     #[Route('/list_structure', name: 'app_admin_list_structure')]
     public function listStructure(Request $request, FranchiseRepository $repository, FranchiseSearch $search): Response
     {
-        $franchises = $this->paginator->paginate(
+        $structures = $this->paginator->paginate(
             $repository->findAllQueries($search),
             $request->query->getInt('page', 1),
             6
         );
-        return $this->render('franchise/index.html.twig', [
-            'franchises' => $franchises
+        return $this->render('structure/index.html.twig', [
+            'structures' => $structures
         ]);
     }
 
@@ -256,10 +285,13 @@ class AdminController extends AbstractController
     public function detail(Request $request, StructureRepository $structureRepository, Franchise $franchise, StructureSearch $search): Response
     {
 
-        //$data = $structureRepository->findByFranchise($franchise);
+        //pagination et affichage d'une franchise et de ces structures.
         $structures = $this->paginator->paginate(
+            //fonction permettant de créer une barre de recherche
             $structureRepository->findAllByFranchiseQueries($franchise, $search),
+            //initialisation de la pagination
             $request->query->getInt('page', 1),
+            //Nombre d'articles par page
             6
         );
         return $this->render('franchise/detail_franchise.html.twig', [

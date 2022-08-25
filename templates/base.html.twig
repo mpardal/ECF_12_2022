@@ -11,7 +11,10 @@
     {% endblock %}
 </head>
 <body>
-{% include 'base/nav.html.twig' %}
+{# use_nav = j'utilise la nav si je le souhaite. Si la variable n'existe pas, alors je l'utilise par défaut #}
+{% if use_nav is not defined or use_nav %}
+    {% include 'base/nav.html.twig' %}
+{% endif %}
 
 {% block body %}{% endblock %}
 </body>

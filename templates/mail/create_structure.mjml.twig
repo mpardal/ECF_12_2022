@@ -4,7 +4,6 @@
             <mj-body>
                 <mj-section>
                     <mj-column>
-
                         <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
 
                         <mj-divider border-color="#F45E43"></mj-divider>
@@ -12,20 +11,17 @@
                         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Bonjour,</mj-text>
                         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Vous recevez ce mail suite à
                             la création de votre structure {{ structure.name }}, lié à votre
-                            franchise {{ structure.franchise }}.
+                            franchise "{{ structure.franchise.name }}".
                         </mj-text>
                         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Pour valider la création de la
                             structure, veuillez cliquer sur le bouton qui suit.
                         </mj-text>
                         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">
-                            <button>Validation de la structure</button>
+                            {# TODO: voir pour le port 8000 #}
+                            <a href="{{ url('app_structure_password_new', {passwordToken : structure.passwordToken}) }}">
+                                Validation de la structure
+                            </a>
                         </mj-text>
-
-                        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Un mail sera envoyer à
-                            l'adresse {{ structure.mail }} pour créer le mot de passe du compte du responsable de la
-                            structure.
-                        </mj-text>
-
                     </mj-column>
                 </mj-section>
             </mj-body>

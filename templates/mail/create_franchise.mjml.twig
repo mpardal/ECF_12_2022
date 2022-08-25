@@ -16,9 +16,11 @@
                         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Pour valider la franchise, veuillez cliquer sur le bouton qui suit.
                         </mj-text>
                         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">
-                            <button>Validation du compte</button>
+                            {# TODO: voir pour le port 8000 #}
+                            <a href="{{ url('app_franchise_password_new', {passwordToken : franchise.passwordToken}) }}">
+                                Validation de la franchise
+                            </a>
                         </mj-text>
-
                     </mj-column>
                 </mj-section>
             </mj-body>
