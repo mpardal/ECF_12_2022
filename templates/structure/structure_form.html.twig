@@ -1,111 +1,118 @@
-
 {{ form_start(structureRegistrationForm) }}
-<article class="articleInfo">
-    <div>
+<article class="border rounded-1 p-2 m-1">
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.name) }}
-        {{ form_widget(structureRegistrationForm.name, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.name, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.franchise) }}
-        {{ form_widget(structureRegistrationForm.franchise, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.franchise, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.email) }}
-        {{ form_widget(structureRegistrationForm.email, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.email, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.address) }}
-        {{ form_widget(structureRegistrationForm.address, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.address, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.imageFile) }}
-        {{ form_widget(structureRegistrationForm.imageFile, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.imageFile, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.postalCode) }}
-        {{ form_widget(structureRegistrationForm.postalCode, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.postalCode, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div class="choiceActive">
-        <p>Actif ?</p>
+    <div class="d-flex flex-row my-2">
+        <p>Est-elle active ?</p>
         <p>
             {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.active} only %}
         </p>
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.city) }}
-        {{ form_widget(structureRegistrationForm.city, {'attr': {'class': 'form'}}) }}
+        {{ form_widget(structureRegistrationForm.city, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.shortDescription) }}
-        {{ form_widget(structureRegistrationForm.shortDescription, {'attr': {'class': 'formDescription'}}) }}
+        {{ form_widget(structureRegistrationForm.shortDescription, {'attr': {'class': 'rounded-3'}}) }}
     </div>
-    <div>
+    <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.fullDescription) }}
-        {{ form_widget(structureRegistrationForm.fullDescription, {'attr': {'class': 'formDescription'}}) }}
+        {{ form_widget(structureRegistrationForm.fullDescription, {'attr': {'class': 'rounded-3'}}) }}
     </div>
 </article>
-<section class="sectionOption">
-    <h2>Options de la structure</h2>
-    <article class="articleOption">
+<section class="border rounded-1 p-2 m-1">
+    <h2 class="text-center m-4">Options de la structure</h2>
+    <article class="d-flex flex-column flex-md-row justify-content-md-around">
         <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.wheySale) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.wheySale} only %}
-            </p>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.wheySale) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.wheySale} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.towelSale) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.towelSale} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.drinkSale) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.drinkSale} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.sauna) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sauna} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.paymentDay) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.paymentDay} only %}
+                </p>
+            </div>
         </div>
         <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.towelSale) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.towelSale} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.drinkSale) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.drinkSale} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sauna) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sauna} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.paymentDay) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.paymentDay} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.lateClosing) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.lateClosing} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sendNewsletter) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sendNewsletter} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.ringBoxe) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.ringBoxe} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.crossfit) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.crossfit} only %}
-            </p>
-        </div>
-        <div>
-            <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.biking) }}</p>
-            <p>
-                {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.biking} only %}
-            </p>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.lateClosing) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.lateClosing} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.sendNewsletter) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sendNewsletter} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>{{ form_label(structureRegistrationForm.ringBoxe) }}</p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.ringBoxe} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>
+                    {{ form_label(structureRegistrationForm.crossfit) }}
+                </p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.crossfit} only %}
+                </p>
+            </div>
+            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
+                <p>
+                    {{ form_label(structureRegistrationForm.biking) }}
+                </p>
+                <p>
+                    {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.biking} only %}
+                </p>
+            </div>
         </div>
     </article>
 </section>

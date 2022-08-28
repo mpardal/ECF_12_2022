@@ -1,13 +1,14 @@
-<div class="etat">
+<div class="form-check form-switch">
     {# Bouton va et vient // Début #}
     <label class="int">
         {% if active %}
-            <input type="checkbox" checked disabled>
+            <input type="checkbox" class="form-check-input bg-success" checked disabled>
         {% else %}
-            <input type="checkbox" disabled>
+            <input type="checkbox" class="form-check-input bg-danger" disabled>
         {% endif %}
         <span></span>
     </label>
     {# FIN #}
 
 </div>
+

@@ -59,7 +59,6 @@ class FranchiseRepository extends ServiceEntityRepository
                 ->setParameter('activeFranchise', $search->isActive());
         }
 
-
         if ($search->getCity()) {
             $query = $query
                 ->andWhere('f.city LIKE :cityFranchise')

@@ -9,15 +9,15 @@ class StructureOptionsRegister
 {
     public function register(Franchise $franchise, Structure $structure): void
     {
-        $structure->setWheySale($franchise->getWheySale());
-        $structure->setTowelSale($franchise->getTowelSale());
-        $structure->setDrinkSale($franchise->getDrinkSale());
-        $structure->setSauna($franchise->getSauna());
-        $structure->setPaymentDay($franchise->getPaymentDay());
-        $structure->setLateClosing($franchise->getLateClosing());
-        $structure->setSendNewsletter($franchise->getSendNewsletter());
-        $structure->setRingBoxe($franchise->getRingBoxe());
-        $structure->setCrossfit($franchise->getCrossfit());
-        $structure->setBiking($franchise->getBiking());
+        $structure->setWheySale($franchise->isWheySale());
+        $structure->setTowelSale($franchise->isTowelSale());
+        $structure->setDrinkSale($franchise->isDrinkSale());
+        $structure->setSauna($franchise->isSauna());
+        $structure->setPaymentDay($franchise->isPaymentDay());
+        $structure->setLateClosing($franchise->isLateClosing());
+        $structure->setSendNewsletter($franchise->isSendNewsletter());
+        $structure->setRingBoxe($franchise->isRingBoxe());
+        $structure->setCrossfit($franchise->isCrossfit());
+        $structure->setBiking($franchise->isBiking());
     }
 }

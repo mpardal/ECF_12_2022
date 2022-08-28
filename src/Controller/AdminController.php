@@ -42,8 +42,9 @@ class AdminController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register_admin')]
-    public function register(Request            $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator,
-                             AdminAuthenticator $authenticator, EntityManagerInterface $entityManager, AdminRepository $adminRepository): Response
+    public function register(Request                    $request, UserPasswordHasherInterface $userPasswordHasher,
+                             UserAuthenticatorInterface $userAuthenticator, AdminAuthenticator $authenticator,
+                             AdminRepository $adminRepository): Response
     {
         // créer une nouvelle entité franchise
         $user = new Admin();
@@ -81,7 +82,7 @@ class AdminController extends AbstractController
     //Création de la franchise
     #[Route('/create_franchise', name: 'app_admin_create_franchise')]
     public function franchiseNew(FranchiseRepository         $franchiseRepository, Request $request,
-                                 UserPasswordHasherInterface $userPasswordHasher, FranchiseMails $franchiseMails): Response
+                                 FranchiseMails $franchiseMails): Response
     {
         //créer une nouvelle entité franchise
         $franchise = new Franchise();
@@ -113,7 +114,9 @@ class AdminController extends AbstractController
 
     // Création d'une structure
     #[Route('/create_structure', name: 'app_admin_create_structure')]
-    public function structureNew(StructureRepository $structureRepository, Request $request, FranchiseMails $franchiseMails, StructureOptionsRegister $structureOptionsRegister): Response
+    public function structureNew(StructureRepository $structureRepository, Request $request,
+                                 FranchiseMails $franchiseMails,
+                                 StructureOptionsRegister $structureOptionsRegister): Response
     {
         //créer une nouvelle entité structure
         $structure = new Structure();
@@ -123,12 +126,9 @@ class AdminController extends AbstractController
 
         //Vérification de la bonne complétude et de la validité du formulaire
         if ($formStructure->isSubmitted() && $formStructure->isValid()) {
-            // initialisation mot de passe encodé
-            // fonction pour flush et persist (dans Repository)
-
             // enregistre les options par défaut de la franchise sur la structure
             $structureOptionsRegister->register($structure->getFranchise(), $structure);
-
+            // fonction pour flush et persist (dans Repository)
             $structureRepository->add($structure, true);
             // Annonce pour validation de création
             $this->addFlash('success', 'La nouvelle structure est créée avec succès');
@@ -147,7 +147,7 @@ class AdminController extends AbstractController
     //Modification d'une franchise
 
     #[Route('/edit_franchise/{id}', name: 'app_admin_edit_franchise')]
-    public function editFranchise(Franchise $franchise, Request $request, EntityManagerInterface $entityManager,
+    public function editFranchise(Franchise      $franchise, Request $request, EntityManagerInterface $entityManager,
                                   FranchiseMails $franchiseMails): Response
     {
         //Donne lieu à un nouveau formulaire
@@ -198,7 +198,9 @@ class AdminController extends AbstractController
             $structureMails->sendEdited($structure);
 
             //redirection après validation du formulaire
-            return $this->redirectToRoute('app_admin_list_structure');
+            return $this->redirectToRoute('app_admin_detail_franchise', [
+                'id' => $structure->getFranchise()->getId()
+            ]);
 
         }
         return $this->render('structure/edit_structure.html.twig', [
@@ -224,7 +226,7 @@ class AdminController extends AbstractController
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
-            6
+            1
         );
         return $this->render('franchise/index.html.twig', [
             'franchises' => $franchises,

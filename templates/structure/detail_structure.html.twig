@@ -1,116 +1,88 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Détail de la structure{% endblock %}
-
-{% block body %}
-    <button type="button" id="list"><a href="{{ path('app_list_franchise') }}">Liste partenaires</a></button>
-    <section>
-        <div class="partnerDiv">
-            <img src="#" alt="photo de la salle">
-            <div class="partnerInfo">
-                <p>{{ structure.name }}</p>
-                <p>{{ structure.address }}</p>
-                <p>{{ structure.postalCode }}</p>
-                <p>{{ structure.city }}</p>
+{% for structure in structures %}
+    <section class="border m-1 p-2">
+        <h2 class="text-center m-4 text-decoration-underline">Détail de la structure</h2>
+        <div class="p-2">
+            <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-around">
+                {{ include('structure/_image_structure.html.twig') }}
+                <div class="d-flex flex-row justify-content-evenly mt-4 flex-lg-column mt-lg-0">
+                    <p>{{ structure.name | upper }}</p>
+                    <p>{{ structure.address }}</p>
+                    <p>{{ structure.city }}</p>
+                    <p>{{ structure.shortDescription }}</p>
+                </div>
             </div>
-            <div class="partnerInfo">
-                <p>{{ structure.email }}</p>
-                <p></p>
-                <p>{{ structure.shortDescription }}</p>
-                <p>{{ structure.fullDescription }}</p>
+            <div class="mx-4 my-1 m-lg-4">
+                {% include 'interrupteur/_interrupteur.html.twig' with {active : structure.active} only %}
             </div>
         </div>
-        {{ structure.active }}
-    </section>
-    <section class="branchSearchPartner">
-        <div>
-            <div class="champList">
-                <label for="zone_id-branch_id">zone_id-branch_id</label>
-                <input type="text" id="zone_id-branch_id">
-            </div>
-            <div>
-                {{ include('interrupteur/_interrupteur.html.twig') }}
-            </div>
+        <div class="p-2">
+            <h2 class="text-center m-4 text-decoration-underline">Options de la structure</h2>
+            <article class="d-flex flex-column flex-md-row justify-content-md-around">
+                <div>
+                    <div>
+                        <p>Vente de protéines</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.wheySale} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Vente de serviettes</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.towelSale} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Vente de boissons</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.drinkSale} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Accès sauna</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.sauna} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Jour de paiement</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.paymentDay} only %}
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p>Fermeture tardive</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.lateClosing} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Option newsletter</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.sendNewsletter} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Accès secteur boxing</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.ringBoxe} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Accès secteur crossfit</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.crossfit} only %}
+                        </p>
+                    </div>
+                    <div>
+                        <p>Accès secteur biking</p>
+                        <p>
+                            {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.biking} only %}
+                        </p>
+                    </div>
+                </div>
+            </article>
         </div>
-        <div class="buttonPartner">
-            <button type="button">TOUTES</button>
-            <button type="button">AJOUTER</button>
-        </div>
     </section>
-    <section>
-        <div class="partnerDiv">
-            <img src="#" alt="photo de la salle">
-            <div class="partnerInfo">
-                <p>{{ structure.name }}</p>
-                <p>{{  structure.city }}</p>
-                <p>{{ structure.shortDescription }}</p>
-            </div>
-        </div>
-        {{ structure.active }}
-    </section>
-    <section class="sectionOption">
-        <h2>Options de la structure</h2>
-        <article class="articleOption">
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.wheySale) }}</p>
-                <p>
-                    {{ structure.wheySale }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.towelSale) }}</p>
-                <p>
-                    {{ structure.towelSale }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.drinkSale) }}</p>
-                <p>
-                    {{ structure.drinkSale }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sauna) }}</p>
-                <p>
-                    {{ structure.sauna }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.paymentDay) }}</p>
-                <p>
-                    {{ structure.paymentDay }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.lateClosing) }}</p>
-                <p>
-                    {{ structure.lateClosing }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.sendNewsletter) }}</p>
-                <p>
-                    {{ structure.sendNewsletter }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.ringBoxe) }}</p>
-                <p>
-                    {{ structure.ringBoxe }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.crossfit) }}</p>
-                <p>
-                    {{ structure.crossfit }}
-                </p>
-            </div>
-            <div>
-                <p class="labelChoiceForm">{{ form_label(structureRegistrationForm.biking) }}</p>
-                <p>
-                    {{ structure.biking }}
-                </p>
-            </div>
-        </article>
-    </section>
-{% endblock %}
+{% endfor %}

@@ -33,19 +33,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $address = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $postalCode = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $city = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $shortDescription = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $fullDescription = null;
 
     #[ORM\Column]
     private ?bool $active = null;
@@ -136,7 +124,6 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -149,67 +136,25 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getPostalCode(): ?string
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(string $postalCode): self
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    /**
+     * @param string|null $city
+     * @return Franchise
+     */
+    public function setCity(?string $city): Franchise
     {
         $this->city = $city;
-
         return $this;
     }
 
-    public function getShortDescription(): ?string
-    {
-        return $this->shortDescription;
-    }
-
-    public function setShortDescription(?string $shortDescription): self
-    {
-        $this->shortDescription = $shortDescription;
-
-        return $this;
-    }
-
-    public function getFullDescription(): ?string
-    {
-        return $this->fullDescription;
-    }
-
-    public function setFullDescription(?string $fullDescription): self
-    {
-        $this->fullDescription = $fullDescription;
-
-        return $this;
-    }
-
-    public function getActive(): ?bool
+    public function isActive(): ?bool
     {
         return $this->active;
     }
@@ -221,7 +166,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getWheySale(): ?bool
+    public function isWheySale(): ?bool
     {
         return $this->wheySale;
     }
@@ -233,7 +178,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTowelSale(): ?bool
+    public function isTowelSale(): ?bool
     {
         return $this->towelSale;
     }
@@ -245,7 +190,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDrinkSale(): ?bool
+    public function isDrinkSale(): ?bool
     {
         return $this->drinkSale;
     }
@@ -257,7 +202,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSauna(): ?bool
+    public function isSauna(): ?bool
     {
         return $this->sauna;
     }
@@ -269,7 +214,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPaymentDay(): ?bool
+    public function isPaymentDay(): ?bool
     {
         return $this->paymentDay;
     }
@@ -281,7 +226,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLateClosing(): ?bool
+    public function isLateClosing(): ?bool
     {
         return $this->lateClosing;
     }
@@ -293,7 +238,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSendNewsletter(): ?bool
+    public function isSendNewsletter(): ?bool
     {
         return $this->sendNewsletter;
     }
@@ -305,7 +250,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRingBoxe(): ?bool
+    public function isRingBoxe(): ?bool
     {
         return $this->ringBoxe;
     }
@@ -317,7 +262,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCrossfit(): ?bool
+    public function isCrossfit(): ?bool
     {
         return $this->crossfit;
     }
@@ -329,7 +274,7 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBiking(): ?bool
+    public function isBiking(): ?bool
     {
         return $this->biking;
     }

@@ -22,9 +22,9 @@ use Symfony\Component\Uid\Uuid;
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
-    public function __construct(private readonly PaginatorInterface $paginator,
-                                private readonly FranchiseRepository $franchiseRepository,
-                                private readonly StructureRepository $structureRepository,
+    public function __construct(private readonly PaginatorInterface     $paginator,
+                                private readonly FranchiseRepository    $franchiseRepository,
+                                private readonly StructureRepository    $structureRepository,
                                 private readonly EntityManagerInterface $entityManager)
     {
     }
@@ -40,7 +40,7 @@ class FranchiseController extends AbstractController
 
         // Pagination
         $franchises = $this->paginator->paginate(
-            //Filtre
+        //Filtre
             $this->franchiseRepository->findAllQueries($searchFranchise),
             // Pagination
             $request->query->getInt('page', 1),
@@ -65,7 +65,7 @@ class FranchiseController extends AbstractController
         //Pagination
         $structures = $this->paginator->paginate(
         //Filtre
-        $this->structureRepository->findAllByFranchiseQueries($franchise, $search),
+            $this->structureRepository->findAllByFranchiseQueries($franchise, $search),
             //Pagination
             $request->query->getInt('page', 1),
             // Nombre limite d'articles
@@ -93,7 +93,7 @@ class FranchiseController extends AbstractController
         if (null === $structure) {
             return $this->redirectToRoute('app_list_franchise');
         }
-        // Si l'ID de la franchise apartenant à la structure est équivalent à la franchise validant le mail
+        // Si l'ID de la franchise appartenant à la structure est équivalent à la franchise validant le mail
         if ($structure->getFranchise()->getId() !== $franchiseId) {
             // soit redirection, soit erreur d'accès 403
             throw $this->createAccessDeniedException();
@@ -101,8 +101,7 @@ class FranchiseController extends AbstractController
         //Validation de la bonne franchise, Envoi du mdp encodé
         $structure
             ->setFranchiseValidated(true)
-            ->setPasswordToken(Uuid::v4())
-        ;
+            ->setPasswordToken(Uuid::v4());
         //Envoi de mail
         $structureMails->sendCreated($structure);
         //stockage en BDD
@@ -110,4 +109,5 @@ class FranchiseController extends AbstractController
         // Redirection de la route
         return $this->redirectToRoute('app_list_franchise');
     }
+
 }

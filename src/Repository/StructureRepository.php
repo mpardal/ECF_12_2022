@@ -43,12 +43,6 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByFranchise(Franchise $franchise):QueryBuilder
-    {
-        return $this->createQueryBuilder('s')
-            ->where('s.franchiseId = :franchiseId')
-            ->setParameter('franchiseId', $franchise->getId());
-    }
 
     public function findAllByFranchiseQueries(Franchise $franchise, StructureSearch $search): Query
     {
@@ -58,15 +52,15 @@ class StructureRepository extends ServiceEntityRepository
 
         if ($search->getName()) {
             $query = $query
-                ->andWhere('s.name = :nameStructure')
-                ->setParameter('nameStructure', $search->getName());
+                ->andWhere('s.name LIKE :nameStructure')
+                ->setParameter('nameStructure', '%'.$search->getName().'%');
         }
 
         //andWhere permet de cumuler les WHERE
-        if ($search->getActive()) {
+        if ($search->isActive() !== null) {
             $query = $query
                 ->andWhere('s.active = :activeStructure')
-                ->setParameter('activeStructure', $search->getActive());
+                ->setParameter('activeStructure', $search->isActive());
         }
 
         return $query->getQuery();

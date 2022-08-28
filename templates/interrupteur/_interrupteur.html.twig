@@ -1,18 +1,17 @@
-<div class="etat">
+<div class="form-check form-switch d-flex flex-row align-items-center">
     {# Bouton va et vient // Début #}
-    <label class="int">
+    <label>
         {% if active %}
-            <input type="checkbox" checked disabled>
+            <input name="check" class="form-check-input bg-success" type="checkbox" checked disabled >
         {% else %}
-            <input type="checkbox" disabled>
+            <input name="disableCheck" class="form-check-input bg-danger" type="checkbox" disabled>
         {% endif %}
         <span></span>
     </label>
     {# FIN #}
     {% if active %}
-    <p class="actif">ACTIF</p>
+    <label for="check" class="form-check-label">ACTIF</label>
     {% else %}
-    <p class="actif">NON ACTIF</p>
+    <label for="disableCheck" class="form-check-label">NON ACTIF</label>
     {% endif %}
-
 </div>

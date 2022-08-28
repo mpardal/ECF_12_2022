@@ -209,7 +209,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getActive(): ?bool
+    public function isActive(): ?bool
     {
         return $this->active;
     }
@@ -221,7 +221,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getWheySale(): ?bool
+    public function isWheySale(): ?bool
     {
         return $this->wheySale;
     }
@@ -233,7 +233,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTowelSale(): ?bool
+    public function isTowelSale(): ?bool
     {
         return $this->towelSale;
     }
@@ -245,7 +245,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDrinkSale(): ?bool
+    public function isDrinkSale(): ?bool
     {
         return $this->drinkSale;
     }
@@ -257,7 +257,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSauna(): ?bool
+    public function isSauna(): ?bool
     {
         return $this->sauna;
     }
@@ -269,7 +269,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPaymentDay(): ?bool
+    public function isPaymentDay(): ?bool
     {
         return $this->paymentDay;
     }
@@ -281,7 +281,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLateClosing(): ?bool
+    public function isLateClosing(): ?bool
     {
         return $this->lateClosing;
     }
@@ -293,7 +293,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSendNewsletter(): ?bool
+    public function isSendNewsletter(): ?bool
     {
         return $this->sendNewsletter;
     }
@@ -305,7 +305,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRingBoxe(): ?bool
+    public function isRingBoxe(): ?bool
     {
         return $this->ringBoxe;
     }
@@ -317,7 +317,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCrossfit(): ?bool
+    public function isCrossfit(): ?bool
     {
         return $this->crossfit;
     }
@@ -329,7 +329,7 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBiking(): ?bool
+    public function isBiking(): ?bool
     {
         return $this->biking;
     }

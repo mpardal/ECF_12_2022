@@ -1,7 +1,7 @@
 {%  if structure.imageName %}
-    <img src="{{ vich_uploader_asset(structure, 'imageFile') }}" alt="image">
+    <img src="{{ vich_uploader_asset(structure, 'imageFile') }}" alt="image" class="img-fluid">
 
 {% else %}
-    <img src="{{ '/images/salle.jpeg' }}" alt="image">
+    <img src="{{ '/images/salle.jpeg' }}" alt="image" class="img-fluid">
 
 {% endif %}

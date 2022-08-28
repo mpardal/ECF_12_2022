@@ -4,13 +4,8 @@ namespace App\Form;
 
 use App\Entity\Franchise;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class FranchiseRegistrationFormType extends AbstractType
@@ -27,20 +22,8 @@ class FranchiseRegistrationFormType extends AbstractType
             ->add('imageFile', VichImageType::class, [
                 'required' => false
             ])
-            ->add('address', null, [
-                'label' => 'addressFranchise'
-            ])
-            ->add('postalCode', null, [
-                'label' => 'postalCodeFranchise'
-            ])
             ->add('city', null, [
                 'label' => 'cityFranchise'
-            ])
-            ->add('shortDescription', null, [
-                'label' => 'shortDescription'
-            ])
-            ->add('fullDescription', null, [
-                'label' => 'fullDescription'
             ])
             ->add('active', options: [
                 'label' => 'active'
@@ -75,18 +58,6 @@ class FranchiseRegistrationFormType extends AbstractType
             ->add('biking', null, [
                 'label' => 'biking'
             ])
-
-
-
-            /*
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])*/
         ;
     }
 

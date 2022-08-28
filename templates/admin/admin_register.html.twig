@@ -3,18 +3,22 @@
 {% block title %}Création nouvel admin{% endblock %}
 
 {% block body %}
-    <h1>Nouvel admin</h1>
+    <h1 class="text-center my-4 text-decoration-underline">Nouvel admin</h1>
     {{ form_start(AdminRegistrationForm) }}
     <article class="articleInfo">
-        <div>
+        <div class="d-flex flex-column my-2">
             {{ form_label(AdminRegistrationForm.email) }}
-            {{ form_widget(AdminRegistrationForm.email, {'attr': {'class': 'form'}}) }}
+            {{ form_widget(AdminRegistrationForm.email, {'attr': {'class': 'rounded-3'}}) }}
         </div>
-        <div>
+        <div class="d-flex flex-column my-2">
             {{ form_label(AdminRegistrationForm.plainPassword) }}
-            {{ form_widget(AdminRegistrationForm.plainPassword, {'attr': {'class': 'form'}}) }}
+            {{ form_widget(AdminRegistrationForm.plainPassword, {'attr': {'class': 'rounded-3'}}) }}
         </div>
     </article>
-    <button type="submit" class="btn">Connexion (administrateur)</button>
+    <div class="d-flex justify-content-center w-50 mt-4">
+    <button type="submit" class="btn btn-success p-2">
+        Création (administrateur)
+    </button>
+    </div>
     {{ form_end(AdminRegistrationForm) }}
 {% endblock %}

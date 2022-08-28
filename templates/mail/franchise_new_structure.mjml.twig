@@ -4,20 +4,19 @@
             <mj-body>
                 <mj-section>
                     <mj-column>
-                        <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
+                        <mj-image width="100px" src="{{ asset('images/logo1.jpg') }}"></mj-image>
 
-                        <mj-divider border-color="#F45E43"></mj-divider>
+                        <mj-divider border-color="#3E3C3C"></mj-divider>
 
-                        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Bonjour,</mj-text>
-                        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Vous recevez ce mail suite à
+                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">Bonjour,</mj-text>
+                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">Vous recevez ce mail suite à
                             la création de votre structure {{ structure.name }}, lié à votre
                             franchise "{{ franchise.name }}".
                         </mj-text>
-                        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Pour valider la création de la
+                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">Pour valider la création de la
                             structure, veuillez cliquer sur le bouton qui suit.
                         </mj-text>
-                        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">
-                            {# TODO: voir pour le port 8000 #}
+                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">
                             <a href="{{ url('app_franchise_validate_structure', {franchiseId: franchise.id, structureId: structure.id}) }}">
                                 Valider la structure
                             </a>

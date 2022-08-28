@@ -71,7 +71,8 @@ security:
       - { path: /admin/connect, roles: PUBLIC_ACCESS }
       - { path: ^/admin, roles: ROLE_ADMIN }
       - { path: /franchise/connect, roles: PUBLIC_ACCESS }
-      - { path: /franchise /password-validated, roles: PUBLIC_ACCESS }
+      - { path: /franchise/new-password, roles: PUBLIC_ACCESS }
+      - { path: /franchise/password-validated, roles: PUBLIC_ACCESS }
       - { path: ^/franchise, roles: ROLE_FRANCHISE }
       - { path: /structure/connect, roles: PUBLIC_ACCESS }
       - { path: ^/structure/new-password, roles: PUBLIC_ACCESS }

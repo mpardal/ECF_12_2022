@@ -80,15 +80,7 @@ class StructureRegistrationFormType extends AbstractType
             ])
             ->add('biking', null, [
                 'label' => 'biking'
-            ])/*
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])*/
+            ])
         ;
     }
 

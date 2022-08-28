@@ -3,153 +3,51 @@
 {% block title %}Détail de la franchise{% endblock %}
 
 {% block body %}
-<div>
-    {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_admin_list_franchise') }}">
-        <button type="button" id="list" class="detailButton">
-            Liste partenaires
-        </button>
-    </a>
-    {% elseif is_granted('ROLE_FRANCHISE') %}
-    <a href="{{ path('app_list_franchise') }}">
-        <button type="button" id="list" class="detailButton">
-            Liste partenaires
-        </button>
-    </a>
-    {% elseif is_granted('ROLE_STRUCTURE') %}
-    <a href="{{ path('app_list_franchise_by_structure') }}">
-        <button type="button" id="list" class="detailButton">
-            Liste partenaires
-        </button>
-    </a>
-    {% endif %}
-</div>
-<div class="detailFranchise">
-    <div class="detailFranchiseDiv">
-        {{ include('franchise/_image_franchise.html.twig') }}
-        <div>
-            <div>
-                <p>{{ franchise.name }}</p>
-                <p>{{ franchise.address }}</p>
-                <p>{{ franchise.postalCode }}</p>
-                <p>{{ franchise.city }}</p>
-            </div>
-            <div>
-                <p>{{ franchise.email }}</p>
-                <p></p>
-                <p>{{ franchise.shortDescription }}</p>
-                <p>{{ franchise.fullDescription }}</p>
-            </div>
-        </div>
-    </div>
-    {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
-</div>
-<section>
-    {{ form_start(structureSearchType) }}
-    <div>
-        <div>
-            {{ form_label(structureSearchType.name) }}
-            {{ form_widget(structureSearchType.name) }}
-        </div>
-        <div>
-            {% include 'interrupteur/_interrupteur.html.twig' with {active : franchise.active} only %}
-        </div>
-    </div>
-    <div class="buttonPartner">
-        <button type="reset">
-            TOUTES
-        </button>
-        {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_admin_create_structure')}}">
-                    <button type="button">
-                        AJOUTER
+    <main class="container">
+        <div class="m-3">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_admin_list_franchise') }}">
+                    <button type="button" id="list" class="rounded-3 p-1">
+                        Liste partenaires
                     </button>
                 </a>
-        {% endif %}
-                <button type="submit">
-                    RECHERCHER
+            {% elseif is_granted('ROLE_FRANCHISE') %}
+                <a href="{{ path('app_list_franchise') }}">
+                    <button type="button" id="list" class="rounded-3 p-1">
+                        Liste partenaires
+                    </button>
+                </a>
+            {% elseif is_granted('ROLE_STRUCTURE') %}
+                <a href="{{ path('app_list_franchise_by_structure') }}">
+                    <button type="button" id="list" class="rounded-3 p-1">
+                        Liste partenaires
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+        <div class="border p-2 m-1">
+            <h2 class="text-center m-2 text-decoration-underline">Détail de la franchise</h2>
+            <div class="d-flex flex-column flex-lg-row justify-content-lg-around">
+                {{ include('franchise/_image_franchise.html.twig') }}
+                <div class="d-flex flex-row justify-content-between align-items-center
+                        flex-lg-column justify-content-lg-center align-items-lg-end">
+                    <p class="mt-3 mt-lg-0">{{ franchise.name | upper }}</p>
+                    <p class="mt-3 mt-lg-0">{{ franchise.email }}</p>
+                    {% include 'interrupteur/_interrupteur.html.twig' with {active: franchise.active} only %}
+                </div>
+            </div>
+        </div>
+        {% include'search/searchStructure.html.twig' %}
+        {% include 'structure/detail_structure.html.twig' %}
+        <div class="d-flex flex-row justify-content-end mx-3 mt-5">
+            <a href="{{ path('app_admin_create_structure') }}">
+                <button type="button" class="rounded-3 p-1">
+                    Créer une nouvelle structure
                 </button>
-            </div>
-            {{ form_end(structureSearchType) }}
-        </section>
-    {% for structure in structures %}
-        <section>
-            <div>
-                {{ include('structure/_image_structure.html.twig') }}
-                <div>
-                    <p>{{ structure.name }}</p>
-                    <p>{{ structure.address }}</p>
-                    <p>{{ structure.city }}</p>
-                    <p>{{ structure.shortDescription }}</p>
-                </div>
-            </div>
-            {% include 'interrupteur/_interrupteur.html.twig' with {active : structure.active} only %}
-        </section>
-        <section>
-            <h2>Options de la structure</h2>
-            <article>
-                <div>
-                    <p>Vente de protéines</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.wheySale} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Vente de serviettes</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.towelSale} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Vente de boissons</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.drinkSale} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Accès sauna</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.sauna} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Jour de paiement</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.paymentDay} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Fermeture tardive</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.lateClosing} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Option newsletter</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.sendNewsletter} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Accès secteur boxing</p>
-                    <p>
-                       {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.ringBoxe} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Accès secteur crossfit</p>
-                    <p>
-                        {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.crossfit} only %}
-                    </p>
-                </div>
-                <div>
-                    <p>Accès secteur biking</p>
-                    <p>
-                       {% include 'interrupteur/_interrupteurs.html.twig' with {active : structure.biking} only %}
-                    </p>
-                </div>
-            </article>
-        </section>
-    {% endfor %}
-    {{ knp_pagination_render(structures) }}
+            </a>
+        </div>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(structures) }}
+        </div>
+    </main>
 {% endblock %}

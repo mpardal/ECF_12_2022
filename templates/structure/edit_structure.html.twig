@@ -3,11 +3,13 @@
 {% block title %}Modification d'une structure{% endblock %}
 
 {% block body %}
-    <h2>Informations de la structure</h2>
+    <main class="container">
+    <h2 class="text-center m-4">Informations de la structure</h2>
     {% include "structure/structure_form.html.twig" %}
-    <div>
-        <button type="button"><a href="{{ path('app_list_structure') }}">Annuler</a></button>
-        <button>Valider</button>
+    <div class="d-flex flex-row justify-content-around m-3">
+        <button type="button" class="rounded-3 p-2 btn btn-danger"><a href="{{ path('app_admin_list_franchise') }}">Annuler</a></button>
+        <button class="rounded-3 p-2 btn btn-success">Valider</button>
     </div>
     {{ form_end(structureRegistrationForm) }}
+    </main>
 {% endblock %}

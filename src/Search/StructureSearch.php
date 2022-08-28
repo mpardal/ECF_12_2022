@@ -30,7 +30,7 @@ class StructureSearch
     /**
      * @return bool|null
      */
-    public function getActive(): ?bool
+    public function isActive(): ?bool
     {
         return $this->active;
     }

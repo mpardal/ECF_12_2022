@@ -3,22 +3,23 @@
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
-    <h1>Bienvenu sur l'API salle de sport</h1>
+    <main class="container">
+        <h2 class="text-center my-5">Bienvenu sur l'API salle de sport</h2>
 
-
-    <a href="{{ path('app_admin_connect') }}">
-        <button>Accès Administrateur</button>
-    </a>
-    <a href="{{ path('app_franchise_connect') }}">
-        <button>Accès Franchise</button>
-    </a>
-    <a href="{{ path('app_structure_connect') }}">
-        <button>Accès Structure</button>
-    </a>
-    <!--
-    <div>
-        <p>Vous pouvez vous connectez à votre compte en cliquant sur ce <a href="/connect">lien</a></p>
-        <p>Vous pouvez trouver la procédure pour demander l'ouverture d'<a href="#">une franchise de la marque</a>.</p>
-    </div>
-    -->
+        {% if is_granted('IS_AUTHENTICATED') %}
+        <span></span>
+        {% else %}
+        <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-around">
+            <a href="{{ path('app_admin_connect') }}">
+                <button class="p-2 rounded-3 m-3">Accès Administrateur</button>
+            </a>
+            <a href="{{ path('app_franchise_connect') }}">
+                <button class="p-2 rounded-3 m-3">Accès Franchise</button>
+            </a>
+            <a href="{{ path('app_structure_connect') }}">
+                <button class="p-2 rounded-3 m-3">Accès Structure</button>
+            </a>
+        </div>
+        {% endif %}
+    </main>
 {% endblock %}

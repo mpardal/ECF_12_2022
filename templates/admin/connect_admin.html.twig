@@ -3,32 +3,59 @@
 {% block title %}Connexion Admin{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <form method="post" class="container">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-
-        {% if app.user %}
-            <div class="mb-3">
-                Vous êtes connectés en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout_admin') }}">Déconnexion</a>
+        {% if is_granted('IS_AUTHENTICATED') %}
+            <div class="mt-4">
+                <p class="my-4">
+                    Vous êtes connectés en tant que {{ app.user.userIdentifier }}.
+                </p>
+                <p class="my-4">
+                    Vous pouvez accéder à la liste des franchises, en appuyant sur le bouton "Liste des franchises".
+                </p>
+                <div class="d-flex flex-row justify-content-center my-4">
+                    <a href="{{ path('app_list_franchise') }}">
+                        <button class="btn btn-secondary rounded-3 p-2">
+                            Liste des franchises
+                        </button>
+                    </a>
+                </div>
+                <p class="my-4">
+                    Vous pouvez vous déconnecter, en appuyant sur le bouton "Déconnexion".
+                </p>
+                <div class="d-flex flex-row justify-content-center my-4">
+                    <a href="{{ path('app_logout_franchise') }}">
+                        <button class="btn btn-danger rounded-3 p-2">
+                            Déconnexion
+                        </button>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <h1 class="text-center text-decoration-underline mt-4">Connectez-vous</h1>
+            <h3 class="text-center my-4">Accès administrateur</h3>
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column my-2">
+                    <label for="email">
+                        Identifiant (e-mail) :
+                    </label>
+                    <input type="email" id="email" name="email" value="{{ last_username }}" autocomplete="email"
+                           required
+                           autofocus class="rounded-3 my-1">
+                </div>
+                <div class="d-flex flex-column my-2">
+                    <label for="password">
+                        Mot de passe :
+                    </label>
+                    <input type="password" id="password" name="password" required class="rounded-3 my-1">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
+                <button type="submit" class="my-4 w-50 mx-auto rounded-3">
+                    Se connecter (administrateur)
+                </button>
             </div>
         {% endif %}
-
-        <h1>Connectez-vous</h1>
-        <h3>Accès administrateur</h3>
-        <div class="inputConnect">
-            <div>
-                <label for="email">Identifiant (e-mail) :</label>
-                <input type="email" id="email" name="email" value="{{ last_username }}" autocomplete="email" required autofocus>
-            </div>
-            <div>
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" required>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            </div>
-            {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
-            <button type="submit">Se connecter (administrateur)</button>
-        </div>
     </form>
 {% endblock %}
