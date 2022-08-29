@@ -8,7 +8,7 @@
         <h2 class="text-center m-4 text-decoration-underline">
             Liste des franchises
         </h2>
-        <section class="mt-4">
+        <section class="mt-4" id="content">
             {% for franchise in franchises %}
                 <article class="border m-1 p-2 pt-4">
                     <div class="d-flex flex-column flex-lg-row justify-content-lg-around align-items-lg-center">
@@ -62,7 +62,7 @@
                 </a>
             </div>
         {% endif %}
-        <div class="pagination text-center">
+        <div class="pagination justify-content-center">
             {{ knp_pagination_render(franchises) }}
         </div>
     </main>

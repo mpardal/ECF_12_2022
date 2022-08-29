@@ -16,18 +16,15 @@ use App\Repository\StructureRepository;
 use App\Search\FranchiseSearch;
 use App\Search\StructureSearch;
 use App\Security\AdminAuthenticator;
-use App\Security\UserStorage;
 use App\Service\FranchiseMails;
 use App\Service\StructureMails;
 use App\Service\StructureOptionsRegister;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -219,15 +216,29 @@ class AdminController extends AbstractController
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $search);
         $formFranchiseSearch->handleRequest($request);
 
+        // Initialisation du filtre
+//        $filters = $request->get('franchises');
+
         //pagination et affichage d'une franchise et de ces structures.
         $franchises = $this->paginator->paginate(
         //fonction permettant de créer une barre de recherche
-            $repository->findAllQueries($search),
+            $repository->findAllQueries($search, /*$filters*/),
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
-            1
+            2
         );
+
+//        // vérification de la requête ajax
+//        if($request->get('ajax')){
+//            return new JsonResponse([
+//                'content' => $this->renderView('franchise/index.html.twig', [
+//                    'franchises' => $franchises,
+//                    'franchiseSearchType' => $formFranchiseSearch->createView()
+//            ])
+//            ]);
+//        }
+
         return $this->render('franchise/index.html.twig', [
             'franchises' => $franchises,
             'franchiseSearchType' => $formFranchiseSearch->createView()
@@ -235,7 +246,8 @@ class AdminController extends AbstractController
     }
 
     #[Route('/details_franchise/{id}', name: 'app_admin_detail_franchise')]
-    public function detail(Request $request, StructureRepository $structureRepository, Franchise $franchise, StructureSearch $search): Response
+    public function detail(Request $request, StructureRepository $structureRepository,
+                           Franchise $franchise): string
     {
         // Entité StructureSearch
         $search = new StructureSearch();
@@ -243,15 +255,29 @@ class AdminController extends AbstractController
         $formStructureSearch = $this->createForm(StructureSearchType::class, $search);
         $formStructureSearch->handleRequest($request);
 
+        // Initialisation du filtre
+//        $filters = $request->get('structures');
+
         //pagination et affichage d'une franchise et de ces structures.
         $structures = $this->paginator->paginate(
         //fonction permettant de créer une barre de recherche
-            $structureRepository->findAllByFranchiseQueries($franchise, $search),
+            $structureRepository->findAllByFranchiseQueries($franchise, $search, /*$filters*/),
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
             6
         );
+
+
+//        if($request->get('ajax')){
+//            return new JsonResponse([
+//            $this->renderView('franchise/detail_franchise.html.twig', [
+//                    'structures' => $structures,
+//                    'franchise' => $franchise,
+//                    'structureSearchType' => $formStructureSearch->createView()
+//            ])
+//                ]);
+//        }
         return $this->render('franchise/detail_franchise.html.twig', [
                 'structures' => $structures,
                 'franchise' => $franchise,

@@ -44,8 +44,9 @@ class StructureRepository extends ServiceEntityRepository
     }
 
 
-    public function findAllByFranchiseQueries(Franchise $franchise, StructureSearch $search): Query
+    public function findAllByFranchiseQueries(Franchise $franchise, StructureSearch $search, $filters = null): Query
     {
+        //if ($filters !== null){
         $query = $this->createQueryBuilder('s')
             ->where('s.franchise = :franchise')
             ->setParameter('franchise', $franchise->getId());;
@@ -62,8 +63,9 @@ class StructureRepository extends ServiceEntityRepository
                 ->andWhere('s.active = :activeStructure')
                 ->setParameter('activeStructure', $search->isActive());
         }
-
+        //}
         return $query->getQuery();
+
     }
 
 //    /**

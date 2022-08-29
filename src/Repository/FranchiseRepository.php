@@ -42,28 +42,30 @@ class FranchiseRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllQueries(FranchiseSearch $search): Query
+    public function findAllQueries(FranchiseSearch $search, $filters = null): Query
     {
+
         $query = $this->createQueryBuilder('f');
+        //if ($search !== null) {
+            if ($search->getName()) {
+                $query = $query
+                    ->andWhere('f.name LIKE :nameFranchise')
+                    ->setParameter('nameFranchise', '%' . $search->getName() . '%');
+            }
 
-        if ($search->getName()) {
-            $query = $query
-                ->andWhere('f.name LIKE :nameFranchise')
-                ->setParameter('nameFranchise', '%'.$search->getName().'%');
-        }
+            //andWhere permet de cumuler les WHERE
+            if ($search->isActive() !== null) {
+                $query = $query
+                    ->andWhere('f.active = :activeFranchise')
+                    ->setParameter('activeFranchise', $search->isActive());
+            }
 
-        //andWhere permet de cumuler les WHERE
-        if ($search->isActive() !== null) {
-            $query = $query
-                ->andWhere('f.active = :activeFranchise')
-                ->setParameter('activeFranchise', $search->isActive());
-        }
-
-        if ($search->getCity()) {
-            $query = $query
-                ->andWhere('f.city LIKE :cityFranchise')
-                ->setParameter('cityFranchise', '%'.$search->getCity().'%');
-        }
+            if ($search->getCity()) {
+                $query = $query
+                    ->andWhere('f.city LIKE :cityFranchise')
+                    ->setParameter('cityFranchise', '%' . $search->getCity() . '%');
+            }
+        //}
         return $query->getQuery();
     }
 

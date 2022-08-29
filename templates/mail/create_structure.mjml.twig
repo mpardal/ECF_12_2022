@@ -9,18 +9,21 @@
                         <mj-divider border-color="#3E3C3C"></mj-divider>
 
                         <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">Bonjour,</mj-text>
-                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">Vous recevez ce mail suite à
-                            la création de votre structure {{ structure.name }}, lié à votre
-                            franchise "{{ structure.franchise.name }}".
+                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">
+                            Vous recevez ce mail suite à
+                            la création de votre structure {{ structure.name }}
                         </mj-text>
-                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">Pour valider la création de la
-                            structure, veuillez cliquer sur le bouton qui suit.
+                        <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">
+                            Pour créer le mot de passe de votre structure, veuillez cliquer sur le bouton qui suit.
                         </mj-text>
                         <mj-text font-size="20px" color="#3E3C3C" font-family="helvetica">
                             <a href="{{ url('app_structure_password_new', {passwordToken : structure.passwordToken}) }}">
-                                Validation de la structure
+                                <button>
+                                    Création du mot de passe
+                                </button>
                             </a>
                         </mj-text>
+                        <mj-divider border-color="#3E3C3C"></mj-divider>
                     </mj-column>
                 </mj-section>
             </mj-body>
