@@ -23,16 +23,16 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 191, nullable: true)]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $city = null;
 
     #[ORM\Column]
@@ -83,10 +83,10 @@ class Franchise implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: Structure::class, orphanRemoval: true)]
     private Collection $structures;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 191, nullable: true)]
     private ?string $activationToken = null;
 
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    #[ORM\Column(length: 191, unique: true, nullable: true)]
     private ?string $passwordToken = null;
 
     public function __construct()

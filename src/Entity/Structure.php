@@ -21,22 +21,22 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 191, nullable: true)]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $postalCode = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 191)]
     private ?string $city = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -94,10 +94,10 @@ class Structure implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Franchise $franchise = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 191, nullable: true)]
     private ?string $activationToken = null;
 
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
+    #[ORM\Column(length: 191, unique: true, nullable: true)]
     private ?string $passwordToken = null;
 
     #[ORM\Column]
