@@ -1,37 +1,25 @@
-<div class="border p-2 m-1">
-    {#    <form id="filterFranchise"> #}
+<div class="border rounded-3 p-2 m-1">
     {{ form_start(franchiseSearchType) }}
     <div class="d-flex flex-column">
         <div class="d-flex flex-column my-2 my-lg-4">
             {{ form_label(franchiseSearchType.name) }}
-            {#            <label for="searchNameFranchise">Nom de la franchise</label> #}
-            {#            <input type="text" name="searchNameFranchise" id="searchNameFranchise"> #}
-            {{ form_widget(franchiseSearchType.name, {'attr': {'class': 'rounded-3'}}) }}
+            {{ form_widget(franchiseSearchType.name) }}
         </div>
         <div class="d-flex flex-column my-2 my-lg-4">
             {{ form_label(franchiseSearchType.city) }}
-            {#            <label for="searchCityFranchise">Ville de la franchise</label> #}
-            {#            <input type="search" name="searchNameFranchise" id="searchCityFranchise"> #}
-            {{ form_widget(franchiseSearchType.city, {'attr': {'class': 'rounded-3'}}) }}
+            {{ form_widget(franchiseSearchType.city) }}
         </div>
     </div>
     <div>
-        {#        <input type="radio" name="franchiseActive" id="franchiseActiveNull"> #}
-        {#        <label for="franchiseActiveNull">Active et Inactive</label> #}
-        {#        <input type="radio" name="franchiseActive" id="franchiseActive"> #}
-        {#        <label for="franchiseActive">Active</label> #}
-        {#        <input type="radio" name="franchiseActive" id="franchiseNoActive"> #}
-        {#        <label for="franchiseNoActive">Inactive</label> #}
         {{ form_widget(franchiseSearchType.active, {'attr': {'class': 'd-flex flex-row justify-content-evenly my-2 px-lg-5 my-lg-5'}}) }}
     </div>
     <div class="d-flex flex-row justify-content-around my-4">
-        <button type="reset" class="rounded-3 m-2 p-2 w-25">
+        <button type="reset" class="btn border border-secondary rounded-3 m-2 p-2 w-25">
             TOUTES
         </button>
-        <button class="rounded-3 m-2 p-2 w-25">
+        <button class="btn border border-secondary rounded-3 m-2 p-2 w-25">
             RECHERCHER
         </button>
     </div>
     {{ form_end(franchiseSearchType) }}
-    {#    </form> #}
 </div>

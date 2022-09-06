@@ -1,21 +1,12 @@
-<section class="border p-2 m-1">
+<section class="border rounded-3 p-2 m-1">
     {{ form_start(structureSearchType) }}
-{#    <form id="filterStructure">#}
     <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-column w-75">
             <div class="d-flex flex-column m-3">
                 {{ form_label(structureSearchType.name) }}
-{#                <label for="searchNameStructure">Nom de la structure</label>#}
-{#                <input type="search" name="searchNameFranchise" id="searchNameStructure">#}
                 {{ form_widget(structureSearchType.name) }}
             </div>
             <div>
-{#                <input type="radio" name="structureActive" id="structureActive">#}
-{#                <label for="structureActive">Active</label>#}
-{#                <input type="radio" name="franchiseActive" id="franchiseNoActive">#}
-{#                <label for="franchiseNoActive">Inactive</label>#}
-{#                <input type="radio" name="franchiseActive" id="franchiseActiveNull">#}
-{#                <label for="franchiseActiveNull">Active et Inactive</label>#}
                 {{ form_widget(structureSearchType.active, {'attr': {'class': 'd-flex flex-row justify-content-around justify-content-lg-start px-lg-5 m-3'}}) }}
             </div>
         </div>
@@ -37,6 +28,5 @@
             RECHERCHER
         </button>
     </div>
-{#    </form>#}
     {{ form_end(structureSearchType) }}
 </section>

@@ -1,53 +1,51 @@
-    const filtersFranchise = document.querySelector("#filterFranchise");
+// Récupération du formulaire franchise/structure
+const filtersFranchiseForm = document.querySelector("form");
+// Récupération de l'élément HTML qui accueillera le nouveau contenu
+const listFranchiseSection = document.querySelector('#content')
 
-    const searchFranchiseName = document.querySelector("#searchNameFranchise");
-    const searchFranchiseCity = document.querySelector("#searchCityFranchise");
-    const franchiseActiveNull = document.querySelector("#franchiseActiveNull");
-    const franchiseActive = document.querySelector("#franchiseActive");
-    const franchiseNoActive = document.querySelector("#franchiseNoActive");
+// On ne fait rien si on n'a pas trouvé de formulaire
+if (filtersFranchiseForm) {
+    let timeout = null;
+    // Récupération de tous les inputs du formulaire
+    const inputs = filtersFranchiseForm.querySelectorAll('input');
 
-    // Interception des appuis sur clavier
-    searchFranchiseName.addEventListener("keydown", () => {
-        // Récupération des données du formulaire
-        const Form = new FormData(filtersFranchise);
-        console.log(Form);
-        // Fabrication "QueryString"
-        const Params = new URLSearchParams();
-
-        Form.forEach(   (value, key) => {
-            Params.append(key, value);
-        })
-
-        // Récupération de l'url active
-        const url = new URL(window.location.href);
-
-        console.log(url.pathname);
-        console.log(Params);
-        // Lancement de la requête ajax
-        fetch(url.pathname + "?" + Params.toString() + "&ajax=1", {
-            // Rajoute la méthodologie du fetch
-            headers: {
-                "X-Requested-With": "XMLHttpRequest"
-            }
-        }).then(response =>
-            response.json()
-        ).then(data => {
-            const content = document.querySelector('#content')
-            content.innerHTML = data.content
-            console.log(content)
-        }).catch(e => alert(e));
+    inputs.forEach(input => {
+        // Si l'input est de type radio, alors on écoute sur le click sinon, le keyup
+        handleInput(input, input.getAttribute('type') === 'radio' ? 'click' : 'keyup')
     });
-        //
-        // searchFranchiseCity.addEventListener("keydown", () => {
-        //     console.log('ola2')
-        // });
-        //
-        // franchiseActiveNull.addEventListener("click", () => {
-        //     console.log('ola3')
-        // });
-        // franchiseActive.addEventListener("click", () => {
-        //     console.log('ola4')
-        // });
-        // franchiseNoActive.addEventListener("click", () => {
-        //     console.log('ola5')
-        // });
+
+    /**
+     * Lance la recherche quand un événement de type $event est déclenché pour le $input
+     *
+     * @param {HTMLInputElement} input
+     * @param {'keyup' | 'click'} event
+     */
+    function handleInput(input, event) {
+        input.addEventListener(event, () => {
+            clearTimeout(timeout)
+
+            // Permet d'attendre un certain temps avant de lancer la requête fetch
+            timeout = setTimeout(() => {
+                // Récupération des données du formulaire
+                const form = new FormData(filtersFranchiseForm);
+                // Fabrication "QueryString" (exemple: name=test&city=bordeaux)
+                const params = new URLSearchParams({
+                    'name': form.get('name'),
+                    'city': form.get('city'),
+                    'active': form.get('active'),
+                    'ajax': 1
+                });
+
+                // Récupération de l'url actuelle
+                const url = new URL(window.location.href);
+
+                fetch(`${url.pathname}?${params.toString()}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        listFranchiseSection.innerHTML = data.content
+                    })
+            }, 300)
+        });
+    }
+
+}

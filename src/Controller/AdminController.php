@@ -22,6 +22,9 @@ use App\Service\StructureOptionsRegister;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\FormErrorIterator;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +44,7 @@ class AdminController extends AbstractController
     #[Route('/register', name: 'app_register_admin')]
     public function register(Request                    $request, UserPasswordHasherInterface $userPasswordHasher,
                              UserAuthenticatorInterface $userAuthenticator, AdminAuthenticator $authenticator,
-                             AdminRepository $adminRepository): Response
+                             AdminRepository            $adminRepository): Response
     {
         // créer une nouvelle entité franchise
         $user = new Admin();
@@ -78,8 +81,8 @@ class AdminController extends AbstractController
 
     //Création de la franchise
     #[Route('/create_franchise', name: 'app_admin_create_franchise')]
-    public function franchiseNew(FranchiseRepository         $franchiseRepository, Request $request,
-                                 FranchiseMails $franchiseMails): Response
+    public function franchiseNew(FranchiseRepository $franchiseRepository, Request $request,
+                                 FranchiseMails      $franchiseMails): Response
     {
         //créer une nouvelle entité franchise
         $franchise = new Franchise();
@@ -111,8 +114,8 @@ class AdminController extends AbstractController
 
     // Création d'une structure
     #[Route('/create_structure', name: 'app_admin_create_structure')]
-    public function structureNew(StructureRepository $structureRepository, Request $request,
-                                 FranchiseMails $franchiseMails,
+    public function structureNew(StructureRepository      $structureRepository, Request $request,
+                                 FranchiseMails           $franchiseMails,
                                  StructureOptionsRegister $structureOptionsRegister): Response
     {
         //créer une nouvelle entité structure
@@ -220,6 +223,7 @@ class AdminController extends AbstractController
 //        $filters = $request->get('franchises');
 
         //pagination et affichage d'une franchise et de ces structures.
+
         $franchises = $this->paginator->paginate(
         //fonction permettant de créer une barre de recherche
             $repository->findAllQueries($search, /*$filters*/),
@@ -229,15 +233,23 @@ class AdminController extends AbstractController
             2
         );
 
-//        // vérification de la requête ajax
-//        if($request->get('ajax')){
-//            return new JsonResponse([
-//                'content' => $this->renderView('franchise/index.html.twig', [
-//                    'franchises' => $franchises,
-//                    'franchiseSearchType' => $formFranchiseSearch->createView()
-//            ])
-//            ]);
-//        }
+        dump($formFranchiseSearch, $franchises);
+
+        // vérification de la requête ajax
+        if ($request->query->get('ajax')) {
+            if (!$formFranchiseSearch->isValid()) {
+                return new JsonResponse([
+                    'error' => $this->formErrorToJson($formFranchiseSearch)
+                ]);
+            }
+
+            return new JsonResponse([
+                'content' => $this->renderView('franchise/franchise_list.html.twig', [
+                    'franchises' => $franchises,
+                    'franchiseSearchType' => $formFranchiseSearch->createView()
+                ])
+            ]);
+        }
 
         return $this->render('franchise/index.html.twig', [
             'franchises' => $franchises,
@@ -246,7 +258,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/details_franchise/{id}', name: 'app_admin_detail_franchise')]
-    public function detail(Request $request, StructureRepository $structureRepository,
+    public function detail(Request   $request, StructureRepository $structureRepository,
                            Franchise $franchise): string
     {
         // Entité StructureSearch
@@ -261,7 +273,7 @@ class AdminController extends AbstractController
         //pagination et affichage d'une franchise et de ces structures.
         $structures = $this->paginator->paginate(
         //fonction permettant de créer une barre de recherche
-            $structureRepository->findAllByFranchiseQueries($franchise, $search, /*$filters*/),
+            $structureRepository->findAllByFranchiseQueries($franchise, $search),
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
@@ -284,5 +296,16 @@ class AdminController extends AbstractController
                 'structureSearchType' => $formStructureSearch->createView()
             ]
         );
+    }
+
+    private function formErrorToJson(FormInterface $form): array
+    {
+        $errors = [];
+
+        foreach ($form->getErrors() as $error) {
+            $errors[$form->getName()][] = $error->getMessage();
+        }
+
+        return $errors;
     }
 }

@@ -20,7 +20,7 @@ class FranchiseMails
         $email = (new Email())
             ->from(new Address('no-reply@sport.fr'))
             ->to($franchise->getEmail())
-            ->subject('Création de votre franchise' . $franchise->getName())
+            ->subject('Création de votre franchise ' . $franchise->getName())
             ->html(
                 $this->twig->render('mail/create_franchise.mjml.twig', [
                     'franchise' => $franchise

@@ -1,93 +1,60 @@
 <article class="border rounded-1 p-2 m-1">
     <div class="d-flex flex-column my-2">
         {{ form_label(franchiseRegistrationForm.name) }}
-        {{ form_widget(franchiseRegistrationForm.name, {'attr': {'class': 'rounded-3'}}) }}
+        {{ form_widget(franchiseRegistrationForm.name, {'attr': {'class': 'form-control rounded-3'}}) }}
     </div>
     <div class="d-flex flex-column my-2">
         {{ form_label(franchiseRegistrationForm.email) }}
-        {{ form_widget(franchiseRegistrationForm.email, {'attr': {'class': 'rounded-3'}}) }}
+        {{ form_widget(franchiseRegistrationForm.email, {'attr': {'class': 'form-control rounded-3'}}) }}
     </div>
     <div class="d-flex flex-column my-2">
         {{ form_label(franchiseRegistrationForm.city) }}
-        {{ form_widget(franchiseRegistrationForm.city, {'attr': {'class': 'rounded-3'}}) }}
+        {{ form_widget(franchiseRegistrationForm.city, {'attr': {'class': 'form-control rounded-3'}}) }}
     </div>
-    <div class="d-flex flex-row my-2">
-        <p class="me-3">Est-elle active ?</p>
-        <p>
-            {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.active} only %}
-        </p>
+    <div class="d-flex my-2 form-switch active-switch">
+        {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.active} only %}
     </div>
     <div class="d-flex flex-column my-2">
         {{ form_label(franchiseRegistrationForm.imageFile) }}
-        {{ form_widget(franchiseRegistrationForm.imageFile, {'attr': {'class': 'rounded-3'}}) }}
+        {{ form_widget(franchiseRegistrationForm.imageFile) }}
     </div>
 </article>
-<section class="border rounded-1 p-2 m-1">
+<section class="border rounded-1 p-2 m-1 mt-3">
     <h2 class="text-center m-4">Options de la franchise</h2>
     <article class="d-flex flex-column flex-md-row justify-content-md-around">
         <div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.wheySale) }}</p>
-            <p>
+            <div class="d-flex my-2 form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.wheySale} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.towelSale) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.towelSale} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.drinkSale) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.drinkSale} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.sauna) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.sauna} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.paymentDay) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.paymentDay} only %}
-            </p>
-        </div>
+            </div>
         </div>
         <div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.lateClosing) }}</p>
-            <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.lateClosing} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.sendNewsletter) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.sendNewsletter} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.ringBoxe) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.ringBoxe} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.crossfit) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.crossfit} only %}
-            </p>
-        </div>
-        <div class="d-flex flex-row my-2 mx-4 justify-content-between form-check form-switch">
-            <p>{{ form_label(franchiseRegistrationForm.biking) }}</p>
-            <p>
+            </div>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                 {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: franchiseRegistrationForm.biking} only %}
-            </p>
-        </div>
+            </div>
         </div>
     </article>
 </section>

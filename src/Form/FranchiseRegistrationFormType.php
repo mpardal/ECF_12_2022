@@ -25,7 +25,7 @@ class FranchiseRegistrationFormType extends AbstractType
             ->add('city', null, [
                 'label' => 'cityFranchise'
             ])
-            ->add('active', options: [
+            ->add('active', null, [
                 'label' => 'active'
             ])
             ->add('wheySale', null, [
