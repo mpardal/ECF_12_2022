@@ -1,5 +1,6 @@
-{% for structure in structures %}
-    <section class="border rounded-3 m-1 p-2">
+<section class="mt-4" id="content">
+    {% for structure in structures %}
+    <article class="border rounded-3 m-1 p-2 pt-4">
         <h2 class="text-center m-4 text-decoration-underline">Détail de la structure</h2>
         <div class="p-2">
             <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-around">
@@ -84,5 +85,6 @@
                 </div>
             </article>
         </div>
-    </section>
+    </article>
 {% endfor %}
+</section>

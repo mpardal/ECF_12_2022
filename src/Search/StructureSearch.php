@@ -9,6 +9,8 @@ class StructureSearch
 
     private ?bool $active = null;
 
+    private ?string $city = null;
+
     /**
      * @return string|null
      */
@@ -44,4 +46,23 @@ class StructureSearch
         $this->active = $active;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string|null $city
+     * @return StructureSearch
+     */
+    public function setCity(?string $city): StructureSearch
+    {
+        $this->city = $city;
+        return $this;
+    }
+
 }

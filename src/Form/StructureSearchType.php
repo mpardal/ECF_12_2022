@@ -25,6 +25,10 @@ class StructureSearchType extends AbstractType
                 'required' => false,
                 'expanded' => true
             ])
+            ->add('city', null, [
+                'required' => false,
+                'label' => 'cityStructure'
+            ])
         ;
     }
 
@@ -33,7 +37,8 @@ class StructureSearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => StructureSearch::class,
             'method' => 'get',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'allow_extra_fields' => true,
         ]);
     }
 

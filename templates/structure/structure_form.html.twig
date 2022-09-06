@@ -24,11 +24,8 @@
         {{ form_label(structureRegistrationForm.postalCode) }}
         {{ form_widget(structureRegistrationForm.postalCode, {'attr': {'class': 'form-control rounded-3'}}) }}
     </div>
-    <div class="d-flex flex-row my-2">
-        <p>Est-elle active ?</p>
-        <p>
+    <div class="d-flex my-2 form-switch active-switch">
             {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.active} only %}
-        </p>
     </div>
     <div class="d-flex flex-column my-2">
         {{ form_label(structureRegistrationForm.city) }}
@@ -47,71 +44,37 @@
     <h2 class="text-center m-4">Options de la structure</h2>
     <article class="d-flex flex-column flex-md-row justify-content-md-around">
         <div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.wheySale) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.wheySale} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.towelSale) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.towelSale} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.drinkSale) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.drinkSale} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.sauna) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sauna} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.paymentDay) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.paymentDay} only %}
-                </p>
             </div>
         </div>
         <div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.lateClosing) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.lateClosing} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.sendNewsletter) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.sendNewsletter} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>{{ form_label(structureRegistrationForm.ringBoxe) }}</p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.ringBoxe} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>
-                    {{ form_label(structureRegistrationForm.crossfit) }}
-                </p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.crossfit} only %}
-                </p>
             </div>
-            <div class="d-flex flex-row my-2 mx-4 justify-content-between">
-                <p>
-                    {{ form_label(structureRegistrationForm.biking) }}
-                </p>
-                <p>
+            <div class="d-flex my-2 justify-content-between form-check form-switch">
                     {% include "interrupteur/_interrupteur_new_edit.html.twig" with {form: structureRegistrationForm.biking} only %}
-                </p>
             </div>
         </div>
     </article>

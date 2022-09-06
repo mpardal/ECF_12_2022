@@ -2,24 +2,28 @@
 
 {% block title %}Détail de la franchise{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/filters.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     <main class="container">
         <div class="m-3">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_admin_list_franchise') }}">
-                    <button type="button" id="list" class="rounded-3 p-1">
+                <a href="{{ path('app_admin_list_franchise') }}" class="rounded-3 p-1">
+                    <button type="button" id="list" class="btn btn-secondary">
                         Liste partenaires
                     </button>
                 </a>
             {% elseif is_granted('ROLE_FRANCHISE') %}
-                <a href="{{ path('app_list_franchise') }}">
-                    <button type="button" id="list" class="rounded-3 p-1">
+                <a href="{{ path('app_list_franchise') }}" class="rounded-3 p-1">
+                    <button type="button" id="list" class="btn btn-secondary">
                         Liste partenaires
                     </button>
                 </a>
             {% elseif is_granted('ROLE_STRUCTURE') %}
-                <a href="{{ path('app_list_franchise_by_structure') }}">
-                    <button type="button" id="list" class="rounded-3 p-1">
+                <a href="{{ path('app_list_franchise_by_structure') }}" class="rounded-3 p-1">
+                    <button type="button" id="list" class="btn btn-secondary">
                         Liste partenaires
                     </button>
                 </a>
@@ -39,9 +43,9 @@
         </div>
         {% include'search/searchStructure.html.twig' %}
         {% include 'structure/detail_structure.html.twig' %}
-        <div class="d-flex flex-row justify-content-end mx-3 mt-5">
+        <div class="d-flex flex-row justify-content-end mx-3 mt-5 mb-2">
             <a href="{{ path('app_admin_create_structure') }}">
-                <button type="button" class="rounded-3 p-1">
+                <button type="button" class="btn btn-secondary rounded-3 p-1">
                     Créer une nouvelle structure
                 </button>
             </a>

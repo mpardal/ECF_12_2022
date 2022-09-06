@@ -219,21 +219,17 @@ class AdminController extends AbstractController
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $search);
         $formFranchiseSearch->handleRequest($request);
 
-        // Initialisation du filtre
-//        $filters = $request->get('franchises');
+
 
         //pagination et affichage d'une franchise et de ces structures.
-
         $franchises = $this->paginator->paginate(
         //fonction permettant de créer une barre de recherche
-            $repository->findAllQueries($search, /*$filters*/),
+            $repository->findAllQueries($search),
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
             2
         );
-
-        dump($formFranchiseSearch, $franchises);
 
         // vérification de la requête ajax
         if ($request->query->get('ajax')) {
@@ -259,16 +255,13 @@ class AdminController extends AbstractController
 
     #[Route('/details_franchise/{id}', name: 'app_admin_detail_franchise')]
     public function detail(Request   $request, StructureRepository $structureRepository,
-                           Franchise $franchise): string
+                           Franchise $franchise): Response
     {
         // Entité StructureSearch
         $search = new StructureSearch();
         // Nouveau formulaire
         $formStructureSearch = $this->createForm(StructureSearchType::class, $search);
         $formStructureSearch->handleRequest($request);
-
-        // Initialisation du filtre
-//        $filters = $request->get('structures');
 
         //pagination et affichage d'une franchise et de ces structures.
         $structures = $this->paginator->paginate(
@@ -280,16 +273,22 @@ class AdminController extends AbstractController
             6
         );
 
+        // vérification de la requête ajax
+        if ($request->query->get('ajax')) {
+            if (!$formStructureSearch->isValid()) {
+                return new JsonResponse([
+                    'error' => $this->formErrorToJson($formStructureSearch)
+                ]);
+            }
+            return new JsonResponse([
+            'content' => $this->renderView('structure/detail_structure.html.twig', [
+                    'structures' => $structures,
+                    'franchise' => $franchise,
+                    'structureSearchType' => $formStructureSearch->createView()
+            ])
+                ]);
+        }
 
-//        if($request->get('ajax')){
-//            return new JsonResponse([
-//            $this->renderView('franchise/detail_franchise.html.twig', [
-//                    'structures' => $structures,
-//                    'franchise' => $franchise,
-//                    'structureSearchType' => $formStructureSearch->createView()
-//            ])
-//                ]);
-//        }
         return $this->render('franchise/detail_franchise.html.twig', [
                 'structures' => $structures,
                 'franchise' => $franchise,

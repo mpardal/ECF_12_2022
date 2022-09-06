@@ -1,13 +1,13 @@
 // Récupération du formulaire franchise/structure
-const filtersFranchiseForm = document.querySelector("form");
+const filtersForm = document.querySelector("form");
 // Récupération de l'élément HTML qui accueillera le nouveau contenu
-const listFranchiseSection = document.querySelector('#content')
+const listSection = document.querySelector('#content')
 
 // On ne fait rien si on n'a pas trouvé de formulaire
-if (filtersFranchiseForm) {
+if (filtersForm) {
     let timeout = null;
     // Récupération de tous les inputs du formulaire
-    const inputs = filtersFranchiseForm.querySelectorAll('input');
+    const inputs = filtersForm.querySelectorAll('input');
 
     inputs.forEach(input => {
         // Si l'input est de type radio, alors on écoute sur le click sinon, le keyup
@@ -27,12 +27,12 @@ if (filtersFranchiseForm) {
             // Permet d'attendre un certain temps avant de lancer la requête fetch
             timeout = setTimeout(() => {
                 // Récupération des données du formulaire
-                const form = new FormData(filtersFranchiseForm);
+                const form = new FormData(filtersForm);
                 // Fabrication "QueryString" (exemple: name=test&city=bordeaux)
                 const params = new URLSearchParams({
-                    'name': form.get('name'),
-                    'city': form.get('city'),
-                    'active': form.get('active'),
+                    'name': form.get('name') ?? '',
+                    'city': form.get('city') ?? '',
+                    'active': form.get('active') ?? '',
                     'ajax': 1
                 });
 
@@ -42,7 +42,7 @@ if (filtersFranchiseForm) {
                 fetch(`${url.pathname}?${params.toString()}`)
                     .then(response => response.json())
                     .then(data => {
-                        listFranchiseSection.innerHTML = data.content
+                        listSection.innerHTML = data.content
                     })
             }, 300)
         });
