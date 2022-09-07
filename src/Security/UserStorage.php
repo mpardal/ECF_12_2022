@@ -15,7 +15,7 @@ class UserStorage
     {
         $user = $this->tokenStorageInterface->getToken()->getUser();
 
-        if ($user instanceof Admin){
+        if ($user instanceof Admin) {
             return $user;
         }
         throw new \TypeError("You are not an admin");

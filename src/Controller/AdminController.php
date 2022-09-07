@@ -22,8 +22,6 @@ use App\Service\StructureOptionsRegister;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -219,8 +217,6 @@ class AdminController extends AbstractController
         $formFranchiseSearch = $this->createForm(FranchiseSearchType::class, $search);
         $formFranchiseSearch->handleRequest($request);
 
-
-
         //pagination et affichage d'une franchise et de ces structures.
         $franchises = $this->paginator->paginate(
         //fonction permettant de créer une barre de recherche
@@ -281,12 +277,12 @@ class AdminController extends AbstractController
                 ]);
             }
             return new JsonResponse([
-            'content' => $this->renderView('structure/detail_structure.html.twig', [
+                'content' => $this->renderView('structure/detail_structure.html.twig', [
                     'structures' => $structures,
                     'franchise' => $franchise,
                     'structureSearchType' => $formStructureSearch->createView()
-            ])
-                ]);
+                ])
+            ]);
         }
 
         return $this->render('franchise/detail_franchise.html.twig', [

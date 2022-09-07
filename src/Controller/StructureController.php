@@ -19,10 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/structure')]
 class StructureController extends AbstractController
 {
-    public function __construct(private readonly PaginatorInterface $paginator,
+    public function __construct(private readonly PaginatorInterface  $paginator,
                                 private readonly FranchiseRepository $franchiseRepository,
-                                private readonly StructureRepository $structureRepository,
-                                private readonly EntityManagerInterface $entityManager)
+                                private readonly StructureRepository $structureRepository)
     {
     }
 
@@ -37,7 +36,7 @@ class StructureController extends AbstractController
 
         // Pagination
         $franchises = $this->paginator->paginate(
-            //Filtre
+        //Filtre
             $this->franchiseRepository->findAllQueries($searchFranchise),
             // Pagination
             $request->query->getInt('page', 1),
@@ -60,7 +59,7 @@ class StructureController extends AbstractController
         $formStructureSearch->handleRequest($request);
         //Pagination
         $structures = $this->paginator->paginate(
-            //Filtre
+        //Filtre
             $this->structureRepository->findAllByFranchiseQueries($franchise, $search), // TODO: structure search
             //Pagination
             $request->query->getInt('page', 1),

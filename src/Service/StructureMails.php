@@ -25,8 +25,7 @@ class StructureMails
                 $this->twig->render('mail/create_structure.mjml.twig', [
                     'structure' => $structure
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }
@@ -42,8 +41,7 @@ class StructureMails
                 $this->twig->render('mail/edit_structure.mjml.twig', [
                     'structure' => $structure
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }
@@ -58,8 +56,7 @@ class StructureMails
                 $this->twig->render('mail/password_validate.mjml.twig', [
                     'structure' => $structure
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }

@@ -2,7 +2,7 @@
     {# Bouton va et vient // Début #}
     <label>
         {% if active %}
-            <input name="check" class="form-check-input bg-success" type="checkbox" checked disabled >
+            <input name="check" class="form-check-input bg-success" type="checkbox" checked disabled>
         {% else %}
             <input name="disableCheck" class="form-check-input bg-danger" type="checkbox" disabled>
         {% endif %}
@@ -10,8 +10,8 @@
     </label>
     {# FIN #}
     {% if active %}
-    <label for="check" class="form-check-label">ACTIF</label>
+        <label for="check" class="form-check-label">ACTIF</label>
     {% else %}
-    <label for="disableCheck" class="form-check-label">NON ACTIF</label>
+        <label for="disableCheck" class="form-check-label">NON ACTIF</label>
     {% endif %}
 </div>

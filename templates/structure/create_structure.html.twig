@@ -4,16 +4,16 @@
 
 {% block body %}
     <main class="container">
-    <h2 class="text-center m-4">Informations de la structure</h2>
-    {% include "structure/structure_form.html.twig" %}
-    <div class="d-flex flex-row justify-content-around m-3">
-        <a href="{{ path('app_admin_list_franchise') }}">
-            <button type="button" class="rounded-3 p-2 btn btn-danger">
-                Annuler
-            </button>
-        </a>
-        <button class="rounded-3 p-2 btn btn-success">Valider</button>
-    </div>
-    {{ form_end(structureRegistrationForm) }}
+        <h2 class="text-center m-4">Informations de la structure</h2>
+        {% include "structure/structure_form.html.twig" %}
+        <div class="d-flex flex-row justify-content-around m-3">
+            <a href="{{ path('app_admin_list_franchise') }}">
+                <button type="button" class="rounded-3 p-2 btn btn-danger">
+                    Annuler
+                </button>
+            </a>
+            <button class="rounded-3 p-2 btn btn-success">Valider</button>
+        </div>
+        {{ form_end(structureRegistrationForm) }}
     </main>
 {% endblock %}

@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $franchise = $this->createFranchise('Nantes', 'nantes@sport.fr', 'Nantes', true, false, false, false, true, true, false, false, false, true);
-        $franchise1 = $this->createFranchise('Marseille', 'marseilles@sport.fr','Marseille', false, false, true, false, true, false, false, false, true, false);
+        $franchise1 = $this->createFranchise('Marseille', 'marseilles@sport.fr', 'Marseille', false, false, true, false, true, false, false, false, true, false);
 
         $structure = $this->createStructure('Nantes Moulin', 'nantes.moulin@sport.fr', '20 boulevard Jean Moulin', '44100', 'Nantes');
         $structure1 = $this->createStructure('Nantes Erdre', 'nantes.erdre@sport.fr', "20 rue de l'Erdre", '44300', 'Nantes');
@@ -40,8 +40,8 @@ class AppFixtures extends Fixture
     }
 
     private function createFranchise(string $name, string $email, string $city, bool $whey, bool $towel, bool $drink,
-                                     bool $sauna, bool   $payment, bool $lateClosing, bool $newsletter, bool $boxe,
-                                     bool $crossfit, bool   $biking): Franchise
+                                     bool   $sauna, bool $payment, bool $lateClosing, bool $newsletter, bool $boxe,
+                                     bool   $crossfit, bool $biking): Franchise
     {
         $franchise = new Franchise();
         $franchise->setName($name)

@@ -57,8 +57,7 @@ class FranchiseRegistrationFormType extends AbstractType
             ])
             ->add('biking', null, [
                 'label' => 'biking'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

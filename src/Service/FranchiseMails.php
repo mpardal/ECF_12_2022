@@ -25,8 +25,7 @@ class FranchiseMails
                 $this->twig->render('mail/create_franchise.mjml.twig', [
                     'franchise' => $franchise
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }
@@ -41,8 +40,7 @@ class FranchiseMails
                 $this->twig->render('mail/edit_franchise.mjml.twig', [
                     'franchise' => $franchise,
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }
@@ -58,8 +56,7 @@ class FranchiseMails
                     'franchise' => $franchise,
                     'structure' => $structure
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }
@@ -74,8 +71,7 @@ class FranchiseMails
                 $this->twig->render('mail/password_validate.mjml.twig', [
                     'franchise' => $franchise
                 ])
-            )
-        ;
+            );
 
         $this->mailer->send($email);
     }

@@ -28,8 +28,7 @@ class FranchiseSearchType extends AbstractType
             ->add('city', null, [
                 'required' => false,
                 'label' => 'cityFranchise'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

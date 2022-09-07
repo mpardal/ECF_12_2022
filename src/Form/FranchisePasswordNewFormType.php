@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Franchise;
-use App\Entity\Structure;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +16,6 @@ class FranchisePasswordNewFormType extends AbstractType
     {
         $builder
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'label' => 'passwordStructure',
                 'attr' => ['autocomplete' => 'new-password'],

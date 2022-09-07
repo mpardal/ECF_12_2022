@@ -13,10 +13,6 @@ class StructureSecurityController extends AbstractController
     #[Route(path: '/connect', name: 'app_structure_connect')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

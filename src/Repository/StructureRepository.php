@@ -7,7 +7,6 @@ use App\Entity\Structure;
 use App\Search\StructureSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -54,7 +53,7 @@ class StructureRepository extends ServiceEntityRepository
         if ($search->getName()) {
             $query = $query
                 ->andWhere('s.name LIKE :nameStructure')
-                ->setParameter('nameStructure', '%'.$search->getName().'%');
+                ->setParameter('nameStructure', '%' . $search->getName() . '%');
         }
 
         //andWhere permet de cumuler les WHERE
@@ -67,30 +66,4 @@ class StructureRepository extends ServiceEntityRepository
         return $query->getQuery();
 
     }
-
-//    /**
-//     * @return Structure[] Returns an array of Structure objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Structure
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
 }

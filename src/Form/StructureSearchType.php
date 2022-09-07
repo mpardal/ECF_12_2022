@@ -28,8 +28,7 @@ class StructureSearchType extends AbstractType
             ->add('city', null, [
                 'required' => false,
                 'label' => 'cityStructure'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

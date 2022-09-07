@@ -15,8 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class FranchisePasswordNewController extends AbstractController
 {
     public function __construct(private readonly UserPasswordHasherInterface $userPasswordHasher,
-                                private readonly EntityManagerInterface $entityManager,
-                                private readonly FranchiseMails $franchiseMails)
+                                private readonly EntityManagerInterface      $entityManager,
+                                private readonly FranchiseMails              $franchiseMails)
     {
     }
 
