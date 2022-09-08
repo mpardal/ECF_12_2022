@@ -10,22 +10,16 @@
     <main class="container">
         <div class="m-3">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_admin_list_franchise') }}" class="rounded-3 p-1">
-                    <button type="button" id="list" class="btn btn-secondary">
+                <a href="{{ path('app_admin_list_franchise') }}" class="btn btn-secondary rounded-3 p-1">
                         Liste partenaires
-                    </button>
                 </a>
             {% elseif is_granted('ROLE_FRANCHISE') %}
-                <a href="{{ path('app_list_franchise') }}" class="rounded-3 p-1">
-                    <button type="button" id="list" class="btn btn-secondary">
+                <a href="{{ path('app_list_franchise') }}" class="btn btn-secondary rounded-3 p-1">
                         Liste partenaires
-                    </button>
                 </a>
             {% elseif is_granted('ROLE_STRUCTURE') %}
-                <a href="{{ path('app_list_franchise_by_structure') }}" class="rounded-3 p-1">
-                    <button type="button" id="list" class="btn btn-secondary">
+                <a href="{{ path('app_list_franchise_by_structure') }}" class="btn btn-secondary rounded-3 p-1">
                         Liste partenaires
-                    </button>
                 </a>
             {% endif %}
         </div>
@@ -44,10 +38,8 @@
         {% include'search/searchStructure.html.twig' %}
         {% include 'structure/detail_structure.html.twig' %}
         <div class="d-flex flex-row justify-content-end mx-3 mt-5 mb-2">
-            <a href="{{ path('app_admin_create_structure') }}">
-                <button type="button" class="btn btn-secondary rounded-3 p-1">
+            <a href="{{ path('app_admin_create_structure') }}" class="btn btn-secondary rounded-3 p-1">
                     Créer une nouvelle structure
-                </button>
             </a>
         </div>
         <div class="pagination justify-content-center">

@@ -20,5 +20,12 @@ services:
       - '../src/Entity/'
       - '../src/Kernel.php'
 
+  AsyncAws\SimpleS3\SimpleS3Client:
+    arguments:
+      $configuration:
+          accessKeyId: '%env(AWS_ACCESS_KEY_ID)%'
+          accessKeySecret: '%env(AWS_ACCESS_KEY_SECRET)%'
+          region: '%env(AWS_REGION)%'
+
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

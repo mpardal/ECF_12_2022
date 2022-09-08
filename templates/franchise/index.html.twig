@@ -15,10 +15,8 @@
         {% include 'franchise/franchise_list.html.twig' %}
         {% if is_granted('ROLE_ADMIN') %}
             <div class="d-flex flex-row justify-content-end mx-3 mt-5 mb-2">
-                <a href="{{ path('app_admin_create_franchise') }}">
-                    <button type="button" class="rounded-3 p-1 btn btn-secondary">
+                <a href="{{ path('app_admin_create_franchise') }}" class="rounded-3 p-1 btn btn-secondary">
                         Créer une nouvelle franchise
-                    </button>
                 </a>
             </div>
         {% endif %}

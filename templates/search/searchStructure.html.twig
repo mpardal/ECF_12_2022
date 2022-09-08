@@ -15,14 +15,12 @@
             </div>
         </div>
         <div class="d-flex flex-column">
-            <button type="reset" class="rounded-3 p-1 m-2">
+            <button type="reset" class="btn btn-danger rounded-3 p-1 m-2">
                 TOUTES
             </button>
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_admin_create_structure') }}">
-                    <button type="button" class="rounded-3 p-1 m-2">
+                <a href="{{ path('app_admin_create_structure') }}" class="btn btn-success rounded-3 p-1 m-2">
                         AJOUTER
-                    </button>
                 </a>
             {% endif %}
         </div>

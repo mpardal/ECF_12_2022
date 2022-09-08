@@ -8,10 +8,8 @@
     {{ form_start(franchiseRegistrationForm) }}
     {% include "franchise/franchise_form.html.twig" %}
     <div class="d-flex flex-row justify-content-around m-3">
-        <a href="{{ path('app_admin_list_franchise') }}">
-            <button type="button" class="rounded-3 p-2 btn btn-danger">
+        <a href="{{ path('app_admin_list_franchise') }}" class="rounded-3 p-2 btn btn-danger">
                 Annuler
-            </button>
         </a>
         <button class="rounded-3 p-2 btn btn-success">
             Valider

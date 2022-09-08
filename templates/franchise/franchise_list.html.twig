@@ -11,31 +11,27 @@
             <div>
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="d-flex flex-row justify-content-between my-3 mx-5 justify-content-lg-around">
-                        <a href="{{ path('app_admin_edit_franchise', {id : franchise.id}) }}">
-                            <button type="button" class="btn btn-secondary rounded-3 p-1">
-                                Modifier la franchise
-                            </button>
+                        <a href="{{ path('app_admin_edit_franchise', {id : franchise.id}) }}"
+                           class="btn btn-secondary rounded-3 p-1">
+                            Modifier la franchise
                         </a>
-                        <a href="{{ path('app_admin_detail_franchise', {id : franchise.id}) }}">
-                            <button type="button" class="btn btn-secondary rounded-3 p-1">
-                                Voir la franchise
-                            </button>
+                        <a href="{{ path('app_admin_detail_franchise', {id : franchise.id}) }}"
+                           class="btn btn-secondary rounded-3 p-1">
+                            Voir la franchise
                         </a>
                     </div>
                 {% elseif is_granted('ROLE_FRANCHISE') %}
                     <div class="d-flex flex-row justify-content-end m-3">
-                        <a href="{{ path('app_detail_franchise', {id : franchise.id}) }}">
-                            <button type="button" class="rounded-3 p-1">
-                                Voir la franchise
-                            </button>
+                        <a href="{{ path('app_detail_franchise', {id : franchise.id}) }}"
+                           class="btn btn-secondary rounded-3 p-1">
+                            Voir la franchise
                         </a>
                     </div>
                 {% elseif is_granted('ROLE_STRUCTURE') %}
                     <div class="d-flex flex-row justify-content-end m-3">
-                        <a href="{{ path('app_detail_franchise_by_structure', {id : franchise.id}) }}">
-                            <button type="button" class="rounded-3 p-1">
-                                Voir la franchise
-                            </button>
+                        <a href="{{ path('app_detail_franchise_by_structure', {id : franchise.id}) }}"
+                           class="btn btn-secondary rounded-3 p-1">
+                            Voir la franchise
                         </a>
                     </div>
                 {% endif %}

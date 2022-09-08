@@ -1,4 +1,5 @@
 .idea
+public/images/sport_gym
 
 ###> symfony/framework-bundle ###
 /.env.local

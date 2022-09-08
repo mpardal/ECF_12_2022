@@ -47,6 +47,9 @@
             "migrations/.gitignore"
         ]
     },
+    "knplabs/knp-gaufrette-bundle": {
+        "version": "v0.7.2"
+    },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.8.0"
     },

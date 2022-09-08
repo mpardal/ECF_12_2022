@@ -1,0 +1,17 @@
+knp_gaufrette:
+  adapters:
+    sport_gym:
+      async_aws_s3:
+        service_id: 'AsyncAws\SimpleS3\SimpleS3Client'
+        bucket_name: '%env(AWS_BUCKET)%'
+        detect_content_type: true
+        options:
+          directory: '%env(AWS_DIRECTORY)%'
+  filesystems:
+    sport_gym:
+      adapter: sport_gym
+      alias: sport_gym_fs
+
+when@prod:
+  knp_gaufrette:
+    stream_wrapper: ~

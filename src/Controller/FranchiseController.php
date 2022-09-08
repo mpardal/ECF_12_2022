@@ -14,10 +14,12 @@ use App\Service\StructureMails;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
@@ -47,6 +49,22 @@ class FranchiseController extends AbstractController
             // Nombre d'articles
             6
         );
+
+        // vérification de la requête ajax
+        if ($request->query->get('ajax')) {
+            if (!$formFranchiseSearch->isValid()) {
+                return new JsonResponse([
+                    'error' => $this->formErrorToJson($formFranchiseSearch)
+                ]);
+            }
+
+            return new JsonResponse([
+                'content' => $this->renderView('franchise/franchise_list.html.twig', [
+                    'franchises' => $franchises,
+                    'franchiseSearchType' => $formFranchiseSearch->createView()
+                ])
+            ]);
+        }
         return $this->render('franchise/index.html.twig', [
             'franchises' => $franchises,
             'franchiseSearchType' => $formFranchiseSearch->createView()
@@ -71,6 +89,23 @@ class FranchiseController extends AbstractController
             // Nombre limite d'articles
             6
         );
+
+        // vérification de la requête ajax
+        if ($request->query->get('ajax')) {
+            if (!$formStructureSearch->isValid()) {
+                return new JsonResponse([
+                    'error' => $this->formErrorToJson($formStructureSearch)
+                ]);
+            }
+            return new JsonResponse([
+                'content' => $this->renderView('structure/detail_structure.html.twig', [
+                    'structures' => $structures,
+                    'franchise' => $franchise,
+                    'structureSearchType' => $formStructureSearch->createView()
+                ])
+            ]);
+        }
+
         return $this->render('franchise/detail_franchise.html.twig', [
             'structures' => $structures,
             'franchise' => $franchise,
@@ -110,4 +145,14 @@ class FranchiseController extends AbstractController
         return $this->redirectToRoute('app_list_franchise');
     }
 
+    private function formErrorToJson(FormInterface $form): array
+    {
+        $errors = [];
+
+        foreach ($form->getErrors() as $error) {
+            $errors[$form->getName()][] = $error->getMessage();
+        }
+
+        return $errors;
+    }
 }
