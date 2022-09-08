@@ -47,7 +47,7 @@ class FranchiseController extends AbstractController
             // Pagination
             $request->query->getInt('page', 1),
             // Nombre d'articles
-            6
+            10
         );
 
         // vérification de la requête ajax
@@ -87,7 +87,7 @@ class FranchiseController extends AbstractController
             //Pagination
             $request->query->getInt('page', 1),
             // Nombre limite d'articles
-            6
+            10
         );
 
         // vérification de la requête ajax

@@ -224,7 +224,7 @@ class AdminController extends AbstractController
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
-            2
+            10
         );
 
         // vérification de la requête ajax
@@ -266,7 +266,7 @@ class AdminController extends AbstractController
             //initialisation de la pagination
             $request->query->getInt('page', 1),
             //Nombre d'articles par page
-            6
+            10
         );
 
         // vérification de la requête ajax
