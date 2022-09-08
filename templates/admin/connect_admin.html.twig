@@ -39,16 +39,16 @@
                     </label>
                     <input type="email" id="email" name="email" value="{{ last_username }}" autocomplete="email"
                            required
-                           autofocus class="rounded-3 my-1">
+                           autofocus class="rounded-3 my-1 form-control">
                 </div>
                 <div class="d-flex flex-column my-2">
                     <label for="password">
                         Mot de passe :
                     </label>
-                    <input type="password" id="password" name="password" required class="rounded-3 my-1">
+                    <input type="password" id="password" name="password" required class="rounded-3 my-1 form-control">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </div>
-                <button type="submit" class="my-4 w-50 mx-auto rounded-3">
+                <button type="submit" class="btn btn-primary my-4 w-50 mx-auto rounded-3">
                     Se connecter (administrateur)
                 </button>
             </div>

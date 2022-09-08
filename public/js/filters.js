@@ -2,6 +2,7 @@
 const filtersForm = document.querySelector("form");
 // Récupération de l'élément HTML qui accueillera le nouveau contenu
 const listSection = document.querySelector('#content')
+const resetButtons = document.querySelectorAll('button[type=reset]')
 
 // On ne fait rien si on n'a pas trouvé de formulaire
 if (filtersForm) {
@@ -13,6 +14,10 @@ if (filtersForm) {
         // Si l'input est de type radio, alors on écoute sur le click sinon, le keyup
         handleInput(input, input.getAttribute('type') === 'radio' ? 'click' : 'keyup')
     });
+
+    resetButtons.forEach(input => {
+        handleInput(input, 'click')
+    })
 
     /**
      * Lance la recherche quand un événement de type $event est déclenché pour le $input
