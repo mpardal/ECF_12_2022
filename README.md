@@ -39,15 +39,23 @@ sur [Symfony - Hashing Password](https://symfony.com/doc/current/security.html#r
 Lors de l’exécution de cette commande, il faut choisir l'entité Admin, afin de créer le mot de passe du premier profil
 administrateur.
 
+![Choice-Password](public/docs/password_choice_hash.png)
+
 Ensuite dans votre base de données, il faut créer un nouvel élément dans la table “admin”, en mettant ces valeurs :
 
 email : l’email que vous utiliserez pour vous connecter
 
-roles : [“ROLE_ADMIN”]
+roles :
+
+```json
+  ["ROLE_ADMIN"]
+```
 
 ATTENTION DE BIEN METTRE DES GUILLEMENTS POUR RESPECTER LE FORMAT JSON
 
-password : copier le mot de passe qui a été généré par la commande précédente.
+password : copier le mot de passe qui a été généré par la commande précédente. (Ligne "Password hash")
+
+![Password Hash](public/docs/mdp_hash.png)
 
 Voici le screen de ce que j'ai rentré dans ma base de données.
 ![Création administrateur](public/docs/admin.png)

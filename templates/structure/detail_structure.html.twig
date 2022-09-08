@@ -85,6 +85,15 @@
                     </div>
                 </article>
             </div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_admin_create_structure') }}" class="btn btn-success rounded-3 p-1 m-2">
+                    AJOUTER
+                </a>
+            {% endif %}
+            <a href="{{ path('app_admin_edit_structure', {id : structure.id}) }}"
+               class="btn btn-secondary rounded-3 p-1">
+                Modifier la structure
+            </a>
         </article>
     {% endfor %}
 </section>
