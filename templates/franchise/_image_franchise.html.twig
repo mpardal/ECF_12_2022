@@ -1,7 +1,5 @@
 {% if franchise.imageName %}
-    <img src="{{ vich_uploader_asset(franchise, 'imageFile') }}" alt="image" class=" img-fluid rounded">
-
+    <img src="{{ vich_uploader_asset(franchise, 'imageFile') }}" alt="image" class="entity-image rounded">
 {% else %}
-    <img src="{{ '/images/salle.jpeg' }}" alt="image" class="img-fluid rounded">
-
+    <img src="{{ '/images/salle.jpeg' }}" alt="image" class="entity-image rounded">
 {% endif %}
