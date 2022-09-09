@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Admin;
 use App\Entity\Franchise;
 use App\Entity\Structure;
 use App\Service\StructureOptionsRegister;
@@ -19,6 +20,14 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $admin = new Admin();
+
+        $admin
+            ->setEmail('admin@sport.fr')
+            ->setPassword($this->passwordHasher->hashPassword($admin, 'adminadmin'))
+            ->setRoles(['ROLE_ADMIN'])
+        ;
+
         $franchise = $this->createFranchise('Nantes', 'nantes@sport.fr', 'Nantes', true, false, false, false, true, true, false, false, false, true);
         $franchise1 = $this->createFranchise('Marseille', 'marseilles@sport.fr', 'Marseille', false, false, true, false, true, false, false, false, true, false);
 
@@ -31,6 +40,7 @@ class AppFixtures extends Fixture
         $franchise->addStructure($structure);
         $franchise->addStructure($structure1);
 
+        $manager->persist($admin);
         $manager->persist($franchise);
         $manager->persist($franchise1);
         $manager->persist($structure);
