@@ -20,3 +20,7 @@ Ce test est dans le fichier tests/Controller/AdminPageTest.php
 
 Le test effectué permet de vérifier qu'un mail est bien envoyé au destinataire correspondant à l'adresse mail rempli
 dans la base de données.
+
+# Points de sécurité
+
+J'ai utilisé comme point de sécurité, l'encodage des mots de passe, ainsi que la gestion des routes URL (access_control)
